@@ -4,10 +4,8 @@ from django.utils import timezone
 from api.models import CustomUser
 
 def reset_meal_swipes():
-    """
-    Percorre todos os usuários e, se tiverem uma opção de meal plan,
-    reseta o saldo de meal swipes para o valor definido nessa opção.
-    """
+    
+    #Resets the meal swipes for all users to 0.
     users = CustomUser.objects.all()
     for user in users:
         if user.meal_plan_option:

@@ -1,51 +1,131 @@
 from rest_framework import serializers
-from .models import CustomUser, Transaction
-from django.contrib.auth.models import User
-from .models import CustomUser, MealPlanOption, Transaction
+from .models import CustomUser, Transaction, MealPlanOption
 
-
-
+# ------------------------------------------------------------------------------
+# UserSerializer
+# ------------------------------------------------------------------------------
 class UserSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the CustomUser model.
+    This serializer is used for retrieving user details.
+    
+    Fields:
+    - id: The user's unique identifier.
+    - username: The username.
+    - email: The email address.
+    - meal_swipe_balance: The current balance of meal swipes for the user.
+    - flex_dollars: The current balance of flex dollars (cash) for the user.
+    """
     class Meta:
         model = CustomUser
         fields = ['id', 'username', 'email', 'meal_swipe_balance', 'flex_dollars']
 
+
+# ------------------------------------------------------------------------------
+# TransactionSerializer
+# ------------------------------------------------------------------------------
 class TransactionSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the Transaction model.
+    Used to create and display transactions.
+    
+    Fields:
+    - id: The unique identifier of the transaction.
+    - user: The user who made the transaction.
+    - amount: The number of meal swipes used in the transaction.
+    - cash: The amount of flex dollars used.
+    - timestamp: The date and time when the transaction occurred.
+    """
     class Meta:
         model = Transaction
         fields = ['id', 'user', 'amount', 'cash', 'timestamp']
-    
+
+
+# ------------------------------------------------------------------------------
+# RegisterSerializer
+# ------------------------------------------------------------------------------
 class RegisterSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only = True)
-    meal_plan_option_id = serializers.IntegerField(write_only = True)
+    """
+    Serializer for registering a new user.
+    It includes additional field 'meal_plan_option_id' for the user to choose
+    a meal plan option during registration, and 'password' is write-only.
+    
+    Fields:
+    - id, username, email, password: Standard user registration fields.
+    - meal_plan_option_id: An extra field representing the primary key of the 
+      selected MealPlanOption.
+    
+    The create() method is overridden to:
+      1. Remove the meal_plan_option_id from the validated data.
+      2. Create the user using create_user() (which takes care of password hashing).
+      3. Retrieve the MealPlanOption based on the provided ID.
+      4. Set the user's meal_plan_option, meal_swipe_balance, and flex_dollars
+         according to the selected plan.
+    """
+    password = serializers.CharField(write_only=True)
+    meal_plan_option_id = serializers.IntegerField(write_only=True)
     
     class Meta:
         model = CustomUser
         fields = ['id', 'username', 'email', 'password', 'meal_plan_option_id']
 
     def create(self, validated_data):
+        # Extract the meal_plan_option_id from the validated data.
         option_id = validated_data.pop('meal_plan_option_id')
+        # Create the user with the remaining data (username, email, password).
         user = CustomUser.objects.create_user(**validated_data)
+        # Try to retrieve the MealPlanOption instance using the provided option_id.
         try:
-            option = MealPlanOption.objects.get(pk= option_id)
+            option = MealPlanOption.objects.get(pk=option_id)
         except MealPlanOption.DoesNotExist:
-            raise serializers.ValidationError({'meal_plan_option_id': 'Opção de Meal Plan inválida.'})
+            # If the option doesn't exist, raise a validation error.
+            raise serializers.ValidationError({'meal_plan_option_id': 'Invalid Meal Plan Option.'})
         
+        # Assign the retrieved meal plan option to the user.
         user.meal_plan_option = option
+        # Set the user's meal swipe balance and flex dollars based on the option.
         user.meal_swipe_balance = option.meal_swipes
         user.flex_dollars = option.flex_dollars
+        # Save the user with the updated information.
         user.save()
         return user
-    
 
+
+# ------------------------------------------------------------------------------
+# MealPlanOptionSerializer
+# ------------------------------------------------------------------------------
 class MealPlanOptionSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the MealPlanOption model.
+    Used for listing and retrieving meal plan options.
+    
+    Fields:
+    - id: The unique identifier of the meal plan option.
+    - name: A descriptive name for the meal plan.
+    - meal_swipes: The number of meal swipes provided by this plan.
+    - flex_dollars: The amount of flex dollars provided by this plan.
+    """
     class Meta:
         model = MealPlanOption
         fields = ['id', 'name', 'meal_swipes', 'flex_dollars']
 
+
+# ------------------------------------------------------------------------------
+# UserMealPlanSerializer
+# ------------------------------------------------------------------------------
 class UserMealPlanSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the CustomUser model, including detailed information about
+    the user's meal plan option.
+    
+    Fields:
+    - id, username: Basic user information.
+    - meal_swipe_balance, flex_dollars: The user's current balances.
+    - meal_plan_option: A nested serializer (MealPlanOptionSerializer) that 
+      provides details of the meal plan option assigned to the user.
+    """
     meal_plan_option = MealPlanOptionSerializer(read_only=True)
+    
     class Meta:
         model = CustomUser
         fields = ['id', 'username', 'meal_swipe_balance', 'flex_dollars', 'meal_plan_option']
-    

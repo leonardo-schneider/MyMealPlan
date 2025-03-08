@@ -8,7 +8,7 @@ class ApiConfig(AppConfig):
     name = 'api'
 
     def ready(self):
-        # Importa a função de reset só quando o app estiver pronto
+        # Import the function to reset the meal swipes every wednesday
         from .jobs import reset_meal_swipes
         from apscheduler.schedulers.background import BackgroundScheduler
         from django_apscheduler.jobstores import DjangoJobStore, register_events
@@ -17,15 +17,14 @@ class ApiConfig(AppConfig):
         scheduler.add_jobstore(DjangoJobStore(), "default")
         
         try:
-            # Configure para executar toda quarta-feira à meia-noite.
-            # Alteramos day_of_week para "wed" para quarta-feira.
+            #we altered to be every wed at midnight
             scheduler.add_job(
                 reset_meal_swipes,
                 trigger="cron",
-                day_of_week="wed",  # "wed" para quarta-feira
+                day_of_week="wed",  
                 hour=0,
                 minute=0,
-                id="reset_meal_swipes",  # ID único para o job
+                id="reset_meal_swipes",  # ID for the job
                 replace_existing=True,
             )
             register_events(scheduler)
