@@ -1,16 +1,10 @@
 from django.apps import AppConfig
 import logging
-from django.conf import settings
-
-
-
-class ApiConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'api'
 
 logger = logging.getLogger(__name__)
 
 class ApiConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
     name = 'api'
 
     def ready(self):
@@ -18,18 +12,17 @@ class ApiConfig(AppConfig):
         from .jobs import reset_meal_swipes
         from apscheduler.schedulers.background import BackgroundScheduler
         from django_apscheduler.jobstores import DjangoJobStore, register_events
-        import datetime
 
         scheduler = BackgroundScheduler()
         scheduler.add_jobstore(DjangoJobStore(), "default")
         
         try:
-            # Aqui, configure para executar toda quinta-feira à meia-noite.
-            # Se quiser quarta-feira, altere day_of_week para "wed"
+            # Configure para executar toda quarta-feira à meia-noite.
+            # Alteramos day_of_week para "wed" para quarta-feira.
             scheduler.add_job(
                 reset_meal_swipes,
                 trigger="cron",
-                day_of_week="thu",  # "thu" para quinta-feira, "wed" para quarta-feira
+                day_of_week="wed",  # "wed" para quarta-feira
                 hour=0,
                 minute=0,
                 id="reset_meal_swipes",  # ID único para o job
