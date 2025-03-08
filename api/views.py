@@ -8,7 +8,7 @@ from .serializers import (
     # Note: If you use UserMealPlanSerializer in your select_plan action, make sure to import it:
     # UserMealPlanSerializer
 )
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated, AllowAny, IsAuthenticatedOrReadOnly
 from decimal import Decimal
 from django.db import transaction 
 from rest_framework.response import Response
@@ -118,7 +118,7 @@ class MealPlanViewSet(viewsets.ModelViewSet):
     """
     queryset = MealPlanOption.objects.all()
     serializer_class = MealPlanOptionSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     
     @action(detail=True, methods=['post'])
     def select_plan(self, request, pk=None):
@@ -135,7 +135,7 @@ class MealPlanViewSet(viewsets.ModelViewSet):
             
             # If you want to return detailed user info, use a serializer like UserMealPlanSerializer.
             # Make sure it's imported: from .serializers import UserMealPlanSerializer
-            serializer = UserSerializer(user)  # Or UserMealPlanSerializer(user)
+            serializer = UserMealPlanSerializer(user)  
             return Response(serializer.data)
         except Exception as e:
             return Response(
