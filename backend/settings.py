@@ -46,15 +46,12 @@ INSTALLED_APPS = [
     'django_apscheduler',
     'drf_yasg',
 
-
-    'corsheaders',
     
 ]
 
 MIDDLEWARE = [
 
-    'corsheaders.middleware.CorsMiddleware',  # Add this at the top
-    'django.middleware.common.CommonMiddleware',
+
 
 
     'django.middleware.security.SecurityMiddleware',
@@ -151,4 +148,3 @@ REST_FRAMEWORK = {
     ),
 }
 
-CORS_ALLOW_ALL_ORIGINS = True
