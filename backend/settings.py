@@ -45,14 +45,17 @@ INSTALLED_APPS = [
     'rest_framework.authtoken', 
     'django_apscheduler',
     'drf_yasg',
+    'corsheaders',
+
+
 
     
 ]
 
 MIDDLEWARE = [
 
-
-
+    'corsheaders.middleware.CorsMiddleware',  # Add this line at the top
+    'django.middleware.common.CommonMiddleware',
 
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -147,4 +150,10 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
     ),
 }
+
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+]
 
