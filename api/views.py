@@ -50,30 +50,14 @@ class TransactionListCreateView(generics.ListCreateAPIView):
     
     When creating a transaction, the perform_create method:
       - Retrieves the current user.
-      - Converts the 'amount' and 'cash' fields to Decimal.
-      - Checks if the user has sufficient meal swipe balance and flex dollars.
-      - Deducts the respective amounts from the user's balances in an atomic transaction.
     """
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
-        user = self.request.user
-        amount = Decimal(serializer.validated_data['amount'])
-        cash = Decimal(serializer.validated_data['cash'])
+        serializer.save(user=self.request.user)
         
-        # Validate that the user has enough balance
-        if user.meal_swipe_balance < amount or user.flex_dollars < cash:
-            raise ValidationError("Insufficient balance")
-        
-        # Deduct balances atomically
-        with transaction.atomic():
-            user.flex_dollars -= cash
-            user.meal_swipe_balance -= amount
-            user.save()
-            serializer.save(user=user)
-
 # ------------------------------------------------------------------------------
 # RegisterView
 # ------------------------------------------------------------------------------

@@ -35,11 +35,14 @@ class TransactionSerializer(serializers.ModelSerializer):
     - amount: The number of meal swipes used in the transaction.
     - cash: The amount of flex dollars used.
     - timestamp: The date and time when the transaction occurred.
+    - By setting the "user" field as read-only, you're telling the serializer not to require it in the input data.
     """
     class Meta:
         model = Transaction
         fields = ['id', 'user', 'amount', 'cash', 'timestamp']
-
+        extra_kwargs = {
+            'user': {'read_only': True},
+        }
 
 # ------------------------------------------------------------------------------
 # RegisterSerializer

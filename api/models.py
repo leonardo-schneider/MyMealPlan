@@ -19,11 +19,11 @@ class CustomUser(AbstractUser):
     meal_plan_option = models.ForeignKey('MealPlanOption', null=True, blank=True, on_delete=models.SET_NULL)
     
     def save(self, *args, **kwargs):
-        # If a meal plan option is set, update the user's balances based on the option's values.
-        if self.meal_plan_option:
-            self.meal_swipe_balance = self.meal_plan_option.meal_swipes
-            self.flex_dollars = self.meal_plan_option.flex_dollars
-        super().save(*args, **kwargs)
+            # Only set initial balances when the user is created
+            if not self.pk and self.meal_plan_option:
+                self.meal_swipe_balance = self.meal_plan_option.meal_swipes
+                self.flex_dollars = self.meal_plan_option.flex_dollars
+            super().save(*args, **kwargs)
             
     def __str__(self):
         # Returns the username as the string representation of the user.
