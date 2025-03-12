@@ -1,6 +1,7 @@
 // src/pages/RegisterPage.js
 import React, { useState } from 'react';
 import api from '../services/api';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import MealPlanDropdown from '../components/MealPlanDropdown'; // Import the dropdown component
 
@@ -15,6 +16,7 @@ const RegisterPage = () => {
     username: '',
     email: '',
     password: '',
+    confirmPassword: '',
     meal_plan_option_id: '',
   });
   const [error, setError] = useState(null);
@@ -29,6 +31,10 @@ const RegisterPage = () => {
   // Submit the registration form.
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
     try {
       const response = await api.post('register/', formData);
       console.log("User registered:", response.data);
@@ -74,6 +80,10 @@ const RegisterPage = () => {
             onChange={handleChange}
             required
           />
+        </div>
+        <div>
+          <label>Confirm Password:</label>
+          <input name="confirmPassword" type="password" value={formData.confirmPassword} onChange={handleChange} required />
         </div>
         <div>
           <label>Meal Plan Option:</label>
