@@ -12,6 +12,9 @@ function App() {
   return (
     <Router>
       <Routes>
+        {/* Route for home page */}
+        <Route path="/home" element={<Home/>} />
+
         {/* Route for user registration */}
         <Route path="/register" element={<RegisterPage />} />
         
@@ -21,8 +24,8 @@ function App() {
         {/* Route for the user's dashboard */}
         <Route path="/dashboard" element={<Dashboard />} />
         
-        {/* Route for selecting meal plans */}
-        <Route path="/meal-plans" element={<MealPlanSelection />} />
+        {/* Route to profile */}
+        <Route path="/profile" element={<Profile />} />
         
         {/* Fallback route for unmatched URLs */}
         <Route path="*" element={<NotFoundPage />} />
