@@ -102,7 +102,7 @@ class MealPlanViewSet(viewsets.ModelViewSet):
     """
     queryset = MealPlanOption.objects.all()
     serializer_class = MealPlanOptionSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [AllowAny]
     
     @action(detail=True, methods=['post'])
     def select_plan(self, request, pk=None):
