@@ -1,46 +1,92 @@
-// src/pages/LoginPage.js
 import React, { useState } from 'react';
-import api from '../services/api';
 import { useNavigate } from 'react-router-dom';
+import './LoginPage.css';
+
 
 const LoginPage = () => {
-  const [credentials, setCredentials] = useState({ username: '', password: '' });
-  const [error, setError] = useState(null);
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const [erro, setErro] = useState('');
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setCredentials({...credentials, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+
+    // Exemplo: Faz uma requisição POST para o endpoint de autenticação
     try {
-      const response = await api.post('token/', credentials);
-      // Save the tokens in localStorage
-      localStorage.setItem('access_token', response.data.access);
-      localStorage.setItem('refresh_token', response.data.refresh);
-      // Navigate to the dashboard or another protected page
-      navigate('/dashboard');
-    } catch (err) {
-      setError(err.response?.data || "Login failed");
+      const response = await fetch('http://localhost:8000/api/login/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: email, password: senha }),
+      });
+
+      if (!response.ok) {
+        // Caso a resposta não seja 200, mostre um erro
+        setErro('Credenciais inválidas');
+        return;
+      }
+
+      const data = await response.json();
+      // Supondo que o backend retorne um token se as credenciais forem válidas
+      if (data.token) {
+        // Salve o token (por exemplo, no localStorage) para uso posterior
+        localStorage.setItem('token', data.token);
+        // Redireciona para o dashboard
+        navigate('/dashboard');
+      }
+    } catch (error) {
+      console.error('Erro na autenticação:', error);
+      setErro('Ocorreu um erro. Tente novamente.');
     }
   };
 
+  const refreshToken = async () => {
+    try {
+      const refresh = localStorage.getItem('refresh');
+      const response = await fetch('http://localhost:8000/token/refresh/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ refresh }),
+      });
+      const data = await response.json();
+      if (data.access) {
+        localStorage.setItem('access', data.access);
+        console.log('Access token refreshed!');
+      } else {
+        console.error('Failed to refresh token', data);
+      }
+    } catch (error) {
+      console.error('Refresh token error:', error);
+    }
+  };
+  
+
   return (
-    <div>
-      <h2>Login</h2>
-      {error && <p style={{color:'red'}}>{JSON.stringify(error)}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username:</label>
-          <input name="username" value={credentials.username} onChange={handleChange} required />
+    <div className="container">
+      <div className="side-image" />
+      <div className="side-form">
+        <div className="login-box">
+          <h2>Login</h2>
+          <form onSubmit={handleLogin}>
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <input
+              type="password"
+              placeholder="Senha"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+              required
+            />
+            {erro && <p style={{ color: 'red' }}>{erro}</p>}
+            <button type="submit">Entrar</button>
+          </form>
         </div>
-        <div>
-          <label>Password:</label>
-          <input name="password" type="password" value={credentials.password} onChange={handleChange} required />
-        </div>
-        <button type="submit">Login</button>
-      </form>
+      </div>
     </div>
   );
 };

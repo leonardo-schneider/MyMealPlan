@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 // Import your page components
 import Home from './pages/Home';
@@ -13,22 +13,15 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Route for home page */}
-        <Route path="/home" element={<Home/>} />
+        {/* Default route: redirect from "/" to "/login" */}
+        <Route path="/" element={<Navigate to="/login" />} />
 
-        {/* Route for user registration */}
+        {/* Other routes */}
+        <Route path="/home" element={<Home />} />
         <Route path="/register" element={<RegisterPage />} />
-        
-        {/* Route for user login */}
         <Route path="/login" element={<LoginPage />} />
-        
-        {/* Route for the user's dashboard */}
         <Route path="/dashboard" element={<Dashboard />} />
-        
-        {/* Route to profile */}
         <Route path="/profile" element={<Profile />} />
-        
-        {/* Fallback route for unmatched URLs */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>

@@ -4,7 +4,8 @@ from .serializers import (
     UserSerializer, 
     TransactionSerializer, 
     RegisterSerializer, 
-    MealPlanOptionSerializer
+    MealPlanOptionSerializer,
+    EmailTokenObtainPairSerializer,
     # Note: If you use UserMealPlanSerializer in your select_plan action, make sure to import it:
     # UserMealPlanSerializer
 )
@@ -14,7 +15,11 @@ from django.db import transaction
 from rest_framework.response import Response
 from django.core.exceptions import ValidationError
 from rest_framework.decorators import action
-
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django.contrib.auth import authenticate
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.views import TokenObtainPairView
 # ------------------------------------------------------------------------------
 # UserListView
 # ------------------------------------------------------------------------------
@@ -142,3 +147,24 @@ class MyAccountView(generics.RetrieveUpdateAPIView):
     def get_object(self):
         # Return the currently authenticated user
         return self.request.user
+
+
+
+class LoginView(APIView):
+    def post(self, request, *args, **kwargs):
+        email = request.data.get('email')
+        password = request.data.get('password')
+        
+        # A função authenticate precisa estar configurada para usar o email.
+        user = authenticate(request=request, username=email, password=password)
+        
+        if user is not None:
+            refresh = RefreshToken.for_user(user)
+            return Response({
+                'access': str(refresh.access_token),
+                'refresh': str(refresh)
+            }, status=status.HTTP_200_OK)
+        else:
+            return Response({'detail': 'Credenciais inválidas'}, status=status.HTTP_401_UNAUTHORIZED)
+class EmailTokenObtainPairView(TokenObtainPairView):
+    serializer_class = EmailTokenObtainPairSerializer

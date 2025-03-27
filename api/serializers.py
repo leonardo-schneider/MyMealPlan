@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from .models import CustomUser, Transaction, MealPlanOption
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from django.contrib.auth import authenticate, get_user_model
 
 # ------------------------------------------------------------------------------
 # UserSerializer
@@ -132,3 +134,29 @@ class UserMealPlanSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = ['id', 'username', 'meal_swipe_balance', 'flex_dollars', 'meal_plan_option']
+
+
+User = get_user_model()
+
+class EmailTokenObtainPairSerializer(TokenObtainPairSerializer):
+    # Sobrescreve o campo padrão para usar email
+    username_field = 'email'
+
+    def validate(self, attrs):
+        # Capture email e senha do payload
+        email = attrs.get('email')
+        password = attrs.get('password')
+
+        if email and password:
+            # Aqui, a função authenticate por padrão utiliza o campo 'username'.
+            # Se você não tiver um backend customizado que autentique pelo email,
+            # pode ser necessário buscar o usuário pelo email e verificar a senha manualmente.
+            user = authenticate(request=self.context.get('request'), username=email, password=password)
+            if user is None:
+                raise serializers.ValidationError('Credenciais inválidas')
+        else:
+            raise serializers.ValidationError('É necessário fornecer email e senha')
+
+        # Se a autenticação for bem-sucedida, o método da superclasse retornará os tokens
+        data = super().validate(attrs)
+        return data
