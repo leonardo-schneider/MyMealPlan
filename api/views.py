@@ -18,8 +18,11 @@ from rest_framework.decorators import action
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.contrib.auth import authenticate
+from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
+
+User = get_user_model()
 # ------------------------------------------------------------------------------
 # UserListView
 # ------------------------------------------------------------------------------
@@ -152,19 +155,28 @@ class MyAccountView(generics.RetrieveUpdateAPIView):
 
 class LoginView(APIView):
     def post(self, request, *args, **kwargs):
-        email = request.data.get('email')
+        print("LoginView POST chamado!")  # Debug inicial
+        email = request.data.get('email', '').strip().lower()  # ou remova o .lower() temporariamente
         password = request.data.get('password')
         
-        # A função authenticate precisa estar configurada para usar o email.
-        user = authenticate(request=request, username=email, password=password)
+        print(f"Email recebido: '{email}'")
+        print(f"Senha recebida: '{password}'")
         
-        if user is not None:
-            refresh = RefreshToken.for_user(user)
-            return Response({
-                'access': str(refresh.access_token),
-                'refresh': str(refresh)
-            }, status=status.HTTP_200_OK)
-        else:
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            print("Usuário não encontrado!")
             return Response({'detail': 'Credenciais inválidas'}, status=status.HTTP_401_UNAUTHORIZED)
+        
+        if not user.check_password(password):
+            print("Senha incorreta!")
+            return Response({'detail': 'Credenciais inválidas'}, status=status.HTTP_401_UNAUTHORIZED)
+        
+        refresh = RefreshToken.for_user(user)
+        return Response({
+            'access': str(refresh.access_token),
+            'refresh': str(refresh)
+        }, status=status.HTTP_200_OK)
+
 class EmailTokenObtainPairView(TokenObtainPairView):
     serializer_class = EmailTokenObtainPairSerializer

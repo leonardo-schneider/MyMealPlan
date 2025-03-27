@@ -15,7 +15,7 @@ urlpatterns = [
     path('token/', EmailTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('my-account/', MyAccountView.as_view(), name='my_account'),
-    path('api/login/', LoginView.as_view(), name='api-login'),
+    path('login/', LoginView.as_view(), name='api-login'),
 
 
     path('', include(router.urls)),

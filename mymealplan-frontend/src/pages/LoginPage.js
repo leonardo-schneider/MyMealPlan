@@ -17,7 +17,7 @@ const LoginPage = () => {
       const response = await fetch('http://localhost:8000/api/login/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: email, password: senha }),
+        body: JSON.stringify({ email: email, password: senha }),
       });
 
       if (!response.ok) {
@@ -28,11 +28,12 @@ const LoginPage = () => {
 
       const data = await response.json();
       // Supondo que o backend retorne um token se as credenciais forem válidas
-      if (data.token) {
-        // Salve o token (por exemplo, no localStorage) para uso posterior
-        localStorage.setItem('token', data.token);
-        // Redireciona para o dashboard
+      if (data.access && data.refresh) {
+        localStorage.setItem('access', data.access);
+        localStorage.setItem('refresh', data.refresh);
         navigate('/dashboard');
+      } else {
+        setErro('Credenciais inválidas');
       }
     } catch (error) {
       console.error('Erro na autenticação:', error);
@@ -60,7 +61,6 @@ const LoginPage = () => {
     }
   };
   
-
   return (
     <div className="container">
       <div className="side-image" />
