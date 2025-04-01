@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import api from '../services/api';
 import { useNavigate } from 'react-router-dom';
-import MealPlanDropdown from '../components/MealPlanDropdown';
+import  MealPlanDropdown  from '../components/MealPlanDropdown';
 import './RegisterPage.css';
 
 const RegisterPage = () => {
@@ -68,7 +68,7 @@ const RegisterPage = () => {
 
   return (
     <div className="container">
-      <div className="side-image" />
+      <div className="side-image-register" />
       <div className="side-form">
         <div className="registration-box">
           <h2>Create Account</h2>
