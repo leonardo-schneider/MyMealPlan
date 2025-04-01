@@ -3,6 +3,7 @@ from .models import CustomUser, Transaction, MealPlanOption
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth import authenticate, get_user_model
 
+CustomUser = get_user_model()
 # ------------------------------------------------------------------------------
 # UserSerializer
 # ------------------------------------------------------------------------------
@@ -72,12 +73,19 @@ class RegisterSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = CustomUser
-        fields = ['id', 'username', 'email', 'password', 'meal_plan_option_id']
-
+        fields = ['id', 'username', 'first_name', 'last_name', 'email', 'password', 'meal_plan_option_id']
+        extra_kwargs = {
+            'username': {'required': False, 'allow_blank': True},
+            'password': {'write_only': True},
+        }
     def create(self, validated_data):
         # Extract the meal_plan_option_id from the validated data.
         option_id = validated_data.pop('meal_plan_option_id')
-        # Create the user with the remaining data (username, email, password).
+        if not validated_data.get('username'):
+            email = validated_data.get('email')
+            validated_data['username'] = email.split('@')[0]
+        
+        # Cria o usuário utilizando o método create_user (que lida com a criptografia da senha)
         user = CustomUser.objects.create_user(**validated_data)
         # Try to retrieve the MealPlanOption instance using the provided option_id.
         try:
