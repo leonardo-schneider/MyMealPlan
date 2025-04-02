@@ -19,7 +19,7 @@
   /* Lado com imagem */
   .side-image-register {
     flex: 1;
-    background-image: url('C:\Users\leona\OneDrive\Documentos\MyMealPlan\MyMealPlan\mymealplan-frontend\src\Images\Register-Img.png'); /* Substitua pelo caminho da sua imagem */
+    background-image: url('../Images/Register-Img.png'); /* Substitua pelo caminho da sua imagem */
     background-size: cover;
     background-position: center;
   }
