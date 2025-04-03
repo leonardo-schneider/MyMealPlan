@@ -135,6 +135,17 @@ const Home = () => {
         </Swiper>
       </div>
 
+      {/*Get Started Section*/}
+      <div id="getStarted-section">
+        <h2>Get Started in 3 Easy Steps</h2>
+        <ul>
+          <li>☑ Sign up with your USAO e-mail</li>
+          <li>☑ Link your meal plan</li>
+          <li>☑ Start tracking and managing your meals and flex</li>
+        </ul>
+        <a href="register"><button>GET STARTED NOW</button></a>
+      </div>
+
   </body>
   
   );

@@ -13,6 +13,8 @@
 
     --p-size:clamp(1rem, 1.2rem, 1.5rem);
     --h2-size: 2.5rem;
+    --bigHsize: 3.5rem;
+    --ulSize: clamp(1.2rem, 1.8rem, 2rem);
 }
 
 body{
@@ -201,7 +203,7 @@ a{
     justify-content: space-between;
 }
 #dashboard-img{
-    width:50%;
+    width:45%;
 }
 #dashboard-content{
     width:45%;
@@ -330,4 +332,34 @@ a{
     .swiper-slide-active .testimonial-card {
         transform: scale(1.05);
     }
+}
+
+
+/*-----Get Started Section-----*/
+#getStarted-section{
+    position: relative;
+    width:100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#getStarted-section h2{
+    font-size: var(--bigHsize);
+    color: var(--h-color);
+    margin-bottom: 5%;
+}
+#getStarted-section ul{
+    color: var(--h-color);
+    font-size: var(--ulSize);
+    line-height: 4rem;
+    margin-bottom:5%;
+}
+#getStarted-section button{
+    padding:20px 4rem;
+    font-size: var(--p-size);
+    background-color: var(--green);
+    border:none;
+    cursor:pointer;
 }
