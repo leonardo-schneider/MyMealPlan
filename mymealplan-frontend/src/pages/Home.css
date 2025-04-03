@@ -1,0 +1,191 @@
+* {
+    font-family: 'Clash Grotesk', sans-serif !important;
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+:root {
+    --bg-color: #193624;
+    --h-color: #F3E7BE;
+    --green: #13D23A;
+    --white: #fff;
+
+    --p-size:clamp(1rem, 1.2rem, 1.5rem);
+    --h2-size: 2.5rem;
+}
+
+body{
+    background-color: var(--bg-color);
+}
+
+ul{
+    list-style-type: none;
+}
+a{
+    text-decoration: none;
+}
+
+.hero{
+    position: relative;
+    top:0;
+    left:0;
+    min-height: 100vh;
+    width:100%;
+    display: flex;
+    background-color: var(--bg-color);
+}
+.hero-img{
+    width:50%;
+    height:100vh;
+    background: url("../Images/images-homepage/home-hero.webp");
+    background-size: cover;
+    background-position: center;
+}
+.hero-content{
+    position: relative;
+    min-height: 100vh;
+    top:0;
+    left:0;
+    width:50%;
+    padding: 5vh 5%;
+    flex: 1;
+}
+.navigation{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height:6%;
+}
+.navigation a{
+    color: var(--h-color);
+}
+.navigation #logo{
+    font-size: clamp(16px, 20px, 26px) !important;
+    font-weight: 600;
+}
+.navigation ul{
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.h-content{
+    height:94%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--h-color);
+}
+.h-content h1{
+    font-size: clamp(2rem, 4vw, 4rem);
+    padding-bottom: 5%;
+}
+.h-content p{
+    font-size: var(--p-size);
+    width:90%;
+    padding-bottom: 5%;
+}
+#h-bottom{
+    position: absolute;
+    color: var(--h-color);
+    bottom:3%;
+    font-size: clamp(.8rem, 1rem, 1.5rem);
+}
+.h-buttons button{
+    font-size: clamp(1rem, 1.2rem, 1.5rem);
+    border: none;
+    cursor: pointer;
+}
+#btn1{
+    background-color: var(--green);
+    padding: 15px 5%;
+}
+#btn1:hover{
+    transition: all .5s;
+    transform: scale(1.05);
+    background-color: var(--white);
+}
+#btn2{
+    background-color: var(--white);
+    margin-left:5%;
+    padding: 15px 10%;
+}
+#btn2:hover{
+    transition: all .5s;
+    transform: scale(1.05);
+    background-color: var(--h-color);
+}
+
+/*------Section 1------*/
+.section1 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100vh; /* Makes the entire section take up the full viewport height */
+    padding: 5vh 5%;
+    background-color: var(--bg-color);
+}
+
+.section1 h2 {
+    font-size: var(--h2-size);
+    color: var(--h-color);
+    margin-bottom: 15vh;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 50px;
+    width: 100%;
+    max-width: 1200px; /* Prevents the cards from stretching too much */
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: white;
+    text-align: left;
+    min-height: 300px; /* Ensures the cards have an appropriate height */
+    max-height: 450px;
+}
+
+.card h3 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.card p {
+    font-size: var(--p-size);
+    color: #333;
+    flex-grow: 1;
+}
+
+.card:first-child {
+    background-color: #00C700;
+    color: black;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .section1 h2 {
+        font-size: 1.8rem;
+    }
+
+    .card-container {
+        grid-template-columns: 1fr; /* Stacks cards on smaller screens */
+    }
+
+    .card {
+        min-height: 250px; /* Slightly reduces height for smaller devices */
+    }
+}
+
