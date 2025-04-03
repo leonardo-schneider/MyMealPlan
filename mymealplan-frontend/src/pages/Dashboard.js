@@ -41,7 +41,7 @@ const Dashboard = () => {
   return (
     <div>
       <h1>Dashboard</h1>
-      <p>Meal Swipes: {accountData.meal_swipes}</p>
+      <p>Meal Swipes: {accountData.meal_swipe_balance}</p>
       <p>Flex Dollars: {accountData.flex_dollars}</p>
       {/* Você pode renderizar outros dados conforme necessário */}
     </div>
