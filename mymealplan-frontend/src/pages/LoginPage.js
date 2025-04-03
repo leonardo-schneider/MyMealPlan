@@ -62,8 +62,18 @@ const LoginPage = () => {
   };
   
   return (
-    <div className="container">
-      <div className="side-image" />
+    <div class="container">
+      <div class="side-image">
+        {/*This is navigation*/}
+        <div class="navigation">
+          <a href="home" id="logo">MyMealPlan</a>
+          <ul>
+            <a href="login"><li>Dashboard</li></a>
+            <a href="#"><li>Profile</li></a>
+            <a href="login"><li>Log In/Sign Up</li></a>
+          </ul>
+        </div>
+      </div>
       <div className="side-form">
         <div className="login-box">
           <h2>Login</h2>
@@ -83,7 +93,7 @@ const LoginPage = () => {
               required
             />
             {erro && <p style={{ color: 'red' }}>{erro}</p>}
-            <button type="submit">Entrar</button>
+            <button type="submit">Sign In</button>
           </form>
         </div>
       </div>

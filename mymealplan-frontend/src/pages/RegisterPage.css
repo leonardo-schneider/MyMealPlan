@@ -23,6 +23,29 @@
     background-size: cover;
     background-position: center;
   }
+
+  .side-image-register .navigation-register{
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height:6%;
+    padding: 6% 8%;
+  }
+  
+.navigation-register a{
+  color: #fff !important;
+}
+.navigation-register #logo{
+    font-size: clamp(16px, 20px, 26px) !important;
+    font-weight: 600;
+}
+.navigation-register ul{
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
   
   /* Lado com o formulário */
   .side-form {

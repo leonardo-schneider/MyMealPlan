@@ -6,8 +6,7 @@
   }
   
   body, html {
-    height: 100%;
-    font-family: Arial, sans-serif;
+    height: 100vh;
   }
   
   /* Container principal com flexbox para dividir em duas colunas */
@@ -23,6 +22,28 @@
     background-size: cover;
     background-position: center;
   }
+  .side-image .navigation{
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height:6%;
+    padding: 6% 8%;
+  }
+  
+.navigation a{
+  color: var(--h-color);
+}
+.navigation #logo{
+    font-size: clamp(16px, 20px, 26px) !important;
+    font-weight: 600;
+}
+.navigation ul{
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
   
   /* Lado com o formulário */
   .side-form {

@@ -68,7 +68,17 @@ const RegisterPage = () => {
 
   return (
     <div className="container">
-      <div className="side-image-register" />
+      <div className="side-image-register">
+        {/*This is navigation*/}
+        <div class="navigation-register">
+          <a href="home" id="logo">MyMealPlan</a>
+          <ul>
+            <a href="login"><li>Dashboard</li></a>
+            <a href="#"><li>Profile</li></a>
+            <a href="login"><li>Log In/Sign Up</li></a>
+          </ul>
+        </div>
+      </div>
       <div className="side-form">
         <div className="registration-box">
           <h2>Create Account</h2>
