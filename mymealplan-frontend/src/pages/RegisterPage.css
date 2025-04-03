@@ -47,6 +47,13 @@
     justify-content: space-between;
 }
   
+#uni-logo{
+  position: absolute;
+  bottom:5%;
+  left:5%;
+  width:10%;
+}
+
   /* Lado com o formulário */
   .side-form {
     flex: 1;

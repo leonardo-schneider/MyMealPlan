@@ -1,7 +1,34 @@
 // Home page
 // Exemplo em Home.js
 import React from 'react';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import dashboardImg from "../Images/images-homepage/dashboard.webp";
+import userImg from "../Images/images-homepage/user-img.webp";
 import './Home.css';
+
+const testimonials = [
+  {
+    img: "/images/user1.jpg",
+    name: "John Doe",
+    occupation: "Junior",
+    quote: "This platform has completely changed how I track my meal swipes!",
+  },
+  {
+    img: "/images/user2.jpg",
+    name: "Jane Smith",
+    occupation: "Freshman",
+    quote: "I love how easy it is to monitor my spending with this app.",
+  },
+  {
+    img: "/images/user3.jpg",
+    name: "Alex Johnson",
+    occupation: "Senior",
+    quote: "The insights and notifications help me stay on top of my finances!",
+  },
+];
 
 const Home = () => {
   return (
@@ -59,6 +86,54 @@ const Home = () => {
             </div>
         </div>
     </div>
+
+    {/*This is Dashboard Overview Section*/}
+    <div id="dashboard-overview">
+      <div id="dashboard-content">
+        <h2>Dashboard<br/>Overview</h2>
+        <p>The Meal Plan Tracker Dashboard is your all-in-one hub for managing your campus dining. 
+          With a clean and intuitive design, you can quickly check your meal balance, review spending 
+          habits, and make informed decisions about your dining options.</p>
+        <ul>
+          <li>✅ Meal Swipes at a Glance</li>
+          <li>💰 Flex Balance Tracking</li>
+          <li>📜 Transaction History</li>
+          <li>🍽 Meal Plan Options & Upgrades</li>
+          <li>📈 Spending Insights</li>
+          <li>🔔 Alerts & Notifications</li>
+        </ul>
+      </div>
+      <img src={dashboardImg} alt="Dashboard" id="dashboard-img"/>
+    </div>
+
+    {/* Testimonial Section */}
+    <div className="testimonial-section">
+        <h2>What Students Are Saying</h2>
+        <Swiper
+          modules={[Navigation]}
+          spaceBetween={-30}
+          slidesPerView={3}
+          centeredSlides={true}
+          navigation
+          loop={true}
+          breakpoints={{
+            768: { slidesPerView: 3 },
+            480: { slidesPerView: 1 },
+          }}
+        >
+          {testimonials.map((testimonial, index) => (
+            <SwiperSlide key={index}>
+              <div className="testimonial-card">
+                <img src={userImg} alt={testimonial.name} className="user-img" />
+                <h3>{testimonial.name}</h3>
+                <p className="occupation">{testimonial.occupation}</p>
+                <span className="quote-mark">“ ”</span>
+                <p className="quote">{testimonial.quote}</p>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
 
   </body>
   

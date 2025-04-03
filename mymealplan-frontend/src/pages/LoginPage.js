@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import uniLogo from "../Images/Assets/uni-logo.webp";
 import './LoginPage.css';
 
 
@@ -73,6 +74,7 @@ const LoginPage = () => {
             <a href="login"><li>Log In/Sign Up</li></a>
           </ul>
         </div>
+        <img src={uniLogo} alt="University Logo" id="uni-logo"/>
       </div>
       <div className="side-form">
         <div className="login-box">

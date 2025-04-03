@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import api from '../services/api';
 import { useNavigate } from 'react-router-dom';
 import  MealPlanDropdown  from '../components/MealPlanDropdown';
+import uniLogo from "../Images/Assets/uni-logo.webp";
 import './RegisterPage.css';
 
 const RegisterPage = () => {
@@ -78,6 +79,7 @@ const RegisterPage = () => {
             <a href="login"><li>Log In/Sign Up</li></a>
           </ul>
         </div>
+        <img src={uniLogo} alt="University Logo" id="uni-logo"/>
       </div>
       <div className="side-form">
         <div className="registration-box">
