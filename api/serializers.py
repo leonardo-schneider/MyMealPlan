@@ -19,11 +19,13 @@ class UserSerializer(serializers.ModelSerializer):
     - meal_swipe_balance: The current balance of meal swipes for the user.
     - flex_dollars: The current balance of flex dollars (cash) for the user.
     """
+    total_meal_swipes = serializers.SerializerMethodField()
     class Meta:
         model = CustomUser
-        fields = ['id', 'username', 'first_name', 'last_name','email', 'meal_swipe_balance', 'flex_dollars']
+        fields = ['id', 'username', 'first_name', 'last_name','email', 'meal_swipe_balance', 'flex_dollars', 'total_meal_swipes']
 
-
+    def get_total_meal_swipes(self, obj):
+        return obj.total_meal_swipes
 # ------------------------------------------------------------------------------
 # TransactionSerializer
 # ------------------------------------------------------------------------------

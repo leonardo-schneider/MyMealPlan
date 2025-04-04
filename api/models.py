@@ -24,7 +24,19 @@ class CustomUser(AbstractUser):
                 self.meal_swipe_balance = self.meal_plan_option.meal_swipes
                 self.flex_dollars = self.meal_plan_option.flex_dollars
             super().save(*args, **kwargs)
-            
+    
+
+    @property
+    def total_meal_swipes(self):
+        """
+        Returns the total number of meal swipes provided by the user's selected meal plan.
+        If no meal plan is set, returns 0.
+        """
+        if self.meal_plan_option:
+            return self.meal_plan_option.meal_swipes
+        return 0
+    
+    
     def __str__(self):
         # Returns the username as the string representation of the user.
         return self.username
