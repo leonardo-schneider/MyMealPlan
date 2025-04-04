@@ -47,6 +47,7 @@ class TransactionSerializer(serializers.ModelSerializer):
             'user': {'read_only': True},
         }
 
+
 # ------------------------------------------------------------------------------
 # RegisterSerializer
 # ------------------------------------------------------------------------------
