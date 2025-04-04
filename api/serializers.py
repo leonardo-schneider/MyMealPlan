@@ -22,12 +22,8 @@ class UserSerializer(serializers.ModelSerializer):
     total_meal_swipes = serializers.SerializerMethodField()
     class Meta:
         model = CustomUser
-<<<<<<< HEAD
-        fields = ['id', 'username', 'first_name', 'last_name', 'email', 'meal_swipe_balance', 'flex_dollars']
 
-=======
         fields = ['id', 'username', 'first_name', 'last_name','email', 'meal_swipe_balance', 'flex_dollars', 'total_meal_swipes']
->>>>>>> 44e598f9ff4dc5e2816f9985bf2b4d783186ea69
 
     def get_total_meal_swipes(self, obj):
         return obj.total_meal_swipes
