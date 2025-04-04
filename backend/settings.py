@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django_apscheduler',
     'drf_yasg',
     'corsheaders',
+    'django_rest_passwordreset',
 
 
 
@@ -156,4 +157,16 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
 ]
+
+# Email configuration for sending reset emails via Gmail
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'             # Gmail's SMTP server
+EMAIL_PORT = 587                          # Common port for TLS
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'mmpusao@gmail.com'       # Your dedicated Gmail address
+EMAIL_HOST_PASSWORD = 'epcb ytci sumb uvki'  # Your App Password (if using 2FA)
+DEFAULT_FROM_EMAIL = 'Your Name <mmpusao@gmail.com>'
+
+# Frontend URL for password reset redirection
+FRONTEND_URL = "http://localhost:3000"      # Adjust this to your frontend URL
 

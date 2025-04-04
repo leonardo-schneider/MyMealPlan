@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './LoginPage.css';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleReset = async (e) => {
     e.preventDefault();
@@ -17,6 +19,10 @@ const ForgotPassword = () => {
 
       if (res.ok) {
         setMessage('Password reset link sent to your email.');
+        // Redirect to login after 3 seconds
+        setTimeout(() => {
+          navigate('/login');
+        }, 3000);
       } else {
         setMessage('Failed to send reset link.');
       }

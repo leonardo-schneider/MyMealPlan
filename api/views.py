@@ -21,6 +21,12 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
+from django.contrib.auth.tokens import default_token_generator
+from django.core.mail import send_mail
+from django.conf import settings
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_decode
 
 User = get_user_model()
 # ------------------------------------------------------------------------------
@@ -180,3 +186,75 @@ class LoginView(APIView):
 
 class EmailTokenObtainPairView(TokenObtainPairView):
     serializer_class = EmailTokenObtainPairSerializer
+
+class ForgotPasswordView(APIView):
+    """
+    API View for handling password reset requests.
+    Only allows emails ending with '@usao.edu' (school email).
+    """
+    def post(self, request, *args, **kwargs):
+        email = request.data.get('email')
+        print(f"Received email for reset: {email}")  # Log the received email
+
+        # Validate that an email was provided
+        if not email:
+            return Response({'error': 'Email is required.'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Check that the email ends with the allowed domain
+        allowed_domain = "@usao.edu"
+        if not email.lower().endswith(allowed_domain):
+            return Response({'error': f'Email must be a school email ending in {allowed_domain}.'}, 
+                            status=status.HTTP_400_BAD_REQUEST)
+        
+        # Try to get the user with the provided email
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            # For security, we return the same message even if the email doesn't exist
+            return Response({'message': 'If the email exists, a reset link has been sent.'}, status=status.HTTP_200_OK)
+        
+        # Generate a token and a URL-safe encoded user ID
+        token = default_token_generator.make_token(user)
+        uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
+        
+        # Build the password reset link pointing to your frontend reset page
+        reset_url = f"{settings.FRONTEND_URL}/reset-password/?uid={uidb64}&token={token}"
+        
+        # Prepare the email content
+        subject = "Reset Your Password"
+        message = f"Click the link below to reset your password:\n\n{reset_url}\n\nIf you did not request a password reset, please ignore this email."
+        from_email = settings.DEFAULT_FROM_EMAIL
+        recipient_list = [email]
+        
+        print(f"Sending reset email to: {recipient_list}")  # Log the recipient list
+        
+        # Send the email
+        send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+        
+        return Response({'message': 'If the email exists, a reset link has been sent.'}, status=status.HTTP_200_OK)
+    
+class ResetPasswordView(APIView):
+    """
+        API view for resetting a user's password.
+        Expects a POST request with uid (encoded), token, and new password.
+    """
+    def post(self, request, *args, **kwargs):
+        uidb64 = request.data.get("uid")
+        token = request.data.get("token")
+        new_password = request.data.get("password")
+
+        if not uidb64 or not token or not new_password:
+            return Response({"error": "Missing required fields."}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            uid = urlsafe_base64_decode(uidb64).decode()
+            user = User.objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+            return Response({"error": "Invalid user."}, status=status.HTTP_400_BAD_REQUEST)
+
+        if default_token_generator.check_token(user, token):
+            user.set_password(new_password)
+            user.save()
+            return Response({"message": "Password reset successful."}, status=status.HTTP_200_OK)
+        else:
+            return Response({"error": "Invalid token."}, status=status.HTTP_400_BAD_REQUEST)

@@ -19,11 +19,18 @@ class UserSerializer(serializers.ModelSerializer):
     - meal_swipe_balance: The current balance of meal swipes for the user.
     - flex_dollars: The current balance of flex dollars (cash) for the user.
     """
+    total_meal_swipes = serializers.SerializerMethodField()
     class Meta:
         model = CustomUser
+<<<<<<< HEAD
         fields = ['id', 'username', 'first_name', 'last_name', 'email', 'meal_swipe_balance', 'flex_dollars']
 
+=======
+        fields = ['id', 'username', 'first_name', 'last_name','email', 'meal_swipe_balance', 'flex_dollars', 'total_meal_swipes']
+>>>>>>> 44e598f9ff4dc5e2816f9985bf2b4d783186ea69
 
+    def get_total_meal_swipes(self, obj):
+        return obj.total_meal_swipes
 # ------------------------------------------------------------------------------
 # TransactionSerializer
 # ------------------------------------------------------------------------------
@@ -47,23 +54,24 @@ class TransactionSerializer(serializers.ModelSerializer):
             'user': {'read_only': True},
         }
 
+
 # ------------------------------------------------------------------------------
 # RegisterSerializer
 # ------------------------------------------------------------------------------
 class RegisterSerializer(serializers.ModelSerializer):
     """
     Serializer for registering a new user.
-    It includes additional field 'meal_plan_option_id' for the user to choose
+    It includes an additional field 'meal_plan_option_id' for the user to choose
     a meal plan option during registration, and 'password' is write-only.
     
     Fields:
-    - id, username, email, password: Standard user registration fields.
+    - id, username, first_name, last_name, email, password: Standard user registration fields.
     - meal_plan_option_id: An extra field representing the primary key of the 
       selected MealPlanOption.
     
     The create() method is overridden to:
       1. Remove the meal_plan_option_id from the validated data.
-      2. Create the user using create_user() (which takes care of password hashing).
+      2. Create the user using create_user() (which handles password hashing).
       3. Retrieve the MealPlanOption based on the provided ID.
       4. Set the user's meal_plan_option, meal_swipe_balance, and flex_dollars
          according to the selected plan.
@@ -78,15 +86,28 @@ class RegisterSerializer(serializers.ModelSerializer):
             'username': {'required': False, 'allow_blank': True},
             'password': {'write_only': True},
         }
+    
+    def validate_email(self, value):
+        """
+        Validate that the email address ends with '@usao.edu'.
+        """
+        allowed_domain = "@usao.edu"
+        if not value.lower().endswith(allowed_domain):
+            raise serializers.ValidationError(f"Email must be a USAO email (ending in {allowed_domain}).")
+        return value
+
     def create(self, validated_data):
         # Extract the meal_plan_option_id from the validated data.
         option_id = validated_data.pop('meal_plan_option_id')
+        
+        # If username is not provided, generate it from the email (the part before '@').
         if not validated_data.get('username'):
             email = validated_data.get('email')
             validated_data['username'] = email.split('@')[0]
         
-        # Cria o usuário utilizando o método create_user (que lida com a criptografia da senha)
+        # Create the user using the create_user() method (handles password hashing).
         user = CustomUser.objects.create_user(**validated_data)
+        
         # Try to retrieve the MealPlanOption instance using the provided option_id.
         try:
             option = MealPlanOption.objects.get(pk=option_id)
