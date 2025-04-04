@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Dashboard.css';
@@ -198,5 +197,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-=======
->>>>>>> 44e598f9ff4dc5e2816f9985bf2b4d783186ea69
