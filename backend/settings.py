@@ -157,3 +157,15 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
 ]
 
+# Email configuration for sending reset emails via Gmail
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'             # Gmail's SMTP server
+EMAIL_PORT = 587                          # Common port for TLS
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'mmpusao@gmail.com'       # Your dedicated Gmail address
+EMAIL_HOST_PASSWORD = 'udtg uzpa ioqc gxkl'  # Your App Password (if using 2FA)
+DEFAULT_FROM_EMAIL = 'Your Name <mmpusao@gmail.com>'
+
+# Frontend URL for password reset redirection
+FRONTEND_URL = "http://localhost:3000"      # Adjust this to your frontend URL
+
