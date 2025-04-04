@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django_apscheduler',
     'drf_yasg',
     'corsheaders',
+    'django_rest_passwordreset',
 
 
 
@@ -163,7 +164,7 @@ EMAIL_HOST = 'smtp.gmail.com'             # Gmail's SMTP server
 EMAIL_PORT = 587                          # Common port for TLS
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'mmpusao@gmail.com'       # Your dedicated Gmail address
-EMAIL_HOST_PASSWORD = 'udtg uzpa ioqc gxkl'  # Your App Password (if using 2FA)
+EMAIL_HOST_PASSWORD = 'epcb ytci sumb uvki'  # Your App Password (if using 2FA)
 DEFAULT_FROM_EMAIL = 'Your Name <mmpusao@gmail.com>'
 
 # Frontend URL for password reset redirection
