@@ -74,7 +74,7 @@ const LoginPage = () => {
         <div class="navigation">
           <a href="home" id="logo">MyMealPlan</a>
           <ul>
-            <a href="login"><li>Dashboard</li></a>
+            <a href="dashboard"><li>Dashboard</li></a>
             <a href="#"><li>Profile</li></a>
             <a href="login"><li>Log In/Sign Up</li></a>
           </ul>
