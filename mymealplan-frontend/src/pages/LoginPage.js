@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import uniLogo from "../Images/Assets/uni-logo.webp";
 import './LoginPage.css';
+import Footer from './Footer.js';
 
 
 const LoginPage = () => {
@@ -23,7 +24,7 @@ const LoginPage = () => {
 
       if (!response.ok) {
         // Caso a resposta não seja 200, mostre um erro
-        setErro('Credenciais inválidas');
+        setErro('Invalid credentials');
         return;
       }
 
@@ -34,7 +35,7 @@ const LoginPage = () => {
         localStorage.setItem('refresh', data.refresh);
         navigate('/dashboard');
       } else {
-        setErro('Credenciais inválidas');
+        setErro('Invalid credentials');
       }
     } catch (error) {
       console.error('Erro na autenticação:', error);
@@ -61,8 +62,12 @@ const LoginPage = () => {
       console.error('Refresh token error:', error);
     }
   };
+
+  const [showPassword, setShowPassword] = useState(false);
+
   
   return (
+  <>  
     <div class="container">
       <div class="side-image">
         {/*This is navigation*/}
@@ -78,28 +83,50 @@ const LoginPage = () => {
       </div>
       <div className="side-form">
         <div className="login-box">
-          <h2>Login</h2>
+          <h2>Sign In</h2>
           <form onSubmit={handleLogin}>
+            <label htmlFor="email">School E-mail</label>
             <input
+              id = "email"
               type="email"
-              placeholder="Email"
+              placeholder="e.g johndoe1234@usao.edu"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <input
-              type="password"
-              placeholder="Senha"
-              value={senha}
-              onChange={(e) => setSenha(e.target.value)}
-              required
-            />
+            <label htmlFor="senha">Password</label>
+            <div className="password-wrapper">
+                <input
+                  id="senha"
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="******"
+                  value={senha}
+                  onChange={(e) => setSenha(e.target.value)}
+                  required
+                />
+                <button
+                  type="button"
+                  className="toggle-btn"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? 'Hide' : 'Show'}
+                </button>
+            </div>
+
+            <p className="forgot-password">
+              <a href="/forgot-password">Forgot Password?</a>
+            </p>
+
+
             {erro && <p style={{ color: 'red' }}>{erro}</p>}
-            <button type="submit">Sign In</button>
+            <button id="signIn-button"type="submit">SIGN IN NOW</button>
           </form>
         </div>
       </div>
     </div>
+    {/* Footer */}
+    <Footer />
+  </>
   );
 };
 

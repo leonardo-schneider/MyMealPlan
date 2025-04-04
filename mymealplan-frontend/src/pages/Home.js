@@ -8,6 +8,7 @@ import "swiper/css/navigation";
 import dashboardImg from "../Images/images-homepage/dashboard.webp";
 import userImg from "../Images/images-homepage/user-img.webp";
 import './Home.css';
+import Footer from './Footer';
 
 const testimonials = [
   {
@@ -32,7 +33,7 @@ const testimonials = [
 
 const Home = () => {
   return (
-  <body>
+  <>
     <div class="hero">
       {/*This is a left side of Hero Section*/}
       <div class="hero-content">
@@ -115,7 +116,7 @@ const Home = () => {
           slidesPerView={3}
           centeredSlides={true}
           navigation
-          loop={true}
+          loop={false}
           breakpoints={{
             768: { slidesPerView: 3 },
             480: { slidesPerView: 1 },
@@ -145,8 +146,10 @@ const Home = () => {
         </ul>
         <a href="register"><button>GET STARTED NOW</button></a>
       </div>
-
-  </body>
+      
+      {/* Footer */}
+      <Footer />
+  </>
   
   );
 };

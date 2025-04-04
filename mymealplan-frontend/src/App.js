@@ -8,6 +8,8 @@ import LoginPage from './pages/LoginPage';
 import Dashboard from './pages/Dashboard';
 import NotFoundPage from './pages/NotFoundPage';
 import Profile from './pages/Profile';
+import ForgotPassword from './pages/ForgotPassword';
+
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<NotFoundPage />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+
       </Routes>
     </Router>
   );
