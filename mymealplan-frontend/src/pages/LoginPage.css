@@ -129,7 +129,7 @@
     padding-right: 80px;
   }
   
-  .toggle-btn {
+  #toggle-btn {
     position: absolute;
     right: 10px;
     top: 17px;
