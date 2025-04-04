@@ -1,0 +1,482 @@
+:root {
+    --bg-color: #193624;
+    --h-color: #F3E7BE;
+    --green: #13D23A;
+    --white: #fff;
+    --black: #1e1e1e;
+  
+    --p-size: clamp(1rem, 1.2rem, 1.5rem);
+    --h2-size: 2.5rem;
+    --bigHsize: 3.5rem;
+    --ulSize: clamp(1.2rem, 1.8rem, 2rem);
+  }
+  
+  /* ========== NAVBAR BASE ========== */
+  .dashboard-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    background-color: var(--bg-color);
+    color: var(--white);
+    position: relative;
+    z-index: 10;
+  }
+  
+  .navbar-left .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--h-color);
+    text-decoration: none;
+  }
+  
+  .navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 5vw;
+  }
+  
+  .navbar-links a {
+    color: var(--h-color);
+    text-decoration: none;
+    font-size: 1rem;
+  }
+  
+  /* ========== PROFILE DROPDOWN (DESKTOP) ========== */
+  .profile-dropdown {
+    position: relative;
+  }
+  
+  .profile-dropdown button {
+    background: none;
+    border: none;
+    color: var(--h-color);
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 130%;
+    right: 0;
+    background-color: var(--white);
+    color: var(--black);
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 160px;
+    max-width: 240px;
+    border: 1px solid #ccc;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  
+  .dropdown-menu a,
+  .dropdown-menu button {
+    padding: 8px 12px;
+    text-align: left;
+    background: none;
+    border: none;
+    color: var(--black);
+    font-size: 0.95rem;
+    text-decoration: none;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .dropdown-menu a:hover,
+  .dropdown-menu button:hover {
+    background-color: #f0f0f0;
+  }
+  
+  /* ========== HAMBURGER MENU ========== */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+  }
+  
+  .hamburger .bar {
+    width: 25px;
+    height: 2px;
+    background-color: var(--h-color);
+    border-radius: 5px;
+  }
+  
+  /* ========== HIDE / SHOW FOR DEVICE TYPES ========== */
+  .desktop-only {
+    display: block;
+  }
+  
+  .mobile-only {
+    display: none;
+  }
+  
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 768px) {
+    .hamburger {
+      display: flex;
+    }
+  
+    .navbar-links {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: var(--bg-color);
+      width: 100%;
+      padding: 10px 0;
+      gap: 0;
+    }
+  
+    .navbar-links.open {
+      display: flex;
+    }
+  
+    .navbar-links a,
+    .navbar-links .profile-dropdown button {
+      padding: 10px 5%;
+      width: 100%;
+      text-align: left;
+    }
+  
+    .desktop-only {
+      display: none;
+    }
+  
+    .mobile-only {
+        display: flex;
+        flex-direction: column;
+        padding: 0 5%;
+        align-items: flex-start;
+        width: 100%;
+        margin-top: 10px;
+    }
+  
+    .mobile-only a,
+    .mobile-only button {
+      padding: 10px 0;
+      text-align: left;
+      border: none;
+      background: none;
+      font-size: 1rem;
+      color: var(--h-color);
+      cursor: pointer;
+      width: 100%;
+    }
+  
+    .mobile-only button:hover,
+    .mobile-only a:hover {
+      text-decoration: underline;
+    }
+  
+    /* Reset dropdown-menu inside mobile */
+    .dropdown-menu {
+      position: static;
+      background-color: var(--white);
+    }
+  }
+  
+
+/* ========== DASHBOARD GRID ========== */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    padding: 30px 5%;
+    min-height: calc(100vh - 80px); /* Account for navbar height */
+  }
+  
+  .column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+  }
+  
+  .column-1 .greeting-box {
+    flex: 0 0 20%;
+  }
+  .column-1 .meals-box {
+    flex: 1;
+  }
+  
+  .column-2 .flex-box,
+  .column-2 .transactions-box,
+  .column-3 .links-box {
+    flex: 1;
+  }
+  
+  /* TEMP STYLING FOR LAYOUT VISUALIZATION */
+  .box {
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    padding: 30px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:100%;
+  }
+
+  .greeting-box {
+    background-color: var(--white);
+    border-radius: 20px;
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .greeting-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 15px;
+  }
+  
+  .avatar-wrapper {
+    flex-shrink: 0;
+  }
+  
+  .avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid #000;
+    background-image: url('../Images/images-homepage/user-img.webp');
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .greeting-text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .greeting-text h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--black);
+  }
+  
+  .greeting-text a {
+    font-size: 0.95rem;
+    color: var(--black);
+    font-weight: 500;
+    text-decoration: underline;
+  }
+  
+  /*-------------------Meals------------------*/
+  .meals-box {
+    position: relative;
+    background-color: var(--green);
+    color: #000;
+    border-radius: 20px;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    height: 100%;
+  }
+  
+  /* Header top left and right */
+  .meals-header {
+    display: flex;
+    justify-content: space-between;
+    width:100%;
+    font-size: 0.85rem;
+    font-weight: 400;
+  }
+  
+  .meals-links {
+    text-align: right;
+  }
+  
+  .meals-links a {
+    display: block;
+    color: #000;
+    font-size: 0.8rem;
+    text-decoration: none;
+  }
+  
+  .meals-links a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Circular progress (can be static for now) */
+  .meals-progress {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    width:100%;
+    background-color: #AAFEBB;
+    border-radius: 20px;
+  }
+  
+  .circle {
+    background-color: #b4fdb4;
+    border-radius: 20px;
+    padding: 30px;
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .meals-number {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+  
+  .meals-label {
+    font-size: .5rem;
+  }
+  
+  /* Edit controls */
+  .meals-edit {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width:100%;
+    font-weight: 500;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .meals-edit h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+  
+  .edit-controls {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+  
+  .edit-controls button {
+    width: 35px;
+    height: 35px;
+    font-size: var(--p-size);
+    border: 1px solid #000;
+    border-radius: 50%;
+    background: none;
+    cursor: pointer;
+  }
+  
+  .edit-controls span {
+    font-size: 1.2rem;
+  }
+  
+  .progress-ring {
+    transform: rotate(-90deg);
+    margin-bottom: 10px;
+  }
+
+  .circle-wrapper {
+    position: relative;
+    width: 120px;
+    height: 120px;
+  }
+  
+  .circle-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+  .circle-center .meals-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    line-height: 1;
+  }
+  
+  .circle-center .meals-label {
+    font-size: 0.9rem;
+    display: block;
+    margin-top: 4px;
+  }
+  
+  
+  .progress-ring__bg {
+    stroke: var(--white);
+  }
+  
+  .progress-ring__circle {
+    transition: stroke-dashoffset 0.4s ease;
+    transform: rotate(0deg);
+    transform-origin: center;
+  }
+  
+
+  /* Footer note */
+  .meals-note {
+    position:absolute;
+    bottom:2%;
+    width:100%;
+    font-size: 0.75rem;
+    font-weight: 300;
+    text-align: center;
+  }
+  
+  
+  /* RESPONSIVE LAYOUT */
+  @media (max-width: 1024px) {
+    .dashboard-grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+    }
+  
+    .column-3 {
+      grid-column: auto;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .dashboard-grid {
+      display: block;  /* Stack instead of grid */
+      padding: 20px;
+    }
+  
+    .column {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      height: auto; /* Let each column manage its own height */
+    }
+  
+    .column-1 .greeting-box {
+      height: 15vh;
+    }
+  
+    .column-1 .meals-box {
+      height: 85vh !important;
+    }
+  
+    .column-2 .flex-box {
+      height: 25vh;
+    }
+  
+    .column-2 .transactions-box {
+      height: 30vh;
+    }
+  
+    .column-3 .links-box {
+      height: 40vh;
+    }
+  }
+  
