@@ -73,6 +73,7 @@ a{
     justify-content: space-between;
 }
 .h-content{
+    position:relative;
     height:94%;
     display: flex;
     flex-direction: column;
@@ -80,7 +81,7 @@ a{
     color: var(--h-color);
 }
 .h-content h1{
-    font-size: clamp(2rem, 4vw, 4rem);
+    font-size: clamp(2.5rem, 4vw, 4rem);
     padding-bottom: 5%;
 }
 .h-content p{
@@ -127,7 +128,7 @@ a{
     align-items: center;
     justify-content: center;
     text-align: center;
-    height: 100vh; /* Makes the entire section take up the full viewport height */
+    min-height: 100vh; /* Makes the entire section take up the full viewport height */
     padding: 5vh 5%;
     background-color: var(--bg-color);
 }
@@ -362,4 +363,29 @@ a{
     background-color: var(--green);
     border:none;
     cursor:pointer;
+}
+
+
+/*-----Responsiveness-----*/
+@media screen and (max-width:768px){
+    .hero{
+        flex-direction: column;
+    }
+    .hero-content, .hero-img{
+        height:100vh;
+        width:100%;
+    }
+    .h-content{
+        margin-top:10%;
+    }
+    .h-content p{
+        width: 100%;
+    }
+    #btn1, #btn2{
+        width:48%;
+    }
+    #btn2{
+        margin-left:2%;
+    }
+
 }

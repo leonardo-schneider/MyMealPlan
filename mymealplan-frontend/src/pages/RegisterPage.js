@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import  MealPlanDropdown  from '../components/MealPlanDropdown';
 import uniLogo from "../Images/Assets/uni-logo.webp";
 import './RegisterPage.css';
+import Footer from './Footer.js';
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -68,6 +69,7 @@ const RegisterPage = () => {
   };
 
   return (
+    <>
     <div className="container">
       <div className="side-image-register">
         {/*This is navigation*/}
@@ -143,6 +145,10 @@ const RegisterPage = () => {
         </div>
       </div>
     </div>
+
+    {/* Footer */}
+    <Footer />
+  </>
   );
 };
 
