@@ -106,7 +106,7 @@ const LoginPage = () => {
                 />
                 <button
                   type="button"
-                  className="toggle-btn"
+                  id="toggle-btn"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? 'Hide' : 'Show'}

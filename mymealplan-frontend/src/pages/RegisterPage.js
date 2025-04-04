@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import api from '../services/api';
 import { useNavigate } from 'react-router-dom';
-import  MealPlanDropdown  from '../components/MealPlanDropdown';
 import uniLogo from "../Images/Assets/uni-logo.webp";
+import api from '../services/api';
+import MealPlanDropdown from '../components/MealPlanDropdown';
+import Footer from './Footer';
 import './RegisterPage.css';
-import Footer from './Footer.js';
 
 const RegisterPage = () => {
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     first_name: '',
     last_name: '',
@@ -14,17 +15,10 @@ const RegisterPage = () => {
     password: '',
     meal_plan_option_id: '',
   });
-  const [error, setError] = useState(null);
   const [mealPlanOptions, setMealPlanOptions] = useState([]);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  // Função de validação da senha
-  const validatePassword = (password) => {
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    return passwordRegex.test(password);
-  };
-
-  // Busca as opções de meal plan do back-end
   useEffect(() => {
     const fetchMealPlans = async () => {
       try {
@@ -38,121 +32,153 @@ const RegisterPage = () => {
     fetchMealPlans();
   }, []);
 
-  // Atualiza os dados do formulário conforme o usuário digita
+  const validatePassword = (password) => {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+    return regex.test(password);
+  };  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData(prev => ({ ...prev, [name]: value }));
+
+    // Clear error if user corrects password
+    if (name === "password" && error) {
+      setError('');
+    }
   };
 
-  // Envia os dados de registro para o back-end
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Validação da senha
-    if (!validatePassword(formData.password)) {
-      setError(
-        "Password must be at least 8 characters long, include at least one uppercase letter and one special character."
-      );
-      return;
-    }
-
     try {
-      const response = await api.post('register/', formData);
-      console.log("User registered:", response.data);
+      await api.post('register/', formData);
       navigate('/login');
     } catch (err) {
-      console.error("Registration error:", err);
       setError(err.response?.data || "Registration failed");
     }
   };
 
   return (
     <>
-    <div className="container">
-      <div className="side-image-register">
-        {/*This is navigation*/}
-        <div class="navigation-register">
-          <a href="home" id="logo">MyMealPlan</a>
-          <ul>
-            <a href="login"><li>Dashboard</li></a>
-            <a href="#"><li>Profile</li></a>
-            <a href="login"><li>Log In/Sign Up</li></a>
-          </ul>
+      <div className="register-container">
+        <div className="left-panel">
+          <div className="navigation-register">
+            <a href="/home" id="logo">MyMealPlan</a>
+            <ul>
+              <a href="/dashboard"><li>Dashboard</li></a>
+              <a href="#"><li>Profile</li></a>
+              <a href="/login"><li>Log In/Sign Up</li></a>
+            </ul>
+          </div>
+          <img src={uniLogo} alt="University Logo" id="uni-logo" />
         </div>
-        <img src={uniLogo} alt="University Logo" id="uni-logo"/>
-      </div>
-      <div className="side-form">
-        <div className="registration-box">
-          <h2>Create Account</h2>
-          {error && <p style={{ color: 'red' }}>{JSON.stringify(error)}</p>}
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label>First Name:</label>
-              <input
-                type="text"
-                name="first_name"
-                value={formData.first_name}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div>
-              <label>Last Name:</label>
-              <input
-                type="text"
-                name="last_name"
-                value={formData.last_name}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div>
-              <label>Email:</label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div>
-              <label>Create Password:</label>
-              <input
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                required
-              />
-              <ul className="password-rules">
-                <li>✔ At least 8 characters long</li>
-                <li>✔ Include at least one uppercase letter (A–Z)</li>
-                <li>✔ Include at least one lowercase letter (a–z)</li>
-                <li>✔ Include at least one number (0–9)</li>
-                <li>✔ Include at least one special character (@#$%^&*)</li>
-                <li className="note">Keep your password secure and don't share it!</li>
-              </ul>
-            </div>
 
-            <div>
-              <label>Your Meal Plan:</label>
-              <MealPlanDropdown
-                name="meal_plan_option_id"
-                value={formData.meal_plan_option_id}
-                onChange={handleChange}
-                options={mealPlanOptions}
-              />
-            </div>
-            <button type="submit">Register</button>
-          </form>
+        <div className="right-panel">
+          <div className="form-wrapper">
+            <h2>Create Account</h2>
+            {error && <p className="error-msg">{JSON.stringify(error)}</p>}
+            <form onSubmit={handleSubmit} className="step-form">
+
+              {/* STEP 1 */}
+              <div className={`step ${step === 1 ? 'active' : ''}`}>
+                <label>First Name</label>
+                <input
+                  type="text"
+                  name="first_name"
+                  value={formData.first_name}
+                  onChange={handleChange}
+                  required
+                />
+
+                <label>Last Name</label>
+                <input
+                  type="text"
+                  name="last_name"
+                  value={formData.last_name}
+                  onChange={handleChange}
+                  required
+                />
+
+                <button
+                  type="button"
+                  className="next-btn"
+                  onClick={() => {
+                    if (!formData.first_name.trim() || !formData.last_name.trim()) {
+                      setError("Please enter both first and last name.");
+                      return;
+                    }
+                    setError('');
+                    setStep(2);
+                  }}
+                >
+                  Next →
+                </button>
+              </div>
+
+              {/* STEP 2 */}
+              <div className={`step ${step === 2 ? 'active' : ''}`}>
+                <label>School E-mail</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+
+                <label>Create Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                />
+
+                <ul className="password-rules">
+                  <li>✔ At least 8 characters</li>
+                  <li>✔ One uppercase & lowercase</li>
+                  <li>✔ One number</li>
+                  <li>✔ One special character</li>
+                </ul>
+
+                <button
+                  type="button"
+                  className="next-btn"
+                  onClick={() => {
+                    if (!validatePassword(formData.password)) {
+                      setError("Password does not meet all requirements.");
+                      return;
+                    }
+                    setStep(3);
+                  }}
+                >
+                   Next →
+                </button>
+              </div>
+
+              {/* STEP 3 */}
+              <div className={`step ${step === 3 ? 'active' : ''}`}>
+                <label>Select Your Meal Plan</label>
+                <MealPlanDropdown
+                  name="meal_plan_option_id"
+                  value={formData.meal_plan_option_id}
+                  onChange={handleChange}
+                  options={mealPlanOptions}
+                />
+
+                <button type="submit">CREATE ACCOUNT</button>
+              </div>
+            </form>
+
+            <p className="signin-link">
+              Already have an account? <a href="/login">Sign In</a>
+            </p>
+          </div>
         </div>
       </div>
-    </div>
 
-    {/* Footer */}
-    <Footer />
-  </>
+      <Footer />
+    </>
   );
 };
 
