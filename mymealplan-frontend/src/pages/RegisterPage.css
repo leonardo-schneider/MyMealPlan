@@ -1,98 +1,186 @@
-/* Reset básico */
+/* RESET */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  html, body {
-    height: 100%;
-    font-family: Arial, sans-serif;
-  }
-  
-  /* Container com layout 50/50 */
-  .container {
-    display: flex;
-    height: 100vh;
-  }
-  
-  /* Lado com imagem */
-  .side-image-register {
-    flex: 1;
-    background-image: url('../Images/Register-Img.png'); /* Substitua pelo caminho da sua imagem */
-    background-size: cover;
-    background-position: center;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  .side-image-register .navigation-register{
-    z-index: 99;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height:6%;
-    padding: 6% 8%;
-  }
-  
-.navigation-register a{
+html, body {
+  height: 100%;
+  font-family: 'Clash Grotesk', sans-serif;
+  background: #fff;
+}
+
+/* CONTAINER: SPLIT LAYOUT */
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* LEFT SIDE IMAGE SECTION */
+.side-image-register {
+  flex: 1;
+  background-image: url('../Images/Register-Img.png');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.navigation-register {
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6% 8%;
+}
+
+.navigation-register a {
   color: #fff !important;
-}
-.navigation-register #logo{
-    font-size: clamp(16px, 20px, 26px) !important;
-    font-weight: 600;
-}
-.navigation-register ul{
-    width: 60%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-  
-#uni-logo{
-  position: absolute;
-  bottom:5%;
-  left:5%;
-  width:10%;
+  font-weight: 500;
+  font-size: 1rem;
 }
 
-  /* Lado com o formulário */
+.navigation-register #logo {
+  font-size: clamp(16px, 20px, 26px);
+  font-weight: 600;
+}
+
+.navigation-register ul {
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#uni-logo {
+  position: absolute;
+  bottom: 5%;
+  left: 5%;
+  width: 10%;
+}
+
+/* RIGHT SIDE FORM SECTION */
+.side-form {
+  flex: 1;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* REGISTRATION BOX */
+.registration-box {
+  width: 100%;
+  max-width: 400px;
+  padding: 30px;
+  background: white;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.registration-box h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 30px;
+  position: relative;
+  display: inline-block;
+}
+
+.registration-box h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 8px;
+  width: 100%;
+  background-color: #13D23A;
+  z-index: -1;
+}
+
+/* FORM INPUTS */
+.registration-box label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.registration-box input,
+.registration-box select {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1.5px solid black;
+  border-radius: 0;
+  outline: none;
+}
+
+/* PASSWORD RULES */
+.password-rules {
+  font-size: 0.75rem;
+  color: #333;
+  margin-top: 8px;
+  padding-left: 18px;
+  list-style-type: none;
+}
+
+.password-rules li {
+  margin-bottom: 3px;
+}
+
+.password-rules .note {
+  margin-top: 10px;
+  font-style: italic;
+  color: #666;
+}
+
+/* SUBMIT BUTTON */
+.registration-box button {
+  width: 100%;
+  padding: 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  background: #13D23A;
+  color: black;
+  border: none;
+  cursor: pointer;
+  margin-top: 25px;
+  transition: background 0.3s ease;
+}
+
+.registration-box button:hover {
+  background: #11b930;
+}
+
+/* ALREADY HAVE AN ACCOUNT */
+.signin-link {
+  font-size: 0.85rem;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.signin-link a {
+  color: #000;
+  text-decoration: underline;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .side-image-register {
+    display: none;
+  }
+
   .side-form {
     flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #f7f7f7;
+    padding: 30px;
   }
-  
-  /* Caixa de registro */
+
   .registration-box {
-    width: 300px;
-    padding: 20px;
-    background: #fff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    border-radius: 5px;
-  }
-  
-  .registration-box h2 {
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .registration-box input,
-  .registration-box select {
     width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 3px;
   }
-  
-  .registration-box button {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    background: #5cb85c;
-    color: #fff;
-    border-radius: 3px;
-    cursor: pointer;
-  }
-  
+}

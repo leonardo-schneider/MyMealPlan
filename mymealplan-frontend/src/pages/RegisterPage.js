@@ -20,9 +20,7 @@ const RegisterPage = () => {
 
   // Função de validação da senha
   const validatePassword = (password) => {
-    // Exemplo de regex:
-    // Pelo menos 8 caracteres, 1 letra maiúscula, 1 caractere especial.
-    const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return passwordRegex.test(password);
   };
 
@@ -127,10 +125,16 @@ const RegisterPage = () => {
                 onChange={handleChange}
                 required
               />
-              <small>
-                Must be at least 8 characters, include an uppercase letter and a special character.
-              </small>
+              <ul className="password-rules">
+                <li>✔ At least 8 characters long</li>
+                <li>✔ Include at least one uppercase letter (A–Z)</li>
+                <li>✔ Include at least one lowercase letter (a–z)</li>
+                <li>✔ Include at least one number (0–9)</li>
+                <li>✔ Include at least one special character (@#$%^&*)</li>
+                <li className="note">Keep your password secure and don't share it!</li>
+              </ul>
             </div>
+
             <div>
               <label>Your Meal Plan:</label>
               <MealPlanDropdown
