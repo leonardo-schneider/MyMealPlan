@@ -378,6 +378,21 @@
   .edit-controls span {
     font-size: 1.2rem;
   }
+
+  .confirm-btn {
+    background-color: var(--green);
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .confirm-btn:hover {
+    background-color: #10b838;
+  }
+  
   
   .progress-ring {
     transform: rotate(-90deg);
