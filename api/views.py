@@ -6,12 +6,11 @@ from .serializers import (
     RegisterSerializer, 
     MealPlanOptionSerializer,
     EmailTokenObtainPairSerializer,
+    UserMealPlanSerializer
     # Note: If you use UserMealPlanSerializer in your select_plan action, make sure to import it:
     # UserMealPlanSerializer
 )
-from rest_framework.permissions import IsAuthenticated, AllowAny, IsAuthenticatedOrReadOnly
-from decimal import Decimal
-from django.db import transaction 
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from django.core.exceptions import ValidationError
 from rest_framework.decorators import action
@@ -27,6 +26,7 @@ from django.conf import settings
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_decode
+import re
 
 User = get_user_model()
 # ------------------------------------------------------------------------------
@@ -131,8 +131,7 @@ class MealPlanViewSet(viewsets.ModelViewSet):
             user.flex_dollars = plan.flex_dollars
             user.save()
             
-            # If you want to return detailed user info, use a serializer like UserMealPlanSerializer.
-            # Make sure it's imported: from .serializers import UserMealPlanSerializer
+
             serializer = UserMealPlanSerializer(user)  
             return Response(serializer.data)
         except Exception as e:
@@ -245,6 +244,12 @@ class ResetPasswordView(APIView):
 
         if not uidb64 or not token or not new_password:
             return Response({"error": "Missing required fields."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if not self.is_valid_password(new_password):
+            return Response(
+                {"error": "Password must be at least 8 characters long, contain an uppercase letter, a lowercase letter, a number, and a special character."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
         try:
             uid = urlsafe_base64_decode(uidb64).decode()
@@ -258,3 +263,24 @@ class ResetPasswordView(APIView):
             return Response({"message": "Password reset successful."}, status=status.HTTP_200_OK)
         else:
             return Response({"error": "Invalid token."}, status=status.HTTP_400_BAD_REQUEST)
+        
+    def is_valid_password(self, password):
+        """
+        Checks if the password meets the security criteria.
+        - At least 8 characters
+        - Contains an uppercase letter
+        - Contains a lowercase letter
+        - Contains a number
+        - Contains a special character
+        """
+        if len(password) < 8:
+            return False
+        if not re.search(r'[A-Z]', password):  # Uppercase letter
+            return False
+        if not re.search(r'[a-z]', password):  # Lowercase letter
+            return False
+        if not re.search(r'[0-9]', password):  # Number
+            return False
+        if not re.search(r'[\W_]', password):  # Special character
+            return False
+        return True
