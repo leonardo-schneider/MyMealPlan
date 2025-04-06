@@ -184,7 +184,7 @@
 /* ========== DASHBOARD GRID ========== */
 .dashboard-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr .8fr;
     gap: 10px;
     padding: 30px 5%;
     min-height: calc(100vh - 80px); /* Account for navbar height */
@@ -549,7 +549,7 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
-    padding:20px 20px 20px 30%;
+    padding:20px 20%;
     background-color: #F3E7BE;
   }
   .links-box a{
