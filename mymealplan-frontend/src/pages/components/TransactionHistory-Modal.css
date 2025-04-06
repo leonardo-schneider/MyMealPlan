@@ -13,7 +13,7 @@
   }
   
   .history-modal {
-    background: white;
+    background: #8AE1FE;
     padding: 30px;
     border-radius: 15px;
     width: 90%;
@@ -45,10 +45,11 @@
   }
   
   .transaction-list li {
-    display: flex;
+    display: flex;    
+    align-items: center;
     justify-content: space-between;
     padding: 12px 0;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #000;
   }
   
   .tx-location {
