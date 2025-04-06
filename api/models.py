@@ -1,6 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models, transaction
 from decimal import Decimal
+from django.conf import settings
+
 
 class CustomUser(AbstractUser):
     """
@@ -107,3 +109,20 @@ class MealPlanOption(models.Model):
     def __str__(self):
         # Returns a descriptive string for the meal plan option.
         return f"{self.meal_swipes} swipes + ${self.flex_dollars} flex"
+
+
+# Transaction History Backend
+class Transaction(models.Model):
+    TRANSACTION_TYPES = (
+        ('meal', 'Meal Swipe'),
+        ('flex', 'Flex Dollars'),
+    )
+    
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    type = models.CharField(max_length=10, choices=TRANSACTION_TYPES, default = 'Meal Swipe')
+    amount = models.DecimalField(max_digits=6, decimal_places=2)
+    location = models.CharField(max_length=100, default='Cafeteria')
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.type} - {self.amount} @ {self.location}"

@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Dashboard.css';
+import Footer from './Footer';
+
+import TransactionModal from './components/Transaction-Modal';
+import './components/Transaction-Modal.css';
+
+import TransactionHistoryModal from './components/TransactionHistory-Modal';
+import './components/TransactionHistory-Modal.css';
+
+
+
 
 const Dashboard = () => {
   const [accountData, setAccountData] = useState(null);
@@ -19,6 +29,101 @@ const Dashboard = () => {
   const spring = [new Date(year, 0, 1), new Date(year, 4, 1)];
   const summer = [new Date(year, 4, 2), new Date(year, 7, 11)];
   const fall = [new Date(year, 7, 12), new Date(year, 11, 20)];
+
+  {/*Transaction Modal Constants */}
+  const [showModal, setShowModal] = useState(false);
+  const [modalType, setModalType] = useState(null); // 'meal' or 'flex'
+  const [transactionLocation, setTransactionLocation] = useState('');
+  const [transactions, setTransactions] = useState([]); // stores list of transactions
+
+  {/*Function that opens the Transaction Modal*/}
+  const openModal = (type) => {
+    setModalType(type);
+    setTransactionLocation('');
+    setShowModal(true);
+  };
+
+  {/*Transaction History Popup Window Constants */}
+  const [showHistoryModal, setShowHistoryModal] = useState(false);
+
+
+  {/*Handling Modal Confirm and Update Balance */}
+  const handleModalConfirm = async () => {
+    const now = new Date();
+    const timestamp = now.toISOString(); // ISO format for backend
+    const token = localStorage.getItem('access');
+  
+    const transactionData = {
+      type: modalType,
+      amount: modalType === 'meal' ? 1 : parseFloat(flexAmount),
+      location: transactionLocation,
+      timestamp: timestamp
+    };
+  
+    try {
+      if (modalType === 'meal') {
+        const updatedMeals = pendingMeals;
+  
+        const mealRes = await fetch('http://localhost:8000/api/my-account/', {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ meal_swipe_balance: updatedMeals }),
+        });
+  
+        if (!mealRes.ok) throw new Error('Failed to update meals');
+        const updatedData = await mealRes.json();
+        setAccountData(updatedData);
+        setPendingMeals(null);
+      }
+  
+      if (modalType === 'flex') {
+        const floatAmount = parseFloat(flexAmount);
+        const updatedFlex = parseFloat((accountData.flex_dollars - floatAmount).toFixed(2));
+
+        const flexRes = await fetch('http://localhost:8000/api/my-account/', {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ flex_dollars: updatedFlex }),
+        });
+  
+        if (!flexRes.ok) throw new Error('Failed to update flex dollars');
+        const updatedData = await flexRes.json();
+        setAccountData(updatedData);
+        setFlexAmount('');
+        setShowFlexConfirm(false);
+      }
+  
+      // ✅ POST transaction to backend
+      const transactionRes = await fetch('http://localhost:8000/api/user-transactions/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(transactionData),
+      });
+  
+      if (!transactionRes.ok) throw new Error('Failed to record transaction');
+      const newTransaction = await transactionRes.json();
+  
+      // Add it to local state too so it shows in history
+      setTransactions(prev => [newTransaction, ...prev]);
+  
+    } catch (err) {
+      alert("Error processing transaction");
+      console.error(err);
+    }
+  
+    setShowModal(false);
+  };
+  
+  
 
 
   useEffect(() => {
@@ -43,6 +148,46 @@ const Dashboard = () => {
     };
     fetchAccountData();
   }, []);
+
+  // 🆕 Add this after fetchAccountData
+  useEffect(() => {
+    if (showHistoryModal) {
+      const fetchTransactions = async () => {
+        try {
+          const token = localStorage.getItem('access');
+          const response = await fetch('http://localhost:8000/api/user-transactions/', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          if (!response.ok) throw new Error('Failed to fetch transactions');
+          const data = await response.json();
+          setTransactions(data);
+        } catch (err) {
+          console.error('❌ Transaction fetch error:', err);
+        }
+      };
+
+      fetchTransactions(); // 🔁 fetch when modal opens
+    }
+  }, [showHistoryModal]);
+
+  useEffect(() => {
+    if (showHistoryModal || showModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [showHistoryModal, showModal]);
+
+
 
   const handleMealChange = (change) => {
     setPendingMeals(prev => {
@@ -174,9 +319,7 @@ const Dashboard = () => {
                 <button onClick={() => handleMealChange(1)}>+</button>
 
                 {pendingMeals !== null && pendingMeals !== accountData.meal_swipe_balance && (
-                  <button className="confirm-btn" onClick={handleConfirmMeals}>
-                    ✓
-                  </button>
+                  <button className="confirm-btn" onClick={() => openModal('meal')}>✓</button>
                 )}
               </div>
             </div>
@@ -224,45 +367,90 @@ const Dashboard = () => {
                 }}
               />
               {showFlexConfirm && (
-                <button
-                  id="flex-confirm-btn"
-                  onClick={async () => {
-                    const updatedFlex = accountData.flex_dollars - flexAmount;
-                    const token = localStorage.getItem('access');
-                    const response = await fetch('http://localhost:8000/api/my-account/', {
-                      method: 'PATCH',
-                      headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${token}`,
-                      },
-                      body: JSON.stringify({ flex_dollars: updatedFlex }),
-                    });
-                    if (response.ok) {
-                      const data = await response.json();
-                      setAccountData(data);
-                      setFlexAmount(0);
-                      setShowFlexConfirm(false);
-                    }
-                  }}
-                >
-                  ✓
-                </button>
+                <button id="flex-confirm-btn" onClick={() => openModal('flex')}>✓</button>
+
               )}
             </div>
 
             <p className="flex-note">Flex can be used at Dusty’s, Daily Grind, C-Store, and Cafeteria.</p>
           </div>
 
-          <div className="box transaction-box">[ Transaction History Box]</div>
+          <div className="box transaction-box">
+            <div className="transaction-top"></div>
+            <div className="transaction-bottom">
+              <h3>Transaction History</h3>
+              <p onClick={() => setShowHistoryModal(true)} style={{ cursor: 'pointer' }}>View More</p>
+            </div>
+          </div>
 
         </div>
 
         <div className="column column-3">
-          <div className="box links-box">[ Useful Links Box ]</div>
+          <div className="box links-box">
+            <h3>Useful Links</h3>
+            <ul>
+              <li><a href="#">Self-Service</a></li>
+              <li><a href="#">Canvas</a></li>
+            </ul>
+            <ul>
+              <li><a href="#">Cost of Attendance</a></li>
+              <li><a href="#">Online Tuition and Fees</a></li>
+              <li><a href="">Student Refund Options</a></li>
+              <li><a href="">Payments And Plans</a></li>
+            </ul>
+            <ul>
+              <li><a href="#">Housing Application</a></li>
+              <li><a href="#">eRez Life</a></li>
+            </ul>
+            <ul>
+              <li><a href="#">Official Website</a></li>
+              <li><a href="#">Athletics Website</a></li>
+            </ul>
+          </div>
         </div>
       </div>
+
+      <div class="dashboard-section2">
+        <h2>Dashboard Overview</h2>
+        <p>✅ <b>Meal Swipes at a Glance</b> – Instantly see how many meal swipes you have left for the 
+          week or semester. No more last-minute surprises at the dining hall!<br/><br/>
+          💰 <b>Flex Balance Tracking</b> – Keep an eye on your remaining flex dollars and track where you’re 
+          spending them, whether it's at cafés, vending machines, or campus restaurants.<br/><br/>
+          📜 <b>Transaction History</b> – View a detailed breakdown of where and when you've used your swipes and flex 
+          dollars. Filter transactions by date, location, or category.<br/><br/>
+          🍽 <b>Meal Plan Options & Upgrades</b> – Explore different meal plans, compare their benefits, and see if upgrading or 
+          adjusting your current plan makes sense for your lifestyle.<br/><br/>
+          📈 <b>Spending Insights</b> – Visual charts help you analyze your meal spending habits, 
+          ensuring you never run out too soon. Get weekly or monthly reports to budget better.<br/><br/>
+          🔔 <b>Alerts & Notifications</b> – Get notified when your balance is running low, so you can 
+          plan accordingly before your next meal.
+        </p>
+      </div>
+
+      {/*Transaction Modal*/}
+      {showModal && (
+        <TransactionModal
+          location={transactionLocation}
+          setLocation={setTransactionLocation}
+          onCancel={() => setShowModal(false)}
+          onConfirm={handleModalConfirm}
+        />
+      )}
+
+      {/*Transaction History Popup Window */}
+      {showHistoryModal && (
+        <TransactionHistoryModal
+          firstName={accountData.first_name}
+          transactions={transactions}
+          onClose={() => setShowHistoryModal(false)}
+        />
+      )}
+
+      {/* Footer */}
+      <Footer />
     </>
   );
 };
+
 
 export default Dashboard;

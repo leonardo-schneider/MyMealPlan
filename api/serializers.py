@@ -185,3 +185,13 @@ class EmailTokenObtainPairSerializer(TokenObtainPairSerializer):
         # Se a autenticação for bem-sucedida, o método da superclasse retornará os tokens
         data = super().validate(attrs)
         return data
+
+
+# Transaction History Serializer
+class UserTransactionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Transaction
+        fields = ['id', 'user', 'type', 'amount', 'location', 'timestamp']
+        extra_kwargs = {
+            'user': {'read_only': True},
+        }
