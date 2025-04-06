@@ -212,10 +212,9 @@
   
   /* TEMP STYLING FOR LAYOUT VISUALIZATION */
   .box {
-    background-color: #f1f1f1;
+    background-color: var(--white);
     border: 1px solid #ccc;
     border-radius: 15px;
-    padding: 30px;
     font-weight: bold;
     display: flex;
     justify-content: center;
@@ -283,7 +282,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 20px;
+    padding: 20px 25px;
     height: 100%;
   }
   
@@ -311,7 +310,6 @@
     text-decoration: underline;
   }
   
-  /* Circular progress (can be static for now) */
   .meals-progress {
     display: flex;
     justify-content: center;
@@ -354,7 +352,7 @@
     margin-bottom: 10px;
   }
   
-  .meals-edit h3, .flex-edit h3 {
+  .meals-edit h3, .flex-edit h3, .transaction-bottom h3, .links-box h3 {
     font-size: 1.5rem;
     font-weight: 500;
   }
@@ -514,7 +512,77 @@
   #flex-confirm-btn:hover{
     background-color: #FBF9D5;
   }
+
+
+  /*---------------Transaction History---------------*/
+  .transaction-box{
+    position:relative;
+    display: flex;
+    flex-direction: column;
+    padding:15px 25px;
+  }
+  .transaction-top{
+    width:100%;
+    height:80%;
+    background: url('../Images/Assets/transaction-img.webp');
+    background-size: cover;
+    background-position: center;
+    border: 1px solid #000;
+    border-radius: 10px;
+    margin-bottom:10px;
+  }
+  .transaction-bottom{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .transaction-bottom p{
+    text-decoration: underline;
+    font-weight: 400;
+  }
   
+
+
+  /*-------------------Useful Links------------------------*/
+  .links-box{
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding:20px 20px 20px 30%;
+    background-color: #F3E7BE;
+  }
+  .links-box a{
+    font-size: 1rem;
+    font-weight: 400;
+    color:#000;
+    text-decoration: underline;
+  }
+  .links-box a:hover{
+    color: var(--green);
+    transition: all .5s ease;
+  }
+
+
+  /*----------------Dashboard Overview, Section 2----------------*/
+  .dashboard-section2{
+    position:relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding:5% 10%;
+    color: var(--h-color);
+  }
+  .dashboard-section2 h2{
+    font-size: var(--h2-size);
+    margin-bottom:5%;
+    text-align: center;
+  }
+  .dashboard-section2 p{
+    width:70%;
+  }
   
   /* RESPONSIVE LAYOUT */
   @media (max-width: 1024px) {
@@ -525,6 +593,16 @@
   
     .column-3 {
       grid-column: auto;
+    }
+    .dashboard-section2{
+      padding:1
+    }
+    .dashboard-section2 h2{
+      font-size: 2rem;
+      margin-bottom:10%;
+    }
+    .dashboard-section2 p{
+      width:100%;
     }
   }
   
@@ -555,7 +633,7 @@
       height: 55vh;
     }
   
-    .column-2 .transactions-box {
+    .column-2 .transaction-box {
       height: 30vh;
     }
   

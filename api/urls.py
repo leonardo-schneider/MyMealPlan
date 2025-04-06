@@ -4,6 +4,10 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework.routers import DefaultRouter
 from .views import EmailTokenObtainPairView
 
+#For Transaction History
+from django.urls import path
+from .views import UserTransactionListCreateView 
+
 router = DefaultRouter()
 router.register(r'meal-plans', MealPlanViewSet)
 
@@ -20,4 +24,8 @@ urlpatterns = [
     path('reset-password/', ResetPasswordView.as_view(), name='reset-password'),
     path('forgot-password/', ForgotPasswordView.as_view(), name='forgot-password'),
     path('', include(router.urls)),
+    
+    #Transaction History
+    path('user-transactions/', UserTransactionListCreateView.as_view(), name='user-transactions'),
+
 ]

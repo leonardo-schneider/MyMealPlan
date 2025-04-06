@@ -191,3 +191,13 @@ class EmailTokenObtainPairSerializer(TokenObtainPairSerializer):
         # If authentication is successful, continue with token generation
         data = super().validate(attrs)
         return data
+
+
+# Transaction History Serializer
+class UserTransactionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Transaction
+        fields = ['id', 'user', 'type', 'amount', 'location', 'timestamp']
+        extra_kwargs = {
+            'user': {'read_only': True},
+        }

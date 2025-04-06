@@ -1,0 +1,74 @@
+.history-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    overflow-y: auto;
+  }
+  
+  .history-modal {
+    background: #8AE1FE;
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    color: #1e1e1e;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  
+  .history-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .history-close:hover{
+    background-color: #fff;
+  }
+
+  .transaction-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+  
+  .transaction-list li {
+    display: flex;    
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #000;
+  }
+  
+  .tx-location {
+    font-weight: 500;
+    color: #193624;
+  }
+  
+  .tx-type {
+    font-weight: bold;
+  }
+  
+  .tx-time {
+    font-size: 0.85rem;
+    color: #666;
+  }
+  
+  .empty-transactions {
+    text-align: center;
+    margin-top: 20px;
+    color: #999;
+  }
+  

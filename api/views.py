@@ -6,6 +6,7 @@ from .serializers import (
     RegisterSerializer, 
     MealPlanOptionSerializer,
     EmailTokenObtainPairSerializer,
+    UserTransactionSerializer,
     UserMealPlanSerializer
     # Note: If you use UserMealPlanSerializer in your select_plan action, make sure to import it:
     # UserMealPlanSerializer
@@ -26,6 +27,23 @@ from django.conf import settings
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_decode
+
+#----------------
+# Transaction History
+from rest_framework import generics, permissions
+from .models import Transaction
+from .serializers import UserTransactionSerializer
+
+class UserTransactionListCreateView(generics.ListCreateAPIView):
+    serializer_class = UserTransactionSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return Transaction.objects.filter(user=self.request.user).order_by('-timestamp')
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
 import re
 
 User = get_user_model()
