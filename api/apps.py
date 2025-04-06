@@ -21,7 +21,7 @@ class ApiConfig(AppConfig):
             scheduler.add_job(
                 reset_meal_swipes,
                 trigger="cron",
-                day_of_week="wed",  
+                day_of_week="sun",  
                 hour=0,
                 minute=0,
                 id="reset_meal_swipes",  # ID for the job
