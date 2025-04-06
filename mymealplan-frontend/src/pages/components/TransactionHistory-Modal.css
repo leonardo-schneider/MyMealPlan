@@ -34,10 +34,6 @@
     cursor: pointer;
   }
 
-  .history-close:hover{
-    background-color: #fff;
-  }
-
   .transaction-list {
     list-style: none;
     padding: 0;
