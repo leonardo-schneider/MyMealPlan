@@ -10,6 +10,16 @@ const Dashboard = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [pendingMeals, setPendingMeals] = useState(null);
   const navigate = useNavigate();
+  const [flexAmount, setFlexAmount] = useState('');
+  const [showFlexConfirm, setShowFlexConfirm] = useState(false);
+
+  {/*Date Constants*/}
+  const today = new Date();
+  const year = today.getFullYear();
+  const spring = [new Date(year, 0, 1), new Date(year, 4, 1)];
+  const summer = [new Date(year, 4, 2), new Date(year, 7, 11)];
+  const fall = [new Date(year, 7, 12), new Date(year, 11, 20)];
+
 
   useEffect(() => {
     const fetchAccountData = async () => {
@@ -129,7 +139,14 @@ const Dashboard = () => {
 
           <div className="box meals-box">
             <div className="meals-header">
-              <div><p>Spring 2025</p><p>Week 3/23 - 3/28</p></div>
+              <div>
+                <p>{(() => {
+                if (today >= spring[0] && today <= spring[1]) return `Spring ${year}`;
+                if (today >= summer[0] && today <= summer[1]) return `Summer ${year}`;
+                if (today >= fall[0] && today <= fall[1]) return `Fall ${year}`;
+                return `Winter ${year}`;
+              })()}</p>
+                <p>Week 3/23 - 3/28</p></div>
               <div className="meals-links">
                 <a href="#">View My Meal Plan</a>
                 <a href="/profile">View My Profile</a>
@@ -150,7 +167,7 @@ const Dashboard = () => {
             </div>
 
             <div className="meals-edit">
-              <h3>Edit Meals</h3>
+              <h3>Edit Meals:</h3>
               <div className="edit-controls">
                 <button onClick={() => handleMealChange(-1)}>-</button>
                 <span>{mealsLeft}</span>
@@ -173,10 +190,71 @@ const Dashboard = () => {
 
         <div className="column column-2">
           <div className="box flex-box">
-            <h3>Flex Dollars</h3>
-            <p>${accountData.flex_dollars}</p>
+            <div className="flex-top">
+              <p className="flex-term">{(() => {
+                const today = new Date();
+                const year = today.getFullYear();
+                const spring = [new Date(year, 0, 1), new Date(year, 4, 1)];
+                const summer = [new Date(year, 4, 2), new Date(year, 7, 11)];
+                const fall = [new Date(year, 7, 12), new Date(year, 11, 20)];
+
+                if (today >= spring[0] && today <= spring[1]) return `Spring ${year}`;
+                if (today >= summer[0] && today <= summer[1]) return `Summer ${year}`;
+                if (today >= fall[0] && today <= fall[1]) return `Fall ${year}`;
+                return `Winter ${year}`;
+              })()}</p>
+              <p className="flex-amount">${Number(accountData.flex_dollars).toFixed(2)}</p>
+              <p className="flex-label">Flex Money Left</p>
+            </div>
+
+            <div className="flex-edit">
+              <h3>Edit Flex:</h3>
+              <input
+                type="number"
+                min="0"
+                max={accountData.flex_dollars}
+                placeholder="Enter amount"
+                value={flexAmount}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (/^\d*\.?\d{0,2}$/.test(value)) {
+                    setFlexAmount(value);
+                    setShowFlexConfirm(value !== '' && parseFloat(value) > 0 && parseFloat(value) <= Number(accountData.flex_dollars));
+                  }
+                }}
+              />
+              {showFlexConfirm && (
+                <button
+                  id="flex-confirm-btn"
+                  onClick={async () => {
+                    const updatedFlex = accountData.flex_dollars - flexAmount;
+                    const token = localStorage.getItem('access');
+                    const response = await fetch('http://localhost:8000/api/my-account/', {
+                      method: 'PATCH',
+                      headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`,
+                      },
+                      body: JSON.stringify({ flex_dollars: updatedFlex }),
+                    });
+                    if (response.ok) {
+                      const data = await response.json();
+                      setAccountData(data);
+                      setFlexAmount(0);
+                      setShowFlexConfirm(false);
+                    }
+                  }}
+                >
+                  ✓
+                </button>
+              )}
+            </div>
+
+            <p className="flex-note">Flex can be used at Dusty’s, Daily Grind, C-Store, and Cafeteria.</p>
           </div>
-          <div className="box transactions-box">[ Transaction History Box ]</div>
+
+          <div className="box transaction-box">[ Transaction History Box]</div>
+
         </div>
 
         <div className="column column-3">
