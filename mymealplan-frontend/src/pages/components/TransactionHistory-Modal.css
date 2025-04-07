@@ -34,8 +34,8 @@
     cursor: pointer;
   }
 
-  .history-close:hover{
-    background-color: #fff;
+  button:hover{
+    background-color: none;
   }
 
   .transaction-list {
