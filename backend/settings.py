@@ -164,8 +164,8 @@ EMAIL_HOST = 'smtp.gmail.com'             # Gmail's SMTP server
 EMAIL_PORT = 587                          # Common port for TLS
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'mmpusao@gmail.com'       # Your dedicated Gmail address
-EMAIL_HOST_PASSWORD = 'epcb ytci sumb uvki'  # Your App Password (if using 2FA)
-DEFAULT_FROM_EMAIL = 'Your Name <mmpusao@gmail.com>'
+EMAIL_HOST_PASSWORD = 'byhg iffd udfs tovp'  # Your App Password (if using 2FA)
+DEFAULT_FROM_EMAIL = 'mmpusao@gmail.com'
 
 # Frontend URL for password reset redirection
 FRONTEND_URL = "http://localhost:3000"      # Adjust this to your frontend URL

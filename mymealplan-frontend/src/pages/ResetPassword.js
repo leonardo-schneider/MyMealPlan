@@ -1,70 +1,82 @@
-import React, { useState } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
-import './ResetPassword.css';
+import { useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import axios from 'axios';
 
-const ResetPassword = () => {
+function ResetPassword() {
+  const [password, setPassword] = useState('');
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const uid = searchParams.get('uid');
   const token = searchParams.get('token');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [message, setMessage] = useState('');
-  const navigate = useNavigate();
 
-  const handleResetPassword = async (e) => {
+  // Funções para validar cada requisito individual
+  const isLengthValid = password.length >= 8;
+  const hasUppercase = /[A-Z]/.test(password);
+  const hasLowercase = /[a-z]/.test(password);
+  const hasNumber = /[0-9]/.test(password);
+  const hasSpecialChar = /[\W_]/.test(password);
+
+  // Senha é válida se tudo for verdadeiro
+  const isPasswordValid = isLengthValid && hasUppercase && hasLowercase && hasNumber && hasSpecialChar;
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (password !== confirmPassword) {
-      setMessage("Passwords do not match.");
+    if (!isPasswordValid) {
+      alert('Your password does not meet the requirements');
       return;
     }
 
     try {
-      const res = await fetch('http://localhost:8000/api/reset-password/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ uid, token, password })
+      await axios.post('http://localhost:8000/api/reset-password/', {
+        uid: uid,
+        token: token,
+        password: password,
       });
-
-      if (res.ok) {
-        setMessage("Password reset successful. Redirecting to login...");
-        setTimeout(() => {
-          navigate('/login');
-        }, 3000);
-      } else {
-        const data = await res.json();
-        setMessage(data.error || "Failed to reset password.");
-      }
+      alert('Password reseted succesfully');
+      navigate('/login');  // Redireciona para login
     } catch (error) {
-      setMessage("An error occurred.");
+      alert('Error defining the password');
     }
   };
 
   return (
-    <div className="reset-password-container">
-      <h2>Reset Your Password</h2>
-      <form onSubmit={handleResetPassword}>
-        <label htmlFor="password">New Password:</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <label htmlFor="confirmPassword">Confirm New Password:</label>
-        <input
-          type="password"
-          id="confirmPassword"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
-        {message && <p className="message">{message}</p>}
-        <button type="submit">Reset Password</button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit} style={{ maxWidth: '400px', margin: 'auto' }}>
+      <h2>Redefinir Senha</h2>
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="New Password"
+        required
+        style={{ width: '100%', padding: '8px', marginBottom: '10px' }}
+      />
+
+      <div style={{ textAlign: 'left', marginBottom: '15px' }}>
+        <p>Requirements:</p>
+        <ul style={{ listStyleType: 'none', paddingLeft: 0 }}>
+          <li style={{ color: isLengthValid ? 'green' : 'red' }}>
+            {isLengthValid ? '✔' : '✖'} 8 Characters 
+          </li>
+          <li style={{ color: hasUppercase ? 'green' : 'red' }}>
+            {hasUppercase ? '✔' : '✖'} One Uppercase letter
+          </li>
+          <li style={{ color: hasLowercase ? 'green' : 'red' }}>
+            {hasLowercase ? '✔' : '✖'} One Lowercase letter
+          </li>
+          <li style={{ color: hasNumber ? 'green' : 'red' }}>
+            {hasNumber ? '✔' : '✖'} Number
+          </li>
+          <li style={{ color: hasSpecialChar ? 'green' : 'red' }}>
+            {hasSpecialChar ? '✔' : '✖'} Special Character
+          </li>
+        </ul>
+      </div>
+
+      <button type="submit" disabled={!isPasswordValid} style={{ width: '100%', padding: '10px' }}>
+        Reset Password
+      </button>
+    </form>
   );
-};
+}
 
 export default ResetPassword;
