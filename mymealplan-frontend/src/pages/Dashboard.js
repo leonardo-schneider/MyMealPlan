@@ -30,6 +30,19 @@ const Dashboard = () => {
   const summer = [new Date(year, 4, 2), new Date(year, 7, 11)];
   const fall = [new Date(year, 7, 12), new Date(year, 11, 20)];
 
+  const getCurrentWeekRange = () => {
+    const today = new Date();
+    const dayOfWeek = today.getDay(); // 0 = Sunday
+    const sunday = new Date(today);
+    sunday.setDate(today.getDate() - dayOfWeek);
+    const saturday = new Date(today);
+    saturday.setDate(today.getDate() + (6 - dayOfWeek));
+  
+    const formatDate = (date) => `${date.getMonth() + 1}/${date.getDate()}`;
+    return `Week ${formatDate(sunday)} - ${formatDate(saturday)}`;
+  };
+  
+
   {/*Transaction Modal Constants */}
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState(null); // 'meal' or 'flex'
@@ -291,7 +304,8 @@ const Dashboard = () => {
                 if (today >= fall[0] && today <= fall[1]) return `Fall ${year}`;
                 return `Winter ${year}`;
               })()}</p>
-                <p>Week 3/23 - 3/28</p></div>
+                <p>{getCurrentWeekRange()}</p>
+                </div>
               <div className="meals-links">
                 <a href="#">View My Meal Plan</a>
                 <a href="/profile">View My Profile</a>

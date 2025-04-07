@@ -142,13 +142,23 @@
 
   .forgot-password {
     font-size: 0.9rem;
+    line-height: 1.5rem;
     text-decoration: underline;
-    margin-bottom: 30px;
     color: var(--black);
     cursor: pointer;
+    margin-bottom: 20px;
   }
 
   .forgot-password a{
+    color: var(--black);
+  }
+
+  #createAcc{
+    margin-top:20px;
+    font-size: 0.9rem;
+  }
+  #createAcc a{
+    text-decoration: underline;
     color: var(--black);
   }
 

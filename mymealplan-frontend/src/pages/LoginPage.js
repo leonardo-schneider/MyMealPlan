@@ -112,15 +112,15 @@ const LoginPage = () => {
                   {showPassword ? 'Hide' : 'Show'}
                 </button>
             </div>
-
+          
             <p className="forgot-password">
               <a href="/forgot-password">Forgot Password?</a>
             </p>
 
-
             {erro && <p style={{ color: 'red' }}>{erro}</p>}
             <button id="signIn-button"type="submit">SIGN IN NOW</button>
           </form>
+          <p id="createAcc">Don't have an account? <a href="/register">Create one</a></p>
         </div>
       </div>
     </div>

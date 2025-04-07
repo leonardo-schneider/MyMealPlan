@@ -8,6 +8,7 @@ import './RegisterPage.css';
 
 const RegisterPage = () => {
   const [step, setStep] = useState(1);
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     first_name: '',
     last_name: '',
@@ -35,13 +36,12 @@ const RegisterPage = () => {
   const validatePassword = (password) => {
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
     return regex.test(password);
-  };  
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
 
-    // Clear error if user corrects password
     if (name === "password" && error) {
       setError('');
     }
@@ -69,7 +69,7 @@ const RegisterPage = () => {
               <a href="/login"><li>Log In/Sign Up</li></a>
             </ul>
           </div>
-          <img src={uniLogo} alt="University Logo" id="uni-logo" />
+          <img src={uniLogo} alt="University Logo" id="uni-logo-register" />
         </div>
 
         <div className="right-panel">
@@ -83,6 +83,7 @@ const RegisterPage = () => {
                 <label>First Name</label>
                 <input
                   type="text"
+                  placeholder="e.g. John"
                   name="first_name"
                   value={formData.first_name}
                   onChange={handleChange}
@@ -92,26 +93,29 @@ const RegisterPage = () => {
                 <label>Last Name</label>
                 <input
                   type="text"
+                  placeholder="e.g. Doe"
                   name="last_name"
                   value={formData.last_name}
                   onChange={handleChange}
                   required
                 />
 
-                <button
-                  type="button"
-                  className="next-btn"
-                  onClick={() => {
-                    if (!formData.first_name.trim() || !formData.last_name.trim()) {
-                      setError("Please enter both first and last name.");
-                      return;
-                    }
-                    setError('');
-                    setStep(2);
-                  }}
-                >
-                  Next →
-                </button>
+                <div className="button-group">
+                  <button
+                    type="button"
+                    className="next-btn"
+                    onClick={() => {
+                      if (!formData.first_name.trim() || !formData.last_name.trim()) {
+                        setError("Please enter both first and last name.");
+                        return;
+                      }
+                      setError('');
+                      setStep(2);
+                    }}
+                  >
+                    Next →
+                  </button>
+                </div>
               </div>
 
               {/* STEP 2 */}
@@ -119,6 +123,7 @@ const RegisterPage = () => {
                 <label>School E-mail</label>
                 <input
                   type="email"
+                  placeholder="e.g. jdoe0000@usao.edu"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
@@ -126,13 +131,22 @@ const RegisterPage = () => {
                 />
 
                 <label>Create Password</label>
-                <input
-                  type="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  required
-                />
+                <div className="password-input-wrapper">
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder='*********'
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    required
+                  />
+                  <span
+                    className="password-toggle"
+                    onClick={() => setShowPassword(prev => !prev)}
+                  >
+                    {showPassword ? 'Hide' : 'Show'}
+                  </span>
+                </div>
 
                 <ul className="password-rules">
                   <li>✔ At least 8 characters</li>
@@ -141,19 +155,28 @@ const RegisterPage = () => {
                   <li>✔ One special character</li>
                 </ul>
 
-                <button
-                  type="button"
-                  className="next-btn"
-                  onClick={() => {
-                    if (!validatePassword(formData.password)) {
-                      setError("Password does not meet all requirements.");
-                      return;
-                    }
-                    setStep(3);
-                  }}
-                >
-                   Next →
-                </button>
+                <div className="button-group">
+                  <button
+                    type="button"
+                    className="back-btn"
+                    onClick={() => setStep(step - 1)}
+                  >
+                    ← Back
+                  </button>
+                  <button
+                    type="button"
+                    className="next-btn"
+                    onClick={() => {
+                      if (!validatePassword(formData.password)) {
+                        setError("Password does not meet all requirements.");
+                        return;
+                      }
+                      setStep(3);
+                    }}
+                  >
+                    Next →
+                  </button>
+                </div>
               </div>
 
               {/* STEP 3 */}
@@ -166,7 +189,18 @@ const RegisterPage = () => {
                   options={mealPlanOptions}
                 />
 
-                <button type="submit">CREATE ACCOUNT</button>
+                <div className="button-group">
+                  <button
+                    type="button"
+                    className="back-btn"
+                    onClick={() => setStep(step - 1)}
+                  >
+                    ← Back
+                  </button>
+                  <button type="submit" className="next-btn">
+                    CREATE ACCOUNT
+                  </button>
+                </div>
               </div>
             </form>
 

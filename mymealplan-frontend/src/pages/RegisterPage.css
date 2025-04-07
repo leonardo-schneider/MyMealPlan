@@ -12,7 +12,7 @@
   --white: #fff;
   --black: #1e1e1e;
 
-  --p-size:clamp(1rem, 1.2rem, 1.5rem);
+  --p-size: clamp(1rem, 1.2rem, 1.5rem);
   --h2-size: 2.5rem;
   --bigHsize: 3.5rem;
   --ulSize: clamp(1.2rem, 1.8rem, 2rem);
@@ -57,11 +57,11 @@
   gap: 20px;
 }
 
-#uni-logo {
-  position: absolute;
-  bottom: 5%;
-  left: 5%;
-  width: 10%;
+#uni-logo-register {
+  position: absolute !important;
+  bottom: 5% !important;
+  left: 10% !important;
+  width: 20% !important;
 }
 
 /* RIGHT PANEL */
@@ -101,17 +101,6 @@
   z-index: -1;
 }
 
-.form-wrapper h2::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 8px;
-  width: 100%;
-  background-color: #13D23A;
-  z-index: -1;
-}
-
 label {
   font-weight: 600;
   margin-top: 15px;
@@ -127,23 +116,16 @@ input, select {
   margin-top: 5px;
 }
 
+/* BUTTON STYLES */
 .right-panel button {
-  margin-top: 20px;
-  padding: 14px;
-  background-color: #13D23A;
-  color: black;
+  font-size: 1rem;
   font-weight: bold;
   border: none;
-  width: 100%;
   cursor: pointer;
-  font-size: 1rem;
+  transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: #0fb72a;
-}
-
-/* STEP FORM */
+/* Step transition */
 .step {
   display: none;
   opacity: 0;
@@ -155,6 +137,13 @@ button:hover {
   display: block;
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Error + Tips */
+.error-msg {
+  color: red;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
 }
 
 .password-rules {
@@ -169,12 +158,7 @@ button:hover {
   margin-bottom: 4px;
 }
 
-.error-msg {
-  color: red;
-  margin-bottom: 10px;
-  font-size: 0.9rem;
-}
-
+/* Sign in prompt */
 .signin-link {
   font-size: 0.9rem;
   margin-top: 20px;
@@ -184,6 +168,65 @@ button:hover {
 .signin-link a {
   text-decoration: underline;
   color: #000;
+}
+
+/* ===== CUSTOM ADDITIONS ===== */
+
+/* Password Toggle */
+.password-input-wrapper {
+  position: relative;
+}
+
+.password-input-wrapper input {
+  padding-right: 60px;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-40%);
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #555;
+  user-select: none;
+}
+
+/* Back + Next Button Group */
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.back-btn,
+.next-btn {
+  flex: 1;
+  padding: 14px;
+  font-weight: bold;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.back-btn {
+  background-color: #eee;
+  color: #000;
+}
+
+.back-btn:hover {
+  background-color: #ccc;
+}
+
+.next-btn {
+  background-color: #13D23A;
+  color: black;
+}
+
+.next-btn:hover {
+  background-color: #0fb72a;
 }
 
 /* RESPONSIVE */
@@ -199,5 +242,9 @@ button:hover {
 
   .right-panel {
     padding: 20px;
+  }
+
+  .button-group {
+    flex-direction: column;
   }
 }
