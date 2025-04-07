@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './LoginPage.css';
+import './ForgotPassword.css';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -32,9 +32,9 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="side-form">
-      <div className="login-box" id="forgot-login-box">
-        <h2>Forgot Password</h2>
+    <div id="forgotPassword-container">
+      <h2>Reset Your Password</h2>
+      <div id="forgot-login-box">
         <form onSubmit={handleReset}>
           <label htmlFor="email">Enter your school e-mail</label>
           <input
@@ -45,10 +45,14 @@ const ForgotPassword = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          {message && <p className="forgot-msg">{message}</p>}
-          <button type="submit">SEND RESET LINK</button>
+          {message && <p id="forgot-msg">{message}</p>}
+          <div id="forgot-login-buttons">
+            <button type="submit" id="forgot-button1">SEND RESET LINK</button>
+            <button id="forgot-button2" onClick={() => navigate('/login')}>CANCEL</button>
+          </div>
         </form>
       </div>
+      <p>Once submitted, check spam box on your e-mail account<br/> in case you don't see it in your inbox.</p>
     </div>
   );
 };
