@@ -1,44 +1,10 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-
-// Import your page components
-import Home from './pages/Home';
-import RegisterPage from './pages/RegisterPage';
-import LoginPage from './pages/LoginPage';
-import Dashboard from './pages/Dashboard';
-import NotFoundPage from './pages/NotFoundPage';
-import Profile from './pages/Profile';
-import ForgotPassword from './pages/ForgotPassword';
-import ResetPassword from './pages/ResetPassword';
-import About from './pages/About';
-
-// Transition Between Pages
-import { AnimatePresence } from 'framer-motion';
-import { useLocation } from 'react-router-dom';
-
-
+import { BrowserRouter as Router } from 'react-router-dom';
+import AnimatedRoutes from './components/AnimatedRoutes';
 
 function App() {
   return (
     <Router>
-      <AnimatePresence mode="wait">
-        <Routes>
-          {/* Default route: redirect from "/" to "/login" */}
-          <Route path="/" element={<Navigate to="/home" />} />
-
-          {/* Other routes */}
-          <Route path="/home" element={<Home />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="*" element={<NotFoundPage />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/about" element={<About />} />
-
-        </Routes>
-      </AnimatePresence>
+      <AnimatedRoutes />
     </Router>
   );
 }

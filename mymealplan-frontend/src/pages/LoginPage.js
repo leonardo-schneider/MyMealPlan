@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import uniLogo from "../Images/Assets/uni-logo.webp";
 import './LoginPage.css';
 import Footer from './components/Footer.js';
-
-// For Smooth Transition Between Pages
-import PageTransition from '../components/PageTransition';
 
 
 const LoginPage = () => {
@@ -71,16 +68,15 @@ const LoginPage = () => {
   
   return (
   <>
-  {/*<PageTransition>*/}
     <div class="container">
       <div class="side-image">
         {/*This is navigation*/}
         <div class="navigation">
-          <a href="home" id="logo">MyMealPlan</a>
+          <Link to="/home" id="logo">MyMealPlan</Link>
           <ul>            
-            <a href="dashboard"><li>Dashboard</li></a>
-            <a href="about"><li>About</li></a>
-            <a href="login"><li>Log In/Sign Up</li></a>
+            <Link to="/dashboard"><li>Dashboard</li></Link>
+            <Link to="/about"><li>About</li></Link>
+            <Link to="/login"><li>Log In/Sign Up</li></Link>
           </ul>
         </div>
         <img src={uniLogo} alt="University Logo" id="uni-logo"/>
@@ -118,19 +114,18 @@ const LoginPage = () => {
             </div>
           
             <p className="forgot-password">
-              <a href="/forgot-password">Forgot Password?</a>
+              <Link to="/forgot-password">Forgot Password?</Link>
             </p>
 
             {erro && <p style={{ color: 'red' }}>{erro}</p>}
             <button id="signIn-button"type="submit">SIGN IN NOW</button>
           </form>
-          <p id="createAcc">Don't have an account? <a href="/register">Create one</a></p>
+          <p id="createAcc">Don't have an account? <Link to="/register">Create one</Link></p>
         </div>
       </div>
     </div>
     {/* Footer */}
     <Footer />
-   {/*</PageTransition>*/}
   </>
   );
 };

@@ -9,9 +9,6 @@ import './components/Transaction-Modal.css';
 import TransactionHistoryModal from '../pages/components/TransactionHistory-Modal';
 import './components/TransactionHistory-Modal.css';
 
-// For Smooth Transition Between Pages
-import PageTransition from '../components/PageTransition';
-
 
 const Dashboard = () => {
   const [accountData, setAccountData] = useState(null);
@@ -246,7 +243,6 @@ const Dashboard = () => {
 
   return (
     <>
-    {/*<PageTransition>*/} 
       <nav className="dashboard-navbar">
         <div className="navbar-left">
           <Link to="/home" className="logo">MyMealPlan</Link>
@@ -292,7 +288,7 @@ const Dashboard = () => {
               <div className="avatar-wrapper"><div className="avatar"></div></div>
               <div className="greeting-text">
                 <h3>Hi, {accountData.first_name || "Student"}!</h3>
-                <a href="/profile">Profile</a>
+                <Link to="/profile">Profile</Link>
               </div>
             </div>
           </div>
@@ -309,8 +305,8 @@ const Dashboard = () => {
                 <p>{getCurrentWeekRange()}</p>
                 </div>
               <div className="meals-links">
-                <a href="#">View My Meal Plan</a>
-                <a href="/profile">View My Profile</a>
+                <Link to="/profile">View My Meal Plan</Link>
+                <Link to="/profile">View My Profile</Link>
               </div>
             </div>
 
@@ -464,7 +460,6 @@ const Dashboard = () => {
 
       {/* Footer */}
       <Footer />
-    {/*<PageTransition>*/}
     </>
   );
 };

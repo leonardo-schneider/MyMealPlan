@@ -6,8 +6,7 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
-// For Smooth Transition Between Pages
-import PageTransition from '../components/PageTransition';
+import { Link, useNavigate } from 'react-router-dom';
 
 import './Home.css';
 import Footer from '../pages/components/Footer';
@@ -41,18 +40,17 @@ const Home = () => {
   return (
 
   <>
-   {/*<PageTransition>*/}
     <div class="hero">
       {/*This is a left side of Hero Section*/}
       <div class="hero-content">
 
         {/*This is navigation*/}
         <div class="navigation">
-          <a href="home" id="logo">MyMealPlan</a>
+          <Link to="/home" id="logo">MyMealPlan</Link>
           <ul>
-            <a href="dashboard"><li>Dashboard</li></a>
-            <a href="about"><li>About</li></a>
-            <a href="login"><li>Log In/Sign Up</li></a>
+            <Link to="/dashboard"><li>Dashboard</li></Link>
+            <Link to="/about"><li>About</li></Link>
+            <Link to="/login"><li>Log In/Sign Up</li></Link>
           </ul>
         </div>
 
@@ -61,8 +59,8 @@ const Home = () => {
           <p>Track your remaining swipes, check your flex balance, explore meal plan options, 
             and review your transaction history—all in one place.</p>
           <div class="h-buttons">
-            <a href="register"><button id="btn1">CREATE ACCOUNT</button></a>
-            <a href="login"><button id="btn2">SIGN IN</button></a>
+            <Link to="/register"><button id="btn1">CREATE ACCOUNT</button></Link>
+            <Link to="/login"><button id="btn2">SIGN IN</button></Link>
           </div>
         </div>
 
@@ -150,7 +148,7 @@ const Home = () => {
           <p>Meal Plan Tracker was built by two students who were tired of asking, “How many swipes do I 
             have left?” We created this app to make campus dining easier, smarter, and stress-free. 
             Learn more about our story and vision for the future.</p>
-          <a href="/about"><button>Read more</button></a>
+          <Link to="/about"><button>Read more</button></Link>
         </div>
         <div className="story-image">
         <img src={campusImg} alt="USAO Building" />
@@ -165,12 +163,11 @@ const Home = () => {
           <li>☑ Link your meal plan</li>
           <li>☑ Start tracking and managing your meals and flex</li>
         </ul>
-        <a href="register"><button>GET STARTED NOW</button></a>
+        <Link to="/register"><button>GET STARTED NOW</button></Link>
       </div>
       
       {/* Footer */}
       <Footer />
-    {/*</PageTransition>*/} 
   </>
   
   );
