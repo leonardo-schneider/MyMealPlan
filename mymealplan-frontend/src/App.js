@@ -10,6 +10,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import Profile from './pages/Profile';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+import About from './pages/About';
 
 
 function App() {
@@ -28,6 +29,8 @@ function App() {
         <Route path="*" element={<NotFoundPage />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/about" element={<About />} />
+
 
 
       </Routes>

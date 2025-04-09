@@ -1,14 +1,18 @@
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import './About.css';
-import Navigation1 from './components/Navigation1'; // Reusable nav
 import Footer from './components/Footer';
 
 import campusImg from '../Images/images-about/campus-about.webp';
-import soccer1 from '../Images/images-about/leo&matija1.webp';
-import soccer2 from '../Images/images-about/leo&matija2.webp';
-import soccer3 from '../Images/images-about/leo&matija3.webp';
+import teamImg from '../Images/images-about/teamImg.webp';
 
 const About = () => {
+
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
   return (
     <>
       <nav className="dashboard-navbar">
@@ -18,19 +22,7 @@ const About = () => {
         <div className={`navbar-links ${mobileMenuOpen ? 'open' : ''}`}>
           <Link to="/home">Home</Link>
           <Link to="/about">About</Link>
-          <div className="profile-dropdown desktop-only">
-            <button onClick={() => setDropdownOpen(!dropdownOpen)}>Profile ▾</button>
-            {dropdownOpen && (
-              <div className="dropdown-menu">
-                <Link to="/profile">Go to Profile</Link>
-                <button onClick={() => {
-                  localStorage.removeItem('access');
-                  localStorage.removeItem('refresh');
-                  navigate('/login');
-                }}>Sign Out</button>
-              </div>
-            )}
-          </div>
+          <Link to="/login">Log In</Link>
           {mobileMenuOpen && (
             <div className="mobile-only">
               <Link to="/profile">Go to Profile</Link>
@@ -72,7 +64,7 @@ const About = () => {
           </p>
         </div>
         <div className="story-image">
-          <img src={campusImg} alt="USAO Building" />
+        <img src={campusImg} alt="USAO Building" />
         </div>
       </div>
 
@@ -80,37 +72,35 @@ const About = () => {
         <h2>Who Are We?</h2>
         <div className="team-section">
           <div className="team-images">
-            <img src={soccer1} alt="Matija and Leo" />
-            <img src={soccer2} alt="Soccer team" />
-            <img src={soccer3} alt="Game action" />
+          <img src={teamImg} alt="Images"/>
           </div>
           <div className="team-text">
             <p>
-              We're <strong>Matija</strong> and <strong>Leo</strong>—two seniors studying Business Administration at the University of Science and Arts of Oklahoma. We both have a passion for tech and problem-solving, which led us to take on Computer Science minors. Matija also minors in Economics and Liberal Arts, bringing a broader systems-thinking approach to how we build solutions.
+              We're <span>Matija</span> and <span>Leo</span>—two seniors studying Business Administration at the University of Science and Arts of Oklahoma. We both have a passion for tech and problem-solving, which led us to take on Computer Science minors. Matija also minors in Economics and Liberal Arts, bringing a broader systems-thinking approach to how we build solutions.
             </p>
             <p>
               We’re also teammates on the varsity men’s soccer team, and we work on campus—Leo in Admissions as a tour guide, and Matija as a Resident Assistant in Housing. Oh, and we both work in the cafeteria too—<span className="bold">so yes, we’ve seen the meal swipe struggle from every angle.</span>
             </p>
-            <p>
-              We've heard the same questions over and over:
+            <p><br/><br/>We've heard the same questions over and over:</p>
               <ul>
                 <li>“How many swipes do I have left?”</li>
                 <li>“Can you just swipe and tell me my balance?”</li>
                 <li>“Wait, I thought I had more flex!”</li>
               </ul>
-            </p>
             <p>
               That’s when it clicked. We weren’t the only ones dealing with this confusion—every student was. So we decided to build something simple, helpful, and designed from the student perspective. We’re proud to be building something real for our community.
-            </p>
-            <p className="mission-closing">
-              <strong>We built this because we live it.</strong><br />
-              <strong>We’re students building for students.</strong><br />
-              <strong>And we’re just getting started.</strong>
             </p>
           </div>
         </div>
       </div>
 
+      <div className="mission-closing">
+      <p>We built this because we live it.<br />
+              We’re students building for students.<br />
+              And we’re just getting started.</p>
+      </div>
+
+      {/* Footer */}
       <Footer />
     </>
   );
