@@ -43,7 +43,7 @@ const Home = () => {
           <a href="home" id="logo">MyMealPlan</a>
           <ul>
             <a href="dashboard"><li>Dashboard</li></a>
-            <a href="#"><li>About</li></a>
+            <a href="about"><li>About</li></a>
             <a href="login"><li>Log In/Sign Up</li></a>
           </ul>
         </div>
