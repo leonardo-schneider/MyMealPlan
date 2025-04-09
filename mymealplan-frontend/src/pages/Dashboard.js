@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Dashboard.css';
-import Footer from './components/Footer';
+import Footer from '../pages/components/Footer';
 
-import TransactionModal from './components/Transaction-Modal';
+import TransactionModal from '../pages/components/Transaction-Modal';
 import './components/Transaction-Modal.css';
 
-import TransactionHistoryModal from './components/TransactionHistory-Modal';
+import TransactionHistoryModal from '../pages/components/TransactionHistory-Modal';
 import './components/TransactionHistory-Modal.css';
-
-
 
 
 const Dashboard = () => {
@@ -290,7 +288,7 @@ const Dashboard = () => {
               <div className="avatar-wrapper"><div className="avatar"></div></div>
               <div className="greeting-text">
                 <h3>Hi, {accountData.first_name || "Student"}!</h3>
-                <a href="/profile">Profile</a>
+                <Link to="/profile">Profile</Link>
               </div>
             </div>
           </div>
@@ -304,11 +302,11 @@ const Dashboard = () => {
                 if (today >= fall[0] && today <= fall[1]) return `Fall ${year}`;
                 return `Winter ${year}`;
               })()}</p>
-                <p>{getCurrentWeekRange()}</p>
+                <p id='meal-box-week'>{getCurrentWeekRange()}</p>
                 </div>
               <div className="meals-links">
-                <a href="#">View My Meal Plan</a>
-                <a href="/profile">View My Profile</a>
+                <Link to="/profile">View My Meal Plan</Link>
+                <Link to="/profile">View My Profile</Link>
               </div>
             </div>
 

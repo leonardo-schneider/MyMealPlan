@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import uniLogo from "../Images/Assets/uni-logo.webp";
 import api from '../services/api';
 import MealPlanDropdown from '../components/MealPlanDropdown';
@@ -62,11 +62,11 @@ const RegisterPage = () => {
       <div className="register-container">
         <div className="left-panel">
           <div className="navigation-register">
-            <a href="/home" id="logo">MyMealPlan</a>
+            <Link to="/home" id="logo">MyMealPlan</Link>
             <ul>
-              <a href="/dashboard"><li>Dashboard</li></a>
-              <a href="#"><li>Profile</li></a>
-              <a href="/login"><li>Log In/Sign Up</li></a>
+              <Link to="/dashboard"><li>Dashboard</li></Link>
+              <Link to="/about"><li>About</li></Link>
+              <Link to="/login"><li>Log In/Sign Up</li></Link>
             </ul>
           </div>
           <img src={uniLogo} alt="University Logo" id="uni-logo-register" />
@@ -205,7 +205,7 @@ const RegisterPage = () => {
             </form>
 
             <p className="signin-link">
-              Already have an account? <a href="/login">Sign In</a>
+              Already have an account? <Link to="/login">Sign In</Link>
             </p>
           </div>
         </div>

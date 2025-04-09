@@ -5,10 +5,15 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+
+import { Link, useNavigate } from 'react-router-dom';
+
+import './Home.css';
+import Footer from '../pages/components/Footer';
+
 import dashboardImg from "../Images/images-homepage/dashboard.webp";
 import userImg from "../Images/images-homepage/user-img.webp";
-import './Home.css';
-import Footer from './components/Footer';
+import campusImg from '../Images/images-about/campus-about.webp';
 
 const testimonials = [
   {
@@ -33,6 +38,7 @@ const testimonials = [
 
 const Home = () => {
   return (
+
   <>
     <div class="hero">
       {/*This is a left side of Hero Section*/}
@@ -40,11 +46,11 @@ const Home = () => {
 
         {/*This is navigation*/}
         <div class="navigation">
-          <a href="home" id="logo">MyMealPlan</a>
+          <Link to="/home" id="logo">MyMealPlan</Link>
           <ul>
-            <a href="dashboard"><li>Dashboard</li></a>
-            <a href="about"><li>About</li></a>
-            <a href="login"><li>Log In/Sign Up</li></a>
+            <Link to="/dashboard"><li>Dashboard</li></Link>
+            <Link to="/about"><li>About</li></Link>
+            <Link to="/login"><li>Log In/Sign Up</li></Link>
           </ul>
         </div>
 
@@ -53,8 +59,8 @@ const Home = () => {
           <p>Track your remaining swipes, check your flex balance, explore meal plan options, 
             and review your transaction history—all in one place.</p>
           <div class="h-buttons">
-            <a href="register"><button id="btn1">CREATE ACCOUNT</button></a>
-            <a href="login"><button id="btn2">SIGN IN</button></a>
+            <Link to="/register"><button id="btn1">CREATE ACCOUNT</button></Link>
+            <Link to="/login"><button id="btn2">SIGN IN</button></Link>
           </div>
         </div>
 
@@ -136,6 +142,19 @@ const Home = () => {
         </Swiper>
       </div>
 
+      <div className="about-story">
+        <div className="story-text" id='about-text'>
+          <h2>About The Project</h2>
+          <p>Meal Plan Tracker was built by two students who were tired of asking, “How many swipes do I 
+            have left?” We created this app to make campus dining easier, smarter, and stress-free. 
+            Learn more about our story and vision for the future.</p>
+          <Link to="/about"><button>READ MORE</button></Link>
+        </div>
+        <div className="story-image">
+        <img src={campusImg} alt="USAO Building" />
+        </div>
+      </div>
+
       {/*Get Started Section*/}
       <div id="getStarted-section">
         <h2>Get Started in 3 Easy Steps</h2>
@@ -144,7 +163,7 @@ const Home = () => {
           <li>☑ Link your meal plan</li>
           <li>☑ Start tracking and managing your meals and flex</li>
         </ul>
-        <a href="register"><button>GET STARTED NOW</button></a>
+        <Link to="/register"><button>GET STARTED NOW</button></Link>
       </div>
       
       {/* Footer */}

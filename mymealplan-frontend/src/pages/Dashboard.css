@@ -298,6 +298,10 @@
   .meals-links {
     text-align: right;
   }
+
+  #meal-box-week{
+    font-weight: 600 !important;
+  }
   
   .meals-links a {
     display: block;
