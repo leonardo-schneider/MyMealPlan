@@ -302,7 +302,7 @@ const Dashboard = () => {
                 if (today >= fall[0] && today <= fall[1]) return `Fall ${year}`;
                 return `Winter ${year}`;
               })()}</p>
-                <p>{getCurrentWeekRange()}</p>
+                <p id='meal-box-week'>{getCurrentWeekRange()}</p>
                 </div>
               <div className="meals-links">
                 <Link to="/profile">View My Meal Plan</Link>
