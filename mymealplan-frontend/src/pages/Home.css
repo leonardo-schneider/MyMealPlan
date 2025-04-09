@@ -337,6 +337,26 @@ a{
 }
 
 
+/*----------About Section---------------*/
+#about-text h2{
+    font-size: var(--h2-size);
+    margin-bottom:20px;
+}
+#about-text button{
+    border:none;
+    width:30%;
+    padding:15px 0;
+    background-color: var(--white);
+    font-size: var(--p-size);
+    margin-top:10px;
+    cursor:pointer;
+}
+#about-text button:hover{
+    background-color: var(--green);
+    transition: all .5s ease;
+}
+
+
 /*-----Get Started Section-----*/
 #getStarted-section{
     position: relative;

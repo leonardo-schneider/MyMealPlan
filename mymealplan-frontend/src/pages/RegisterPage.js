@@ -6,6 +6,9 @@ import MealPlanDropdown from '../components/MealPlanDropdown';
 import Footer from './components/Footer';
 import './RegisterPage.css';
 
+// For Smooth Transition Between Pages
+import PageTransition from '../components/PageTransition';
+
 const RegisterPage = () => {
   const [step, setStep] = useState(1);
   const [showPassword, setShowPassword] = useState(false);
@@ -59,13 +62,14 @@ const RegisterPage = () => {
 
   return (
     <>
+    {/*<PageTransition>*/}
       <div className="register-container">
         <div className="left-panel">
           <div className="navigation-register">
             <a href="/home" id="logo">MyMealPlan</a>
             <ul>
               <a href="/dashboard"><li>Dashboard</li></a>
-              <a href="#"><li>Profile</li></a>
+              <a href="/about"><li>About</li></a>
               <a href="/login"><li>Log In/Sign Up</li></a>
             </ul>
           </div>
@@ -212,6 +216,7 @@ const RegisterPage = () => {
       </div>
 
       <Footer />
+    {/*</PageTransition>*/}
     </>
   );
 };

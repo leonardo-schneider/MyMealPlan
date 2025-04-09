@@ -5,10 +5,16 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+
+// For Smooth Transition Between Pages
+import PageTransition from '../components/PageTransition';
+
+import './Home.css';
+import Footer from '../pages/components/Footer';
+
 import dashboardImg from "../Images/images-homepage/dashboard.webp";
 import userImg from "../Images/images-homepage/user-img.webp";
-import './Home.css';
-import Footer from './components/Footer';
+import campusImg from '../Images/images-about/campus-about.webp';
 
 const testimonials = [
   {
@@ -33,7 +39,9 @@ const testimonials = [
 
 const Home = () => {
   return (
+
   <>
+   {/*<PageTransition>*/}
     <div class="hero">
       {/*This is a left side of Hero Section*/}
       <div class="hero-content">
@@ -136,6 +144,19 @@ const Home = () => {
         </Swiper>
       </div>
 
+      <div className="about-story">
+        <div className="story-text" id='about-text'>
+          <h2>About The Project</h2>
+          <p>Meal Plan Tracker was built by two students who were tired of asking, “How many swipes do I 
+            have left?” We created this app to make campus dining easier, smarter, and stress-free. 
+            Learn more about our story and vision for the future.</p>
+          <a href="/about"><button>Read more</button></a>
+        </div>
+        <div className="story-image">
+        <img src={campusImg} alt="USAO Building" />
+        </div>
+      </div>
+
       {/*Get Started Section*/}
       <div id="getStarted-section">
         <h2>Get Started in 3 Easy Steps</h2>
@@ -149,6 +170,7 @@ const Home = () => {
       
       {/* Footer */}
       <Footer />
+    {/*</PageTransition>*/} 
   </>
   
   );

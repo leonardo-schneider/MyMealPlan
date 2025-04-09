@@ -4,6 +4,9 @@ import uniLogo from "../Images/Assets/uni-logo.webp";
 import './LoginPage.css';
 import Footer from './components/Footer.js';
 
+// For Smooth Transition Between Pages
+import PageTransition from '../components/PageTransition';
+
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -67,15 +70,16 @@ const LoginPage = () => {
 
   
   return (
-  <>  
+  <>
+  {/*<PageTransition>*/}
     <div class="container">
       <div class="side-image">
         {/*This is navigation*/}
         <div class="navigation">
           <a href="home" id="logo">MyMealPlan</a>
-          <ul>
+          <ul>            
             <a href="dashboard"><li>Dashboard</li></a>
-            <a href="#"><li>Profile</li></a>
+            <a href="about"><li>About</li></a>
             <a href="login"><li>Log In/Sign Up</li></a>
           </ul>
         </div>
@@ -126,6 +130,7 @@ const LoginPage = () => {
     </div>
     {/* Footer */}
     <Footer />
+   {/*</PageTransition>*/}
   </>
   );
 };

@@ -7,6 +7,9 @@ import Footer from './components/Footer';
 import campusImg from '../Images/images-about/campus-about.webp';
 import teamImg from '../Images/images-about/teamImg.webp';
 
+// For Smooth Transition Between Pages
+import PageTransition from '../components/PageTransition';
+
 const About = () => {
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -15,6 +18,7 @@ const About = () => {
 
   return (
     <>
+    {/*<PageTransition>*/}
       <nav className="dashboard-navbar">
         <div className="navbar-left">
           <Link to="/home" className="logo">MyMealPlan</Link>
@@ -102,6 +106,7 @@ const About = () => {
 
       {/* Footer */}
       <Footer />
+    {/*<PageTransition>*/}
     </>
   );
 };

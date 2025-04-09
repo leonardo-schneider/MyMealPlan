@@ -1,29 +1,42 @@
-// src/components/PageTransition.js
 import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import './PageTransition.css';
 
-const transitionVariants = {
+const overlayVariants = {
   initial: { y: '100%' },
   animate: { y: 0 },
   exit: { y: '-100%' },
 };
 
-const PageTransition = ({ children }) => {
+const TransitionOverlay = () => {
+  const location = useLocation();
+  const [show, setShow] = useState(true);
+
+  useEffect(() => {
+    setShow(true);
+    const timer = setTimeout(() => {
+      setShow(false);
+    }, 1000); // keep in sync with animation
+
+    return () => clearTimeout(timer);
+  }, [location.pathname]);
+
   return (
-    <>
-      <AnimatePresence mode="wait">
+    <AnimatePresence mode="wait">
+      {show && (
         <motion.div
-          className="transition-screen"
-          variants={transitionVariants}
+          className="transition-overlay"
+          key={location.pathname}
+          variants={overlayVariants}
           initial="initial"
           animate="animate"
           exit="exit"
           transition={{ duration: 0.6, ease: 'easeInOut' }}
         />
-      </AnimatePresence>
-      {children}
-    </>
+      )}
+    </AnimatePresence>
   );
 };
 
-export default PageTransition;
+export default TransitionOverlay;

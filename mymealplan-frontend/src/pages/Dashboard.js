@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Dashboard.css';
-import Footer from './components/Footer';
+import Footer from '../pages/components/Footer';
 
-import TransactionModal from './components/Transaction-Modal';
+import TransactionModal from '../pages/components/Transaction-Modal';
 import './components/Transaction-Modal.css';
 
-import TransactionHistoryModal from './components/TransactionHistory-Modal';
+import TransactionHistoryModal from '../pages/components/TransactionHistory-Modal';
 import './components/TransactionHistory-Modal.css';
 
-
+// For Smooth Transition Between Pages
+import PageTransition from '../components/PageTransition';
 
 
 const Dashboard = () => {
@@ -245,6 +246,7 @@ const Dashboard = () => {
 
   return (
     <>
+    {/*<PageTransition>*/} 
       <nav className="dashboard-navbar">
         <div className="navbar-left">
           <Link to="/home" className="logo">MyMealPlan</Link>
@@ -462,6 +464,7 @@ const Dashboard = () => {
 
       {/* Footer */}
       <Footer />
+    {/*<PageTransition>*/}
     </>
   );
 };
