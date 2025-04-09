@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import UserListView, UserDetailView, TransactionListCreateView, MealPlanViewSet, RegisterView, MyAccountView, LoginView, ForgotPasswordView, ResetPasswordView
+from .views import UserListView, UserDetailView, TransactionListCreateView, MealPlanViewSet, RegisterView, MyAccountView, LoginView, ForgotPasswordView, ResetPasswordView, ProfileUpdateView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework.routers import DefaultRouter
 from .views import EmailTokenObtainPairView
@@ -27,5 +27,8 @@ urlpatterns = [
     
     #Transaction History
     path('user-transactions/', UserTransactionListCreateView.as_view(), name='user-transactions'),
+
+    #profile
+    path('profile/', ProfileUpdateView.as_view(), name='profile-update'),
 
 ]

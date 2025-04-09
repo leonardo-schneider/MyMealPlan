@@ -7,7 +7,8 @@ from .serializers import (
     MealPlanOptionSerializer,
     EmailTokenObtainPairSerializer,
     UserTransactionSerializer,
-    UserMealPlanSerializer
+    UserMealPlanSerializer,
+    ProfileUpdateSerializer
     # Note: If you use UserMealPlanSerializer in your select_plan action, make sure to import it:
     # UserMealPlanSerializer
 )
@@ -302,3 +303,11 @@ class ResetPasswordView(APIView):
         if not re.search(r'[\W_]', password):  # Special character
             return False
         return True
+    
+
+class ProfileUpdateView(generics.RetrieveUpdateAPIView):
+    serializer_class = ProfileUpdateSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+        return self.request.user
