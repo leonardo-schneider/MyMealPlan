@@ -148,7 +148,7 @@ const Home = () => {
           <p>Meal Plan Tracker was built by two students who were tired of asking, “How many swipes do I 
             have left?” We created this app to make campus dining easier, smarter, and stress-free. 
             Learn more about our story and vision for the future.</p>
-          <Link to="/about"><button>Read more</button></Link>
+          <Link to="/about"><button>READ MORE</button></Link>
         </div>
         <div className="story-image">
         <img src={campusImg} alt="USAO Building" />
