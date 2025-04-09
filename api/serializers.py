@@ -201,3 +201,21 @@ class UserTransactionSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'user': {'read_only': True},
         }
+
+class ProfileUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ['first_name', 'last_name', 'meal_plan_option', 'profile_picture']
+
+    def update(self, instance, validated_data):
+        # Update fields one by one
+        instance.first_name = validated_data.get('first_name', instance.first_name)
+        instance.last_name = validated_data.get('last_name', instance.last_name)
+        instance.meal_plan_option = validated_data.get('meal_plan_option', instance.meal_plan_option)
+        
+        # Only update the profile picture if provided
+        if 'profile_picture' in validated_data:
+            instance.profile_picture = validated_data['profile_picture']
+        
+        instance.save()
+        return instance
