@@ -17,7 +17,7 @@ function App() {
     <Router>
       <Routes>
         {/* Default route: redirect from "/" to "/login" */}
-        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/" element={<Navigate to="/home" />} />
 
         {/* Other routes */}
         <Route path="/home" element={<Home />} />

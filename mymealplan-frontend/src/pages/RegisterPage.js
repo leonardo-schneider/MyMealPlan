@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import uniLogo from "../Images/Assets/uni-logo.webp";
 import api from '../services/api';
 import MealPlanDropdown from '../components/MealPlanDropdown';
-import Footer from './Footer';
+import Footer from './components/Footer';
 import './RegisterPage.css';
 
 const RegisterPage = () => {

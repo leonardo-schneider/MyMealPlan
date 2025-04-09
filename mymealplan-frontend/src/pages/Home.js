@@ -8,7 +8,7 @@ import "swiper/css/navigation";
 import dashboardImg from "../Images/images-homepage/dashboard.webp";
 import userImg from "../Images/images-homepage/user-img.webp";
 import './Home.css';
-import Footer from './Footer';
+import Footer from './components/Footer';
 
 const testimonials = [
   {
