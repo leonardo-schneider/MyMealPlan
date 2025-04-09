@@ -1,0 +1,196 @@
+:root {
+    --bg-color: #193624;
+    --h-color: #F3E7BE;
+    --green: #13D23A;
+    --white: #fff;
+    --black: #1e1e1e;
+  
+    --p-size: clamp(1rem, 1.1rem, 1.2rem);
+    --h1-size: clamp(2.5rem, 3.5rem, 5rem);
+    --h2-size: clamp(1.8rem, 2.4rem, 3rem);
+  }
+  
+  body {
+    background-color: var(--bg-color);
+    font-family: 'Clash Grotesk', sans-serif;
+  }
+  
+  .about-hero {
+    position: relative;
+    width:100%;
+    padding: 10vh 5%;
+    text-align: center;
+    color: var(--h-color);
+  }
+
+  .about-hero-text{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .about-hero h1 {
+    font-size: 5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 30px;
+  }
+  
+  .about-hero p {
+    font-size: calc(var(--p-size) + 0.2rem);
+    width:50%;
+  }
+  
+  .highlight {
+    font-weight: 600;
+  }
+  
+  .about-story {
+    position: relative;
+    width:100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 20px 5%;
+    flex-wrap: wrap;
+    color: var(--h-color);
+  }
+  
+  .story-text {
+    flex: 1;
+    width:60%;
+    font-size: var(--p-size);
+    line-height: 1.6;
+  }
+  
+  .story-text p {
+    margin-bottom: 20px;
+  }
+  
+  .story-text .bold {
+    font-weight: 600;
+  }
+  
+  .story-image {
+    position: relative;
+    flex: 1;
+    height:100vh;
+    width:40%;
+    padding:5%;
+    display: flex;
+    align-items: center;
+    justify-content:flex-end;
+  }
+  .story-image img{
+    height:100%;
+    border-radius: 20px;
+  }
+
+  
+  .about-team {
+    position: relative;
+    padding: 5%;
+    width:100%;
+    color: var(--h-color);
+  }
+  
+  .about-team h2 {
+    text-align: center;
+    font-size: var(--h2-size);
+    margin-bottom: 10%;
+  }
+  
+  .team-section {
+    position:relative;
+    display: flex;
+    justify-content: space-between;
+    width:100%;
+    min-height: 100vh;
+    flex-wrap: wrap;
+  }
+  
+  .team-images {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width:40%;
+  }
+  
+  .team-images img {
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+  
+  .team-text {
+    position: relative;
+    width:60%;
+    padding-left:5%;
+    font-size: var(--p-size);
+    line-height: 1.6;
+  }
+  
+  .team-text p {
+    margin-bottom: 20px;
+  }
+  
+  .team-text span{
+    font-weight: 600;
+  }
+  
+  .team-text ul {
+    padding-left: 20px;
+    margin-top: -10px;
+    margin-bottom: 20px;
+  }
+  
+  .team-text li {
+    font-style: italic;
+  }
+  
+  .mission-closing{
+    position:relative;
+    width:100%;
+    min-height:50vh;
+    display: grid;
+    place-content: center;
+    color: var(--h-color);
+  }
+  .mission-closing p{
+    font-size:var(--h2-size);
+    font-weight: 600;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 900px) {
+    .about-story {
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+    }
+  
+    .story-text {
+      text-align: left;
+    }
+  
+    .team-section {
+      flex-direction: column;
+    }
+  
+    .team-text {
+      text-align: left;
+    }
+  
+    .about-hero h1 {
+      font-size: 2.5rem;
+    }
+  
+    .about-team h2 {
+      font-size: 2rem;
+    }
+  }
+  

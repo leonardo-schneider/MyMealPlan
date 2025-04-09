@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Dashboard.css';
-import Footer from './Footer';
+import Footer from './components/Footer';
 
 import TransactionModal from './components/Transaction-Modal';
 import './components/Transaction-Modal.css';

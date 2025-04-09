@@ -8,7 +8,7 @@ import "swiper/css/navigation";
 import dashboardImg from "../Images/images-homepage/dashboard.webp";
 import userImg from "../Images/images-homepage/user-img.webp";
 import './Home.css';
-import Footer from './Footer';
+import Footer from './components/Footer';
 
 const testimonials = [
   {
@@ -43,7 +43,7 @@ const Home = () => {
           <a href="home" id="logo">MyMealPlan</a>
           <ul>
             <a href="dashboard"><li>Dashboard</li></a>
-            <a href="#"><li>About</li></a>
+            <a href="about"><li>About</li></a>
             <a href="login"><li>Log In/Sign Up</li></a>
           </ul>
         </div>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import uniLogo from "../Images/Assets/uni-logo.webp";
 import './LoginPage.css';
-import Footer from './Footer.js';
+import Footer from './components/Footer.js';
 
 
 const LoginPage = () => {
