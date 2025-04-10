@@ -1,5 +1,5 @@
 // src/components/AnimatedRoutes.js
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import PageTransitionOverlay from './PageTransitionOverlay';
@@ -23,7 +23,8 @@ const MotionWrapper = ({ children }) => (
   </motion.div>
 );
 
-export default function AnimatedRoutes() {
+export default function AnimatedRoutes({ token, onMealPlanUpdate, mealPlan })
+  {
   const location = useLocation();
   const [transitionTrigger, setTransitionTrigger] = useState(false);
 
@@ -38,13 +39,14 @@ export default function AnimatedRoutes() {
       <PageTransitionOverlay trigger={transitionTrigger} />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/about" element={<MotionWrapper><About /></MotionWrapper>} />
-          <Route path="/dashboard" element={<MotionWrapper><Dashboard /></MotionWrapper>} />
+          <Route path="/dashboard" element={<MotionWrapper><Dashboard mealPlan={mealPlan} /></MotionWrapper>} />
           <Route path="/register" element={<MotionWrapper><Register /></MotionWrapper>} />
           <Route path="/login" element={<MotionWrapper><Login /></MotionWrapper>} />
           <Route path="/home" element={<MotionWrapper><Home /></MotionWrapper>} />
           <Route path="/forgot-password" element={<MotionWrapper><ForgotPassword /></MotionWrapper>} />
-          <Route path="/profile" element={<MotionWrapper><Profile /></MotionWrapper>} />
+          <Route path="/profile" element={<MotionWrapper key={token}><Profile token={token} onMealPlanUpdate={onMealPlanUpdate} /></MotionWrapper>} />
         </Routes>
       </AnimatePresence>
     </>

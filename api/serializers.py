@@ -2,7 +2,8 @@ from rest_framework import serializers
 from .models import CustomUser, Transaction, MealPlanOption
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth import authenticate, get_user_model
-import re
+from rest_framework.reverse import reverse
+from django.conf import settings
 
 CustomUser = get_user_model()
 
@@ -23,13 +24,19 @@ class UserSerializer(serializers.ModelSerializer):
     - total_meal_swipes: Computed field for total swipes.
     """
     total_meal_swipes = serializers.SerializerMethodField()
+    profile_pic = serializers.SerializerMethodField()
 
     class Meta:
         model = CustomUser
-        fields = ['id', 'username', 'first_name', 'last_name', 'email', 'meal_swipe_balance', 'flex_dollars', 'total_meal_swipes']
+        fields = ['id', 'username', 'first_name', 'last_name', 'email', 'meal_swipe_balance', 'flex_dollars', 'total_meal_swipes', 'profile_pic']
 
     def get_total_meal_swipes(self, obj):
         return obj.total_meal_swipes
+
+    def get_profile_pic(self, obj):
+        if obj.profile_pic:
+            return f"{settings.MEDIA_URL}{obj.profile_pic}"
+        return None
 
 # ----------------------------------------------------------------------
 # TransactionSerializer
@@ -209,7 +216,7 @@ class UserTransactionSerializer(serializers.ModelSerializer):
 class ProfileUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ['first_name', 'last_name', 'meal_plan_option', 'profile_picture']
+        fields = ['username', 'first_name', 'last_name', 'meal_plan_option', 'profile_picture']
 
     def update(self, instance, validated_data):
         # Update fields one by one
@@ -218,8 +225,8 @@ class ProfileUpdateSerializer(serializers.ModelSerializer):
         instance.meal_plan_option = validated_data.get('meal_plan_option', instance.meal_plan_option)
         
         # Only update the profile picture if provided
-        if 'profile_picture' in validated_data:
-            instance.profile_picture = validated_data['profile_picture']
+        if 'profile_pic' in validated_data:
+            instance.profile_pic = validated_data['profile_pic']
         
         instance.save()
         return instance
