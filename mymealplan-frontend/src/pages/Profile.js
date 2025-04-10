@@ -166,7 +166,7 @@ export default function ProfilePage({ token, onMealPlanUpdate, mealPlan}) {
         </div>
         {mobileMenuOpen && (
           <div className="mobile-only">
-            <Link to="/profile">Go to Profile</Link>
+            <Link to="/dashboard">Dashboard</Link>
             <button onClick={() => {
               localStorage.removeItem('access');
               localStorage.removeItem('refresh');

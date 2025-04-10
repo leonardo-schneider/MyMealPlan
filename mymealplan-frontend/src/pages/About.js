@@ -54,13 +54,21 @@ const About = () => {
       <div className="about-story">
         <div className="story-text">
           <p>
-            As students, we were constantly swiping our cards at the register just to check our balance—or squinting at receipts and forgetting the numbers an hour later. It didn’t take long to realize there had to be a better way. So, we decided to build one.
+            As students, we were constantly swiping our cards at the register just to check our 
+            balance—or squinting at receipts and forgetting the numbers an hour later. It didn’t take 
+            long to realize there had to be a better way. So, we decided to build one.
           </p>
           <p>
-            This app was created with one goal in mind: <span className="bold">make campus life easier for students</span>. We wanted to modernize how meal plans are managed—no more guessing, no more awkward register moments, no more surprises. With this tool, students can track their meal swipes, flex money, and transaction history all in one place, anytime they need it.
+            This app was created with one goal in mind: <span className="bold">make campus life easier 
+              for students</span>. We wanted to modernize how meal plans are managed—no more guessing, 
+              no more awkward register moments, no more surprises. With this tool, students can track 
+              their meal swipes, flex money, and transaction history all in one place, anytime they 
+              need it.
           </p>
           <p>
-            But we're not stopping there. In the future, we envision students being able to pay for meals directly through the app—<span className="bold">just scan a QR code and go</span>. Simple, fast, and student-friendly.
+            But we're not stopping there. In the future, we envision students being able to pay for 
+            meals directly through the app—<span className="bold">just scan and go</span>. 
+            Simple, fast, and student-friendly.
           </p>
         </div>
         <div className="story-image">

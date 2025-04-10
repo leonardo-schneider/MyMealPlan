@@ -383,7 +383,7 @@
   }
 
   .confirm-btn {
-    background-color: var(--green);
+    background-color: #AAFEBB !important;
     border: none;
     border-radius: 20px;
     font-weight: bold;
