@@ -16,11 +16,10 @@ class CustomUser(AbstractUser):
     The save() method is overridden to automatically update the user's meal swipe and flex dollar balances
     based on the associated MealPlanOption whenever the user is saved.
     """
+    profile_pic = models.ImageField(upload_to='profile_pics/', null=True, blank=True)
     meal_swipe_balance = models.IntegerField(default=0)
     flex_dollars = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     meal_plan_option = models.ForeignKey('MealPlanOption', null=True, blank=True, on_delete=models.SET_NULL)
-    
-    profile_picture = models.ImageField(upload_to='profile_pics/', null=True, blank=True)
 
     def save(self, *args, **kwargs):
             # Only set initial balances when the user is created

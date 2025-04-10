@@ -68,15 +68,15 @@ const LoginPage = () => {
   
   return (
   <>
-    <div class="container">
-      <div class="side-image">
+    <div className="container">
+      <div className="side-image">
         {/*This is navigation*/}
-        <div class="navigation">
+        <div className="navigation">
           <Link to="/home" id="logo">MyMealPlan</Link>
           <ul>            
             <Link to="/dashboard"><li>Dashboard</li></Link>
             <Link to="/about"><li>About</li></Link>
-            <Link to="/login"><li>Log In/Sign Up</li></Link>
+            <Link to="/register"><li>Sign Up</li></Link>
           </ul>
         </div>
         <img src={uniLogo} alt="University Logo" id="uni-logo"/>

@@ -1,0 +1,82 @@
+:root {
+  --bg-color: #193624;
+  --h-color: #F3E7BE;
+  --green: #13D23A;
+  --white: #fff;
+  --black: #1e1e1e;
+
+  --p-size: clamp(1rem, 1.2rem, 1.5rem);
+  --h2-size: 2.5rem;
+  --bigHsize: 3.5rem;
+  --ulSize: clamp(1.2rem, 1.8rem, 2rem);
+}
+
+/* Container */
+.profile-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 20%;
+  width:100%;
+  color: var(--h-color);
+}
+  
+/* Heading */
+.profile-heading {
+  font-size: var(--h2-size);
+  font-weight: bold;
+  margin-bottom: 24px;
+}
+
+/* Input Group */
+.input-group {
+  margin-bottom: 16px;
+}
+
+.input-label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+input[type="file"]{
+  border-radius: 6px;
+}
+
+/* Text inputs and dropdown */
+.profile-input,
+.profile-select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+/* Profile Picture */
+.profile-pic-preview {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 8px;
+  border: 1px solid var(--h-color);
+}
+
+/* Confirm Button */
+.confirm-button {
+  background-color: #16a34a;
+  color: #fff;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.confirm-button:hover {
+  background-color: #15803d;
+}
+  

@@ -10,7 +10,7 @@ import TransactionHistoryModal from '../pages/components/TransactionHistory-Moda
 import './components/TransactionHistory-Modal.css';
 
 
-const Dashboard = () => {
+const Dashboard = ({ mealPlan }) => {
   const [accountData, setAccountData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -199,6 +199,11 @@ const Dashboard = () => {
   }, [showHistoryModal, showModal]);
 
 
+  useEffect(() => {
+    if (mealPlan) {
+      setPendingMeals(null); // Reset pending edits when meal plan changes
+    }
+  }, [mealPlan]);
 
   const handleMealChange = (change) => {
     setPendingMeals(prev => {
@@ -237,7 +242,7 @@ const Dashboard = () => {
   if (error) return <div>Error: {error}</div>;
 
   const mealsLeft = pendingMeals !== null ? pendingMeals : accountData.meal_swipe_balance;
-  const totalMeals = accountData.total_meal_swipes;
+  const totalMeals = mealPlan || accountData.total_meal_swipes;
   const circleCircumference = 314;
   const progressOffset = totalMeals ? (1 - (mealsLeft / totalMeals)) * circleCircumference : 0;
 
@@ -254,7 +259,7 @@ const Dashboard = () => {
             <button onClick={() => setDropdownOpen(!dropdownOpen)}>Profile ▾</button>
             {dropdownOpen && (
               <div className="dropdown-menu">
-                <Link to="/profile">Go to Profile</Link>
+                <a href="/profile">Profile</a>
                 <button onClick={() => {
                   localStorage.removeItem('access');
                   localStorage.removeItem('refresh');
@@ -265,7 +270,7 @@ const Dashboard = () => {
           </div>
           {mobileMenuOpen && (
             <div className="mobile-only">
-              <Link to="/profile">Go to Profile</Link>
+              <a href="/profile">Profile</a>
               <button onClick={() => {
                 localStorage.removeItem('access');
                 localStorage.removeItem('refresh');
@@ -288,7 +293,7 @@ const Dashboard = () => {
               <div className="avatar-wrapper"><div className="avatar"></div></div>
               <div className="greeting-text">
                 <h3>Hi, {accountData.first_name || "Student"}!</h3>
-                <Link to="/profile">Profile</Link>
+                <a href="/profile">Profile</a>
               </div>
             </div>
           </div>
@@ -328,7 +333,6 @@ const Dashboard = () => {
               <div className="edit-controls">
                 <button onClick={() => handleMealChange(-1)}>-</button>
                 <span>{mealsLeft}</span>
-                <button onClick={() => handleMealChange(1)}>+</button>
 
                 {pendingMeals !== null && pendingMeals !== accountData.meal_swipe_balance && (
                   <button className="confirm-btn" onClick={() => openModal('meal')}>✓</button>
@@ -401,28 +405,28 @@ const Dashboard = () => {
           <div className="box links-box">
             <h3>Useful Links</h3>
             <ul>
-              <li><a href="#">Self-Service</a></li>
-              <li><a href="#">Canvas</a></li>
+              <li><a href="https://selfservice.usao.edu/Student/">Self-Service</a></li>
+              <li><a href="https://usao.onelogin.com/">Canvas</a></li>
             </ul>
             <ul>
-              <li><a href="#">Cost of Attendance</a></li>
-              <li><a href="#">Online Tuition and Fees</a></li>
-              <li><a href="">Student Refund Options</a></li>
-              <li><a href="">Payments And Plans</a></li>
+              <li><a href="https://usao.edu/financial-aid/cost-of-attendance.html">Cost of Attendance</a></li>
+              <li><a href="https://online.usao.edu/tuition-and-fees/">Online Tuition and Fees</a></li>
+              <li><a href="https://hbui.usao.edu/student">Student Refund Options</a></li>
+              <li><a href="https://hbui.usao.edu/student">Payments And Plans</a></li>
             </ul>
             <ul>
-              <li><a href="#">Housing Application</a></li>
-              <li><a href="#">eRez Life</a></li>
+              <li><a href="https://usao.erezlife.com">Housing Application</a></li>
+              <li><a href="https://usao.erezlife.com/">eRez Life</a></li>
             </ul>
             <ul>
-              <li><a href="#">Official Website</a></li>
-              <li><a href="#">Athletics Website</a></li>
+              <li><a href="https://usao.edu/">Official Website</a></li>
+              <li><a href="https://www.usaoathletics.com/landing/index">Athletics Website</a></li>
             </ul>
           </div>
         </div>
       </div>
 
-      <div class="dashboard-section2">
+      <div className="dashboard-section2">
         <h2>Dashboard Overview</h2>
         <p>✅ <b>Meal Swipes at a Glance</b> – Instantly see how many meal swipes you have left for the 
           week or semester. No more last-minute surprises at the dining hall!<br/><br/>
