@@ -4,6 +4,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth import authenticate, get_user_model
 from rest_framework.reverse import reverse
 from django.conf import settings
+import re
 
 CustomUser = get_user_model()
 
@@ -216,7 +217,7 @@ class UserTransactionSerializer(serializers.ModelSerializer):
 class ProfileUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ['username', 'first_name', 'last_name', 'meal_plan_option', 'profile_picture']
+        fields = ['username', 'first_name', 'last_name', 'meal_plan_option', 'profile_pic']
 
     def update(self, instance, validated_data):
         # Update fields one by one

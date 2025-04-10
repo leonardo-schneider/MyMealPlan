@@ -175,6 +175,48 @@ class MyAccountView(generics.RetrieveUpdateAPIView):
         # Return the currently authenticated user
         return self.request.user
 
+    def update(self, request, *args, **kwargs):
+        user = self.get_object()
+        data = request.data
+        files = request.FILES
+
+        # Update first/last name
+        user.first_name = data.get('first_name', user.first_name)
+        user.last_name = data.get('last_name', user.last_name)
+
+        # Profile picture (if applicable)
+        if 'profile_pic' in files:
+            user.profile_pic = files['profile_pic']
+
+        # ✅ Allow direct updates to flex_dollars and meal_swipe_balance
+        if 'flex_dollars' in data:
+            try:
+                user.flex_dollars = float(data['flex_dollars'])
+            except ValueError:
+                return Response({'error': 'Invalid flex dollar value'}, status=status.HTTP_400_BAD_REQUEST)
+
+        if 'meal_swipe_balance' in data:
+            try:
+                user.meal_swipe_balance = int(data['meal_swipe_balance'])
+            except ValueError:
+                return Response({'error': 'Invalid meal swipe balance'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Meal plan update
+        meal_plan_id = data.get('meal_plan_option')
+        if meal_plan_id:
+            try:
+                plan = MealPlanOption.objects.get(id=meal_plan_id)
+                user.meal_plan_option = plan
+                user.meal_swipe_balance = plan.meal_swipes
+                user.flex_dollars = plan.flex_dollars
+            except MealPlanOption.DoesNotExist:
+                return Response({'error': 'Invalid meal plan option'}, status=status.HTTP_400_BAD_REQUEST)
+
+        user.save()
+        serializer = self.get_serializer(user)
+        return Response(serializer.data)
+
+
 
 
 class LoginView(APIView):

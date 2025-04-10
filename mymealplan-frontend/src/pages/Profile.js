@@ -17,6 +17,9 @@ export default function ProfilePage({ token, onMealPlanUpdate, mealPlan}) {
 
   const totalMeals = mealPlan || profile?.total_meal_swipes || '';
 
+  //For Meal Plan Updates
+  const [mealPlans, setMealPlans] = useState([]);
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -27,7 +30,7 @@ export default function ProfilePage({ token, onMealPlanUpdate, mealPlan}) {
 
 
   useEffect(() => {
-    fetch(`${API_BASE_URL}/my-account/`, {
+    fetch(`${API_BASE_URL}/api/my-account/`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -49,6 +52,28 @@ export default function ProfilePage({ token, onMealPlanUpdate, mealPlan}) {
         alert("Could not load your profile.");
       });
   }, [token, API_BASE_URL, location.pathname]);
+
+
+  // For Meal Plan Options
+  useEffect(() => {
+    fetch(`${API_BASE_URL}/api/meal-plans/`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to fetch meal plans');
+        return res.json();
+      })
+      .then(data => {
+        setMealPlans(data);
+      })
+      .catch(err => {
+        console.error(err);
+        alert("Failed to load meal plans.");
+      });
+  }, [token, API_BASE_URL]);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -81,17 +106,19 @@ export default function ProfilePage({ token, onMealPlanUpdate, mealPlan}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('username', form.username || '');
+    //formData.append('username', form.username || '');
     formData.append('first_name', form.first_name || '');
     formData.append('last_name', form.last_name || '');
-    formData.append('meal_plan_option', form.meal_plan_option);
+    if (form.meal_plan_option) {
+      formData.append('meal_plan_option', form.meal_plan_option);
+    }
     if (form.profile_pic instanceof File) {
       formData.append('profile_pic', form.profile_pic);
     }
 
     try {
-      const response = await fetch(`${API_BASE_URL}/my-account/`, {
-        method: 'PUT',
+      const response = await fetch(`${API_BASE_URL}/api/my-account/`, {
+        method: 'PATCH',
         headers: {
           Authorization: `Bearer ${token}`
         },
@@ -200,13 +227,15 @@ export default function ProfilePage({ token, onMealPlanUpdate, mealPlan}) {
           <select
             name="meal_plan_option"
             className="profile-select"
-            value={form.meal_plan_option}
+            value={form.meal_plan_option || ''}
             onChange={handleChange}
           >
             <option value="" disabled hidden>Select Meal Plan...</option>
-            <option value="1">5 Meals</option>
-            <option value="2">12 Meals</option>
-            <option value="3">18 Meals</option>
+            {mealPlans.map((plan) => (
+              <option key={plan.id} value={plan.id}>
+                {plan.name} - {plan.meal_swipes} meals + ${plan.flex_dollars} flex
+              </option>
+            ))}
           </select>
         </div>
 

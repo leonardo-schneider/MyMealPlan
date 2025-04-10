@@ -290,7 +290,21 @@ const Dashboard = ({ mealPlan }) => {
         <div className="column column-1">
           <div className="box greeting-box">
             <div className="greeting-content">
-              <div className="avatar-wrapper"><div className="avatar"></div></div>
+              <div className="avatar-wrapper">
+              <img
+                className="avatar-img"
+                src={
+                  accountData.profile_pic?.startsWith('http')
+                    ? accountData.profile_pic
+                    : `http://localhost:8000${accountData.profile_pic}`
+                }
+                alt="Profile"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = require('../Images/images-homepage/user-img.webp');
+                }}
+              />
+              </div>
               <div className="greeting-text">
                 <h3>Hi, {accountData.first_name || "Student"}!</h3>
                 <a href="/profile">Profile</a>
