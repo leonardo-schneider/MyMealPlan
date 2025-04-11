@@ -225,8 +225,6 @@ class LoginView(APIView):
         email = request.data.get('email', '').strip().lower()  # ou remova o .lower() temporariamente
         password = request.data.get('password')
         
-        print(f"Email recebido: '{email}'")
-        print(f"Senha recebida: '{password}'")
         
         try:
             user = User.objects.get(email=email)
