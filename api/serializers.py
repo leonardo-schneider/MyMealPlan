@@ -23,13 +23,15 @@ class UserSerializer(serializers.ModelSerializer):
     - meal_swipe_balance: Current meal swipe balance.
     - flex_dollars: Current flex dollars balance.
     - total_meal_swipes: Computed field for total swipes.
+    - profile_pic: store the profile picture
+    - buddy_swipe_balance: Current buddy swipe
     """
     total_meal_swipes = serializers.SerializerMethodField()
     profile_pic = serializers.SerializerMethodField()
 
     class Meta:
         model = CustomUser
-        fields = ['id', 'username', 'first_name', 'last_name', 'email', 'meal_swipe_balance', 'flex_dollars', 'total_meal_swipes', 'profile_pic']
+        fields = ['id', 'username', 'first_name', 'last_name', 'email', 'meal_swipe_balance', 'flex_dollars', 'total_meal_swipes','buddy_swipe_balance', 'profile_pic']
 
     def get_total_meal_swipes(self, obj):
         return obj.total_meal_swipes
@@ -155,10 +157,11 @@ class MealPlanOptionSerializer(serializers.ModelSerializer):
     - name: Name of the meal plan.
     - meal_swipes: Number of meal swipes.
     - flex_dollars: Amount of flex dollars.
+    - buddy_swipes: Amount of buddy swipes.
     """
     class Meta:
         model = MealPlanOption
-        fields = ['id', 'name', 'meal_swipes', 'flex_dollars']
+        fields = ['id', 'name', 'meal_swipes', 'flex_dollars', 'buddy_swipes']
 
 # ----------------------------------------------------------------------
 # UserMealPlanSerializer

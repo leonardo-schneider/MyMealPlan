@@ -8,3 +8,5 @@ admin.site.register(CustomUser)
 class MealPlanOptionAdmin(admin.ModelAdmin):
     list_display = ('name', 'meal_swipes', 'flex_dollars')
 
+class MealPlanOptionAdmin(admin.ModelAdmin):
+    list_display = ('name', 'meal_swipes', 'flex_dollars', 'buddy_swipes')

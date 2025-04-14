@@ -11,6 +11,7 @@ import Register from '../pages/RegisterPage';
 import Login from '../pages/LoginPage';
 import ForgotPassword from '../pages/ForgotPassword';
 import Profile from '../pages/Profile';
+import ResetPassword from '../pages/ResetPassword';
 
 const MotionWrapper = ({ children }) => (
   <motion.div
@@ -47,6 +48,7 @@ export default function AnimatedRoutes({ token, onMealPlanUpdate, mealPlan })
           <Route path="/home" element={<MotionWrapper><Home /></MotionWrapper>} />
           <Route path="/forgot-password" element={<MotionWrapper><ForgotPassword /></MotionWrapper>} />
           <Route path="/profile" element={<MotionWrapper key={token}><Profile token={token} onMealPlanUpdate={onMealPlanUpdate} /></MotionWrapper>} />
+          <Route path="/reset-password" element={<MotionWrapper><ResetPassword /></MotionWrapper>} />
         </Routes>
       </AnimatePresence>
     </>

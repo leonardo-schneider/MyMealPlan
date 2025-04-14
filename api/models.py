@@ -19,6 +19,7 @@ class CustomUser(AbstractUser):
     profile_pic = models.ImageField(upload_to='profile_pics/', null=True, blank=True)
     meal_swipe_balance = models.IntegerField(default=0)
     flex_dollars = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    buddy_swipe_balance = models.IntegerField(default=0)
     meal_plan_option = models.ForeignKey('MealPlanOption', null=True, blank=True, on_delete=models.SET_NULL)
 
     def save(self, *args, **kwargs):
@@ -26,6 +27,7 @@ class CustomUser(AbstractUser):
             if not self.pk and self.meal_plan_option:
                 self.meal_swipe_balance = self.meal_plan_option.meal_swipes
                 self.flex_dollars = self.meal_plan_option.flex_dollars
+                self.buddy_swipe_balance = self.meal_plan_option.buddy_swipes
             super().save(*args, **kwargs)
     
 
@@ -103,13 +105,14 @@ class MealPlanOption(models.Model):
     name = models.CharField(max_length=50)
     meal_swipes = models.PositiveIntegerField()
     flex_dollars = models.DecimalField(max_digits=10, decimal_places=2)
+    buddy_swipes = models.PositiveIntegerField(default=0)
 
     class Meta:
         ordering = ['meal_swipes']
 
     def __str__(self):
         # Returns a descriptive string for the meal plan option.
-        return f"{self.meal_swipes} swipes + ${self.flex_dollars} flex"
+        return f"{self.meal_swipes} swipes + ${self.flex_dollars} flex + {self.buddy_swipes} buddy swipes"
 
 
 # Transaction History Backend
