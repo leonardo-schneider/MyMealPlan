@@ -34,6 +34,12 @@ const testimonials = [
     occupation: "Senior",
     quote: "The insights and notifications help me stay on top of my finances!",
   },
+  {
+    img: "/images/user3.jpg",
+    name: "Matija Malenovic",
+    occupation: "Senior",
+    quote: "The insights and notifications help me stay on top of my finances!",
+  },
 ];
 
 const Home = () => {
@@ -45,12 +51,11 @@ const Home = () => {
       <div className="hero-content">
 
         {/*This is navigation*/}
-        <div className="navigation">
+        <div className="home-navigation">
           <Link to="/home" id="logo">MyMealPlan</Link>
           <ul>
-            <Link to="/dashboard"><li>Dashboard</li></Link>
             <Link to="/about"><li>About</li></Link>
-            <Link to="/login"><li>Log In/Sign Up</li></Link>
+            <Link to="/login"><li>Log In</li></Link>
           </ul>
         </div>
 

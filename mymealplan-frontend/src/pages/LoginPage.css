@@ -18,44 +18,43 @@
     --ulSize: clamp(1.2rem, 1.8rem, 2rem);
 }
   
-  body, html {
-    height: 100vh;
-  }
+body, html {
+  height: 100vh;
+}
+
+/* Container principal com flexbox para dividir em duas colunas */
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* Lado com a imagem */
+.side-image {
+  flex: 1;
+  background-image: url('../Images/Hero-Img.png'); /* Substitua pelo caminho da sua imagem */
+  background-size: cover;
+  background-position: center;
+}
+.side-image .login-navigation{
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height:6%;
+  padding: 6% 8%;
+}
   
-  /* Container principal com flexbox para dividir em duas colunas */
-  .container {
-    display: flex;
-    height: 100vh;
-  }
-  
-  /* Lado com a imagem */
-  .side-image {
-    flex: 1;
-    background-image: url('../Images/Hero-Img.png'); /* Substitua pelo caminho da sua imagem */
-    background-size: cover;
-    background-position: center;
-  }
-  .side-image .navigation{
-    z-index: 99;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height:6%;
-    padding: 6% 8%;
-  }
-  
-.navigation a{
+.login-navigation a{
   color: var(--h-color);
 }
-.navigation #logo{
+.login-navigation #logo{
     font-size: clamp(16px, 20px, 26px) !important;
     font-weight: 600;
 }
-.navigation ul{
-    width: 60%;
+.login-navigation ul{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap:20px;
 }
 
 #uni-logo{

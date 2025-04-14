@@ -1,0 +1,113 @@
+:root {
+    --bg-color: #193624;
+    --h-color: #F3E7BE;
+    --green: #13D23A;
+    --white: #fff;
+    --black: #1e1e1e;
+
+    --p-size: clamp(1rem, 1.2rem, 1.5rem);
+    --h2-size: 2.5rem;
+    --bigHsize: 3.5rem;
+    --ulSize: clamp(1.2rem, 1.8rem, 2rem);
+}
+
+.weekly-menu-section {
+    position: relative;
+    width:100%;
+    min-height: 100vh;
+    display: flex;
+    gap: 40px;
+    background-color: var(--bg-color);
+    color: var(--white);
+    border-radius: 20px;
+    padding: 30px 5%;
+    margin-top: 20px;
+}
+
+.menu-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap:50px;
+}
+
+.menu-left h2 {
+    color: var(--h-color);
+    font-size: 2.2rem;
+    line-height: 1.2;
+}
+
+.week-range {
+    font-size: 1.1rem;
+}
+
+.menu-left select {
+    font-size: 1rem;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    margin-top: 10px;
+}
+
+.hours {
+    margin-top: 20px;
+    font-size: 0.95rem;
+}
+
+.hours h3{
+    color:var(--h-color);
+}
+
+#hours-columns{
+    display: flex;
+    gap:30px;
+    margin-top:10px;
+    font-size: 1.1rem;
+}
+
+.hours-label{
+    color:var(--green);
+}
+
+.menu-right {
+    flex: 2;
+    background-color: white;
+    color: black;
+    border-radius: 15px;
+    padding: 25px;
+}
+
+.meal-block {
+    margin-bottom: 30px;
+}
+
+.meal-block h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--bg-color);
+}
+
+.meal-block ul {
+    margin-bottom: 10px;
+    padding-left: 20px;
+}
+
+.meal-block ul li {
+    list-style-type: disc;
+    font-size: 1rem;
+}
+
+.menu-content{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+@media screen and (max-width: 768px){
+    .weekly-menu-section{
+        flex-direction: column;
+    }
+    .menu-content{
+        grid-template-columns: 1fr;
+        gap:25px;
+    }
+}

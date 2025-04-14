@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 import Footer from '../pages/components/Footer';
 
+import WeeklyMenu from '../components/WeeklyMenu';
+
 import TransactionModal from '../pages/components/Transaction-Modal';
 import './components/Transaction-Modal.css';
 
@@ -255,6 +257,7 @@ const Dashboard = ({ mealPlan }) => {
         <div className={`navbar-links ${mobileMenuOpen ? 'open' : ''}`}>
           <Link to="/home">Home</Link>
           <Link to="/about">About</Link>
+          <a href="#weekly-menu">Menu</a>
           <div className="profile-dropdown desktop-only">
             <button onClick={() => setDropdownOpen(!dropdownOpen)}>Profile ▾</button>
             {dropdownOpen && (
@@ -475,6 +478,9 @@ const Dashboard = ({ mealPlan }) => {
           onClose={() => setShowHistoryModal(false)}
         />
       )}
+
+    {/* Weekly Menu Section */}
+    <div id="weekly-menu"><WeeklyMenu/></div>
 
       {/* Footer */}
       <Footer />
