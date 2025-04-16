@@ -10,7 +10,7 @@
     --bigHsize: 3.5rem;
     --ulSize: clamp(1.2rem, 1.8rem, 2rem);
   }
-  
+
   /* ========== NAVBAR BASE ========== */
   .dashboard-navbar {
     display: flex;
@@ -577,7 +577,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding:5% 10%;
+    padding:5%;
     color: var(--h-color);
   }
   .dashboard-section2 h2{
@@ -644,6 +644,10 @@
   
     .column-3 .links-box {
       display: none;
+    }
+
+    .dashboard-section2 p{
+      width:100%;
     }
   }
   

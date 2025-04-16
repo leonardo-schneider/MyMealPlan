@@ -71,10 +71,10 @@ const LoginPage = () => {
     <div className="container">
       <div className="side-image">
         {/*This is navigation*/}
-        <div className="navigation">
+        <div className="login-navigation">
           <Link to="/home" id="logo">MyMealPlan</Link>
           <ul>            
-            <Link to="/dashboard"><li>Dashboard</li></Link>
+            <Link to="/home"><li>Home</li></Link>
             <Link to="/about"><li>About</li></Link>
             <Link to="/register"><li>Sign Up</li></Link>
           </ul>

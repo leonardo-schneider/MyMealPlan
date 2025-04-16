@@ -64,7 +64,7 @@ const RegisterPage = () => {
           <div className="navigation-register">
             <Link to="/home" id="logo">MyMealPlan</Link>
             <ul>
-              <Link to="/dashboard"><li>Dashboard</li></Link>
+              <Link to="/home"><li>Home</li></Link>
               <Link to="/about"><li>About</li></Link>
               <Link to="/login"><li>Log In</li></Link>
             </ul>

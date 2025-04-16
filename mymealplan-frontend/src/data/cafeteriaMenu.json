@@ -1,0 +1,125 @@
+{
+    "week": "4/13 - 4/19",
+    "menu": {
+      "Monday": {
+        "breakfast": {
+          "items": ["Scrambled Eggs", "Pork Sausage", "Hash Browns", "Roasted Zucchini", "Biscuits and Gravy"],
+          "action": "Pancakes",
+          "madeToOrder": ["Yogurt", "Waffle Bar", "Cereal Station"]
+        },
+        "lunch": {
+          "items": ["Spaghetti", "Marinara", "Meatballs", "Chef's Choice Veggies", "Tofu"],
+          "action": "Grilled Cheese",
+          "madeToOrder": ["SOUP: TBA", "Lacie's Smorgasbord", "Creations on Pizza", "Salad, Deli, Waffle Bar", "Dessert and Cereal Station"]
+        },
+        "dinner": {
+          "items": ["Chicken Alfredo", "Alfredo", "Pasta", "Veggies", "Bread Sticks"],
+          "action": "Grilled Cheese",
+          "madeToOrder": ["SOUP: TBA", "Lacie's Smorgasbord", "Creations on Pizza", "Salad, Deli, Waffle Bar", "Dessert and Cereal Station"]
+        }
+      },
+      "Tuesday": {
+        "breakfast": {
+          "items": ["________", "Pork Sausage", "Hash Browns", "Roasted Zucchini", "Biscuits and Gravy"],
+          "action": "Pancakes",
+          "madeToOrder": ["Yogurt", "Waffle Bar", "Cereal Station"]
+        },
+        "lunch": {
+          "items": ["Spaghetti", "Marinara", "Meatballs", "Chef's Choice Veggies", "Tofu"],
+          "action": "Grilled Cheese",
+          "madeToOrder": ["SOUP: TBA", "Lacie's Smorgasbord", "Creations on Pizza", "Salad, Deli, Waffle Bar", "Dessert and Cereal Station"]
+        },
+        "dinner": {
+          "items": ["Chicken Alfredo", "Alfredo", "Pasta", "Veggies", "Bread Sticks"],
+          "action": "Grilled Cheese",
+          "madeToOrder": ["SOUP: TBA", "Lacie's Smorgasbord", "Creations on Pizza", "Salad, Deli, Waffle Bar", "Dessert and Cereal Station"]
+        }
+      },
+      "Wednesday": {
+        "breakfast": {
+          "items": ["Scrambled Eggs", "Pork Sausage", "Hash Browns", "Roasted Zucchini", "Biscuits and Gravy"],
+          "action": "Pancakes",
+          "madeToOrder": ["Yogurt", "Waffle Bar", "Cereal Station"]
+        },
+        "lunch": {
+          "items": ["Spaghetti", "Marinara", "Meatballs", "Chef's Choice Veggies", "Tofu"],
+          "action": "Grilled Cheese",
+          "madeToOrder": ["SOUP: TBA", "Lacie's Smorgasbord", "Creations on Pizza", "Salad, Deli, Waffle Bar", "Dessert and Cereal Station"]
+        },
+        "dinner": {
+          "items": ["Chicken Alfredo", "Alfredo", "Pasta", "Veggies", "Bread Sticks"],
+          "action": "Grilled Cheese",
+          "madeToOrder": ["SOUP: TBA", "Lacie's Smorgasbord", "Creations on Pizza", "Salad, Deli, Waffle Bar", "Dessert and Cereal Station"]
+        }
+      },
+      "Thursday": {
+        "breakfast": {
+          "items": ["Scrambled Eggs", "Pork Sausage", "Hash Browns", "Roasted Zucchini", "Biscuits and Gravy"],
+          "action": "Pancakes",
+          "madeToOrder": ["Yogurt", "Waffle Bar", "Cereal Station"]
+        },
+        "lunch": {
+          "items": ["Spaghetti", "Marinara", "Meatballs", "Chef's Choice Veggies", "Tofu"],
+          "action": "Grilled Cheese",
+          "madeToOrder": ["SOUP: TBA", "Lacie's Smorgasbord", "Creations on Pizza", "Salad, Deli, Waffle Bar", "Dessert and Cereal Station"]
+        },
+        "dinner": {
+          "items": ["Chicken Alfredo", "Alfredo", "Pasta", "Veggies", "Bread Sticks"],
+          "action": "Grilled Cheese",
+          "madeToOrder": ["SOUP: TBA", "Lacie's Smorgasbord", "Creations on Pizza", "Salad, Deli, Waffle Bar", "Dessert and Cereal Station"]
+        }
+      },
+      "Friday": {
+        "breakfast": {
+          "items": ["Scrambled Eggs", "Pork Sausage", "Hash Browns", "Roasted Zucchini", "Biscuits and Gravy"],
+          "action": "Pancakes",
+          "madeToOrder": ["Yogurt", "Waffle Bar", "Cereal Station"]
+        },
+        "lunch": {
+          "items": ["Spaghetti", "Marinara", "Meatballs", "Chef's Choice Veggies", "Tofu"],
+          "action": "Grilled Cheese",
+          "madeToOrder": ["SOUP: TBA", "Lacie's Smorgasbord", "Creations on Pizza", "Salad, Deli, Waffle Bar", "Dessert and Cereal Station"]
+        },
+        "dinner": {
+          "items": ["Chicken Alfredo", "Alfredo", "Pasta", "Veggies", "Bread Sticks"],
+          "action": "Grilled Cheese",
+          "madeToOrder": ["SOUP: TBA", "Lacie's Smorgasbord", "Creations on Pizza", "Salad, Deli, Waffle Bar", "Dessert and Cereal Station"]
+        }
+      },
+      "Saturday": {
+        "breakfast": {
+          "items": ["Scrambled Eggs", "Pork Sausage", "Hash Browns", "Roasted Zucchini", "Biscuits and Gravy"],
+          "action": "Pancakes",
+          "madeToOrder": ["Yogurt", "Waffle Bar", "Cereal Station"]
+        },
+        "lunch": {
+          "items": ["Spaghetti", "Marinara", "Meatballs", "Chef's Choice Veggies", "Tofu"],
+          "action": "Grilled Cheese",
+          "madeToOrder": ["SOUP: TBA", "Lacie's Smorgasbord", "Creations on Pizza", "Salad, Deli, Waffle Bar", "Dessert and Cereal Station"]
+        },
+        "dinner": {
+          "items": ["Chicken Alfredo", "Alfredo", "Pasta", "Veggies", "Bread Sticks"],
+          "action": "Grilled Cheese",
+          "madeToOrder": ["SOUP: TBA", "Lacie's Smorgasbord", "Creations on Pizza", "Salad, Deli, Waffle Bar", "Dessert and Cereal Station"]
+        }
+      },
+      "Sunday": {
+        "breakfast": {
+          "items": ["Scrambled Eggs", "Pork Sausage", "Hash Browns", "Roasted Zucchini", "Biscuits and Gravy"],
+          "action": "Pancakes",
+          "madeToOrder": ["Yogurt", "Waffle Bar", "Cereal Station"]
+        },
+        "lunch": {
+          "items": ["Spaghetti", "Marinara", "Meatballs", "Chef's Choice Veggies", "Tofu"],
+          "action": "Grilled Cheese",
+          "madeToOrder": ["SOUP: TBA", "Lacie's Smorgasbord", "Creations on Pizza", "Salad, Deli, Waffle Bar", "Dessert and Cereal Station"]
+        },
+        "dinner": {
+          "items": ["Chicken Alfredo", "Alfredo", "Pasta", "Veggies", "Bread Sticks"],
+          "action": "Grilled Cheese",
+          "madeToOrder": ["SOUP: TBA", "Lacie's Smorgasbord", "Creations on Pizza", "Salad, Deli, Waffle Bar", "Dessert and Cereal Station"]
+        }
+      }
+    }
+  }
+  

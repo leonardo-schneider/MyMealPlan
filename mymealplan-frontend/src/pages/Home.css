@@ -53,24 +53,23 @@ a{
     padding: 5vh 5%;
     flex: 1;
 }
-.navigation{
+.home-navigation{
     display: flex;
     align-items: center;
     justify-content: space-between;
     height:6%;
 }
-.navigation a{
+.home-navigation a{
     color: var(--h-color);
 }
-.navigation #logo{
+.home-navigation #logo{
     font-size: clamp(16px, 20px, 26px) !important;
     font-weight: 600;
 }
-.navigation ul{
-    width: 60%;
+.home-navigation ul{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap:15px;
 }
 .h-content{
     position:relative;
