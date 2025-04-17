@@ -105,14 +105,14 @@ class MealPlanOption(models.Model):
     name = models.CharField(max_length=50)
     meal_swipes = models.PositiveIntegerField()
     flex_dollars = models.DecimalField(max_digits=10, decimal_places=2)
-    buddy_swipes = models.PositiveIntegerField(default=0)
+    buddy_swipe_balance = models.PositiveIntegerField(default=0)
 
     class Meta:
         ordering = ['meal_swipes']
 
     def __str__(self):
         # Returns a descriptive string for the meal plan option.
-        return f"{self.meal_swipes} swipes + ${self.flex_dollars} flex + {self.buddy_swipes} buddy swipes"
+        return f"{self.meal_swipes} swipes + ${self.flex_dollars} flex"
 
 
 # Transaction History Backend

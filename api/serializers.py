@@ -140,6 +140,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.meal_plan_option = option
         user.meal_swipe_balance = option.meal_swipes
         user.flex_dollars = option.flex_dollars
+        user.buddy_swipe_balance = option.buddy_swipe_balance
         user.save()
 
         return user
@@ -157,11 +158,11 @@ class MealPlanOptionSerializer(serializers.ModelSerializer):
     - name: Name of the meal plan.
     - meal_swipes: Number of meal swipes.
     - flex_dollars: Amount of flex dollars.
-    - buddy_swipes: Amount of buddy swipes.
+    - buddy_swipes: Amount of buddy
     """
     class Meta:
         model = MealPlanOption
-        fields = ['id', 'name', 'meal_swipes', 'flex_dollars', 'buddy_swipes']
+        fields = ['id', 'name', 'meal_swipes', 'flex_dollars', 'buddy_swipe_balance']
 
 # ----------------------------------------------------------------------
 # UserMealPlanSerializer
@@ -179,7 +180,7 @@ class UserMealPlanSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ['id', 'username', 'meal_swipe_balance', 'flex_dollars', 'meal_plan_option']
+        fields = ['id', 'username', 'meal_swipe_balance', 'flex_dollars', 'buddy_swipe_balance', 'meal_plan_option']
 
 # ----------------------------------------------------------------------
 # EmailTokenObtainPairSerializer

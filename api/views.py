@@ -118,6 +118,7 @@ class RegisterView(generics.CreateAPIView):
             user.meal_plan_option = default_plan
             user.meal_swipe_balance = default_plan.meal_swipes
             user.flex_dollars = default_plan.flex_dollars
+            user.buddy_swipe_balance = default_plan.buddy_swipe_balance
             user.save()
 
 # ------------------------------------------------------------------------------
@@ -148,6 +149,7 @@ class MealPlanViewSet(viewsets.ModelViewSet):
             user.meal_plan_option = plan
             user.meal_swipe_balance = plan.meal_swipes
             user.flex_dollars = plan.flex_dollars
+            user.buddy_swipe_balance = plan.buddy_swipe_balance
             user.save()
             
 
@@ -209,6 +211,7 @@ class MyAccountView(generics.RetrieveUpdateAPIView):
                 user.meal_plan_option = plan
                 user.meal_swipe_balance = plan.meal_swipes
                 user.flex_dollars = plan.flex_dollars
+                user.buddy_swipe_balance = plan.buddy_swipe_balance
             except MealPlanOption.DoesNotExist:
                 return Response({'error': 'Invalid meal plan option'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -221,8 +224,8 @@ class MyAccountView(generics.RetrieveUpdateAPIView):
 
 class LoginView(APIView):
     def post(self, request, *args, **kwargs):
-        print("LoginView POST chamado!")  # Debug inicial
-        email = request.data.get('email', '').strip().lower()  # ou remova o .lower() temporariamente
+        print("LoginView POST chamado!")  
+        email = request.data.get('email', '').strip().lower()  
         password = request.data.get('password')
         
         
