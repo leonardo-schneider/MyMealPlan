@@ -68,17 +68,17 @@ const LoginPage = () => {
   
   return (
   <>
+    {/*This is navigation*/}
+    <div id="login-navigation">
+      <Link to="/home" id="logo">MyMealPlan</Link>
+      <ul>            
+        <Link to="/home"><li>Home</li></Link>
+        <Link to="/about"><li>About</li></Link>
+        <Link to="/register"><li>Sign Up</li></Link>
+      </ul>
+    </div>
     <div className="container">
       <div className="side-image">
-        {/*This is navigation*/}
-        <div className="login-navigation">
-          <Link to="/home" id="logo">MyMealPlan</Link>
-          <ul>            
-            <Link to="/home"><li>Home</li></Link>
-            <Link to="/about"><li>About</li></Link>
-            <Link to="/register"><li>Sign Up</li></Link>
-          </ul>
-        </div>
         <img src={uniLogo} alt="University Logo" id="uni-logo"/>
       </div>
       <div className="side-form">

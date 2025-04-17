@@ -25,33 +25,35 @@ body, html {
 /* Container principal com flexbox para dividir em duas colunas */
 .container {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 /* Lado com a imagem */
 .side-image {
+  position: relative;
   flex: 1;
   background-image: url('../Images/Hero-Img.png'); /* Substitua pelo caminho da sua imagem */
   background-size: cover;
   background-position: center;
 }
-.side-image .login-navigation{
+#login-navigation{
+  position: fixed;
   z-index: 99;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height:6%;
-  padding: 6% 8%;
+  width:50%;
+  padding:2%;
 }
   
-.login-navigation a{
+#login-navigation a{
   color: var(--h-color);
 }
-.login-navigation #logo{
+#login-navigation #logo{
     font-size: clamp(16px, 20px, 26px) !important;
     font-weight: 600;
 }
-.login-navigation ul{
+#login-navigation ul{
     display: flex;
     align-items: center;
     gap:20px;
@@ -61,11 +63,12 @@ body, html {
   position: absolute;
   bottom:5%;
   left:5%;
-  width:10%;
+  width:20%;
 }
   
   /* Lado com o formulário */
   .side-form {
+    position: relative;
     flex: 1;
     display: flex;
     justify-content: center;
@@ -183,3 +186,25 @@ body, html {
     margin-top: 10px;
   }
   
+
+  @media screen and (max-width:768px) {
+    #login-navigation{
+      position:relative;
+      width:100%;
+      padding:5%;
+      background-color: #fff;
+      height:15vh;
+    }
+    #login-navigation a{
+      color:var(--black);
+    }
+    .container{
+      flex-direction: column-reverse;
+    }
+    .side-form{
+      min-height: 85vh;
+    }
+    .side-image{
+      min-height:100vh;
+    }
+  }

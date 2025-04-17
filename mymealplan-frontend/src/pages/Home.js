@@ -6,6 +6,7 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
+
 import { Link, useNavigate } from 'react-router-dom';
 
 import './Home.css';
@@ -103,7 +104,7 @@ const Home = () => {
     {/*This is Dashboard Overview Section*/}
     <div id="dashboard-overview">
       <div id="dashboard-content">
-        <h2>Dashboard<br/>Overview</h2>
+        <h2>Dashboard Overview</h2>
         <p>The Meal Plan Tracker Dashboard is your all-in-one hub for managing your campus dining. 
           With a clean and intuitive design, you can quickly check your meal balance, review spending 
           habits, and make informed decisions about your dining options.</p>
@@ -121,7 +122,7 @@ const Home = () => {
 
     {/* Testimonial Section */}
     <div className="testimonial-section">
-        <h2>What Students Are Saying</h2>
+        <h3>What Students Are Saying</h3>
         <Swiper
           modules={[Navigation]}
           spaceBetween={-30}
@@ -148,15 +149,15 @@ const Home = () => {
         </Swiper>
       </div>
 
-      <div className="about-story">
-        <div className="story-text" id='about-text'>
+      <div id="home-aboutSection">
+        <div id='home-aboutText'>
           <h2>About The Project</h2>
           <p>Meal Plan Tracker was built by two students who were tired of asking, “How many swipes do I 
             have left?” We created this app to make campus dining easier, smarter, and stress-free. 
             Learn more about our story and vision for the future.</p>
           <Link to="/about"><button>READ MORE</button></Link>
         </div>
-        <div className="story-image">
+        <div id="home-aboutImage">
         <img src={campusImg} alt="USAO Building" />
         </div>
       </div>

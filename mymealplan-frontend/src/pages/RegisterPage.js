@@ -59,16 +59,16 @@ const RegisterPage = () => {
 
   return (
     <>
+      <div id="navigation-register">
+        <Link to="/home" id="logo">MyMealPlan</Link>
+        <ul>
+          <Link to="/home"><li>Home</li></Link>
+          <Link to="/about"><li>About</li></Link>
+          <Link to="/login"><li>Log In</li></Link>
+        </ul>
+      </div>
       <div className="register-container">
         <div className="left-panel">
-          <div className="navigation-register">
-            <Link to="/home" id="logo">MyMealPlan</Link>
-            <ul>
-              <Link to="/home"><li>Home</li></Link>
-              <Link to="/about"><li>About</li></Link>
-              <Link to="/login"><li>Log In</li></Link>
-            </ul>
-          </div>
           <img src={uniLogo} alt="University Logo" id="uni-logo-register" />
         </div>
 

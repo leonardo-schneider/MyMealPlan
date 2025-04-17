@@ -178,7 +178,7 @@
     }
   
     .team-section {
-      flex-direction: column;
+      flex-direction: column-reverse;
     }
   
     .team-text {
@@ -194,3 +194,49 @@
     }
   }
   
+
+@media screen and (max-width:768px){
+  .about-hero{
+    min-height: 70vh;
+  }
+  .about-hero h1{
+    font-size:3rem;
+  }
+  .about-hero p{
+    width:100%;
+    font-size:1.1rem;
+  }
+  .story-text{
+    width:100%;
+  }
+
+  .story-image{
+    width:100%;
+  }
+
+  .story-image img{
+    height:auto;
+    width:100%;
+  }
+
+  .team-section{
+    gap:50px;
+  }
+
+  .team-text{
+    width:100%;
+    padding-left:0;
+    margin-top:0;
+  }
+
+  .team-images{
+    width:100%;
+  }
+
+  .mission-closing{
+    padding:10vh 5%;
+  }
+  .mission-closing p{
+    font-size: 1.8rem;
+  }
+} 
