@@ -56,6 +56,7 @@ const Home = () => {
           <ul>
             <Link to="/about"><li>About</li></Link>
             <Link to="/login"><li>Log In</li></Link>
+            <Link to="/register"><li>Register</li></Link>
           </ul>
         </div>
 
