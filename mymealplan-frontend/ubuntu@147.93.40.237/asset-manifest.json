@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.00662f29.css",
+    "main.js": "/static/js/main.3897fd5c.js",
+    "static/media/Register-Img.png": "/static/media/Register-Img.8d5c103003b27b917c44.png",
+    "static/media/Hero-Img.png": "/static/media/Hero-Img.c93e9aab4af2021ad1f8.png",
+    "static/media/teamImg.webp": "/static/media/teamImg.3233c28a1a2a2f9cf679.webp",
+    "static/media/campus-about.webp": "/static/media/campus-about.c66cd919b97411931c98.webp",
+    "static/media/dashboard.webp": "/static/media/dashboard.38bb333255c677ed4af9.webp",
+    "static/media/home-hero.webp": "/static/media/home-hero.63584fc39a6ce6a17866.webp",
+    "static/media/transaction-img.webp": "/static/media/transaction-img.9a5ea005f6acd28bea5a.webp",
+    "static/media/uni-logo.webp": "/static/media/uni-logo.0b106e1010ff071f68be.webp",
+    "static/media/user-img.webp": "/static/media/user-img.57491f6c899f9617392c.webp",
+    "index.html": "/index.html",
+    "main.00662f29.css.map": "/static/css/main.00662f29.css.map",
+    "main.3897fd5c.js.map": "/static/js/main.3897fd5c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.00662f29.css",
+    "static/js/main.3897fd5c.js"
+  ]
+}
