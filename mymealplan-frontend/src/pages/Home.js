@@ -132,7 +132,8 @@ const Home = () => {
           loop={false}
           breakpoints={{
             768: { slidesPerView: 3 },
-            480: { slidesPerView: 1 },
+            600: { slidesPerView: 2 },
+            0: { slidesPerView: 1 },
           }}
         >
           {testimonials.map((testimonial, index) => (
