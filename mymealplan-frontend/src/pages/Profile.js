@@ -90,15 +90,21 @@ export default function ProfilePage({ token, onMealPlanUpdate, mealPlan}) {
 
   const getProfileImage = () => {
     if (preview) return preview;
-  
-    // Construct full image URL from relative path
+
     if (profile?.profile_pic) {
-      return profile.profile_pic.startsWith('http')
-        ? profile.profile_pic
-        : `${API_BASE_URL}${profile.profile_pic}`;
+      // Already a full URL? Use as is
+      if (profile.profile_pic.startsWith('http')) {
+        return profile.profile_pic;
+      }
+
+      // Fallback to production or development base
+      const baseUrl =
+        process.env.REACT_APP_API_BASE_URL || 'https://mymealplan.cloud';
+
+      return `${baseUrl}${profile.profile_pic}`;
     }
-  
-    return userImg; // Fallback to default
+
+    return userImg; // default fallback
   };
   
   

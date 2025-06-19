@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-xdq9*e28wj)i2up0m_1mx&65%vkbz5=nh-e55s!dmwr5#%r^&3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['mymealplan.cloud', 'www.mymealplan.cloud', '147.93.40.237']
+ALLOWED_HOSTS = ['mymealplan.cloud', 'www.mymealplan.cloud', '147.93.40.237', '127.0.0.1', 'localhost']
 
 
 # Application definition
