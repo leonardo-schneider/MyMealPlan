@@ -16,7 +16,7 @@ const LoginPage = () => {
 
     // Exemplo: Faz uma requisição POST para o endpoint de autenticação
     try {
-      const response = await fetch('http://localhost:8000/api/login/', {
+      const response = await fetch('https://mymealplan.cloud/api/login/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: email, password: senha }),
@@ -46,7 +46,7 @@ const LoginPage = () => {
   const refreshToken = async () => {
     try {
       const refresh = localStorage.getItem('refresh');
-      const response = await fetch('http://localhost:8000/token/refresh/', {
+      const response = await fetch('https://mymealplan.cloud/token/refresh/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ refresh }),

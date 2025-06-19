@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // Create an Axios instance
 const api = axios.create({
-  baseURL: 'http://127.0.0.1:8000/api/',
+  baseURL: 'https://mymealplan.cloud/api/',
 });
 
 // Attach token to every request if available
@@ -25,7 +25,7 @@ const refreshAccessToken = async () => {
     throw new Error("No refresh token available");
   }
   try {
-    const response = await axios.post('http://127.0.0.1:8000/api/token/refresh/', {
+    const response = await axios.post('https://mymealplan.cloud/api/token/refresh/', {
       refresh: refreshToken
     });
     localStorage.setItem('access_token', response.data.access);
