@@ -37,8 +37,9 @@ class UserSerializer(serializers.ModelSerializer):
         return obj.total_meal_swipes
 
     def get_profile_pic(self, obj):
-        if obj.profile_pic:
-            return f"{settings.MEDIA_URL}{obj.profile_pic}"
+        request = self.context.get('request')
+        if obj.profile_pic and request:
+            return request.build_absolute_uri(obj.profile_pic.url)
         return None
 
 # ----------------------------------------------------------------------
