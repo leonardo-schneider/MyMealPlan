@@ -26,6 +26,13 @@ ul{
 }
 a{
     text-decoration: none;
+    color: inherit;
+}
+
+@media screen and (max-width:500px){
+    a{
+        color: #000;
+    }
 }
 
 .hero{
@@ -204,6 +211,12 @@ a{
     }
 }
 
+@media screen and (max-width:500px){
+    #h-bottom{
+        font-size: 1.1rem;
+    }
+}
+
 /*------Section 1------*/
 .section1 {
     position: relative;
@@ -240,7 +253,6 @@ a{
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     background: white;
     text-align: left;
-    min-height: 300px; /* Ensures the cards have an appropriate height */
     max-height: 450px;
 }
 
@@ -263,7 +275,7 @@ a{
 }
 
 /* Mobile adjustments */
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .section1 h2 {
         font-size: 1.8rem;
         margin-bottom:10vh;
@@ -276,6 +288,19 @@ a{
 
     .card {
         min-height: 250px; /* Slightly reduces height for smaller devices */
+    }
+
+    .card h3{
+        text-align: left;
+    }
+}
+
+@media screen and (max-width: 450px){
+    .section1 h2{
+        font-size:2rem;
+    }
+    .card-container{
+        width:100%;
     }
 }
 
@@ -317,6 +342,7 @@ a{
       padding: 5vh 0% 10vh 5%;
       text-align: center;
       text-align: left;
+      overflow-x: hidden;
     }
   
     #dashboard-img, #dashboard-content {
@@ -337,6 +363,10 @@ a{
   
     #dashboard-content li {
       margin-bottom: 10px;
+    }
+
+    #dashboard-img{
+        width:130%;
     }
   }
 
@@ -432,14 +462,6 @@ a{
     transition: all .5s ease;
 }
 
-/* Default state for inactive slides */
-.swiper-slide:not(.swiper-slide-active) {
-    filter: blur(5px);
-    opacity: 0.6;
-    transform: scale(0.9); /* Keeps inactive slides smaller */
-}
-  
-
 /* Mobile responsiveness */
 @media screen and (max-width: 768px) {
     #dashboard-content h2{
@@ -469,9 +491,8 @@ a{
         font-size:1.5rem;
     }
 
-    .swiper-button-prev,
-    .swiper-button-next {
-      display: none; /* Hide arrows on small screens */
+    .swiper-button-prev, .swiper-button-next {
+      display: none;
     }
     
     .quote-mark {
@@ -481,6 +502,15 @@ a{
       .quote {
         font-size: 0.9rem;
       }
+}
+
+@media screen and (max-width:500px){
+    .swiper{
+        width:90% !important;
+    }
+    .testimonial-card{
+        max-width:90%;
+    }
 }
 
 
@@ -565,6 +595,15 @@ a{
     }
 }
 
+@media screen and (max-width:500px){
+    #home-aboutText h2{
+        font-size: 2.3rem;
+    }
+    #home-aboutText button{
+        width:50%;
+    }
+}
+
 
 /*-----Get Started Section-----*/
 #getStarted-section{
@@ -615,5 +654,11 @@ a{
 
     #getStarted-section button {
         font-size: 1rem;
+    }
+}
+
+@media screen and (max-width:500px){
+    #getStarted-section{
+        min-height:70vh;
     }
 }

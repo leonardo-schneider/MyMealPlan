@@ -208,3 +208,13 @@ body, html {
       min-height:100vh;
     }
   }
+
+  @media screen and (max-width:500px){
+    .login-box #signIn-button{
+      width:100%;
+    }
+
+    .login-box{
+      width:85%;
+    }
+  }
