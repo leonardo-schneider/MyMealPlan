@@ -27,7 +27,7 @@ function ResetPassword() {
     }
 
     try {
-      await axios.post('http://localhost:8000/api/reset-password/', {
+      await axios.post('http://https://mymealplan.cloud/api/reset-password/', {
         uid: uid,
         token: token,
         password: password,

@@ -77,7 +77,7 @@ const Dashboard = ({ mealPlan }) => {
       if (modalType === 'meal') {
         const updatedMeals = pendingMeals;
   
-        const mealRes = await fetch('http://localhost:8000/api/my-account/', {
+        const mealRes = await fetch('https://mymealplan.cloud/api/my-account/', {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -96,7 +96,7 @@ const Dashboard = ({ mealPlan }) => {
         const floatAmount = parseFloat(flexAmount);
         const updatedFlex = parseFloat((accountData.flex_dollars - floatAmount).toFixed(2));
 
-        const flexRes = await fetch('http://localhost:8000/api/my-account/', {
+        const flexRes = await fetch('https://mymealplan.cloud/api/my-account/', {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -113,7 +113,7 @@ const Dashboard = ({ mealPlan }) => {
       }
   
       // ✅ POST transaction to backend
-      const transactionRes = await fetch('http://localhost:8000/api/user-transactions/', {
+      const transactionRes = await fetch('https://mymealplan.cloud/api/user-transactions/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -143,7 +143,7 @@ const Dashboard = ({ mealPlan }) => {
     const fetchAccountData = async () => {
       try {
         const token = localStorage.getItem('access');
-        const response = await fetch('http://localhost:8000/api/my-account/', {
+        const response = await fetch('https://mymealplan.cloud/api/my-account/', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -168,7 +168,7 @@ const Dashboard = ({ mealPlan }) => {
       const fetchTransactions = async () => {
         try {
           const token = localStorage.getItem('access');
-          const response = await fetch('http://localhost:8000/api/user-transactions/', {
+          const response = await fetch('https://mymealplan.cloud/api/user-transactions/', {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -221,7 +221,7 @@ const Dashboard = ({ mealPlan }) => {
 
     try {
       const token = localStorage.getItem('access');
-      const response = await fetch('http://localhost:8000/api/my-account/', {
+      const response = await fetch('https://mymealplan.cloud/api/my-account/', {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -299,7 +299,7 @@ const Dashboard = ({ mealPlan }) => {
                 src={
                   accountData.profile_pic?.startsWith('http')
                     ? accountData.profile_pic
-                    : `http://localhost:8000${accountData.profile_pic}`
+                    : `https://mymealplan.cloud/${accountData.profile_pic}`
                 }
                 alt="Profile"
                 onError={(e) => {
