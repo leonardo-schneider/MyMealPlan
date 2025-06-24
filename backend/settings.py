@@ -175,5 +175,5 @@ FRONTEND_URL = "http://localhost:3000"      # Adjust this to your frontend URL
 # Giving Frontend the access for the Transaction History
 CORS_ALLOW_ALL_ORIGINS = True
 
-MEDIA_URL = '/media/'
+MEDIA_URL = 'https://mymealplan.cloud/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
