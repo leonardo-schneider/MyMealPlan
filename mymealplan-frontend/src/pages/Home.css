@@ -18,8 +18,8 @@
 }
 
 body{
-    /*background-color: var(--bg-color);*/
-    background-color: red;
+    background-color: var(--bg-color);
+
 }
 
 ul{
@@ -43,7 +43,8 @@ a{
     min-height: 100vh;
     width:100%;
     display: flex;
-    background-color: var(--bg-color);
+    /*background-color: var(--bg-color);*/
+    background-color: red;
 }
 .hero-img{
     width:50%;
