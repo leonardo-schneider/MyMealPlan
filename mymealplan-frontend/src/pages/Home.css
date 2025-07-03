@@ -44,7 +44,7 @@ a{
     width:100%;
     display: flex;
     /*background-color: var(--bg-color);*/
-    background-color: red;
+    background-color: blue;
 }
 .hero-img{
     width:50%;
